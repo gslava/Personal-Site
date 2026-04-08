@@ -28,7 +28,9 @@
     "format": "prettier --write .",
     "watch": "ng build --watch --configuration development",
     "pretest": "npm run check:repo-hygiene && npm run check:content && npm run sync:locale-bootstrap",
-    "test": "ng test"
+    "test": "ng test",
+    "deploy": "npm run build && wrangler deploy",
+    "preview": "npm run build && wrangler dev"
   },
   "private": true,
   "packageManager": "npm@11.11.1",
@@ -62,6 +64,7 @@
     "prettier": "^3.8.1",
     "typescript": "~5.9.2",
     "typescript-eslint": "^8.57.2",
-    "vitest": "^4.0.8"
+    "vitest": "^4.0.8",
+    "wrangler": "^4.81.0"
   }
 }
