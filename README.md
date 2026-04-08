@@ -190,10 +190,19 @@ GITHUB_PAGES_BASE_HREF=/your-repo-name/ npm run build:github
 Example:
 
 ```bash
-GITHUB_PAGES_BASE_HREF=/personal-site/ npm run build:github
+GITHUB_PAGES_BASE_HREF=/Personal-Site/ npm run build:github
 ```
 
 The project uses hash-based routing so deep links remain stable on static hosting.
+
+For this repository, the expected GitHub Pages URL is:
+
+- `https://gslava.github.io/Personal-Site/`
+
+Recommended publishing setup:
+
+- Source: `GitHub Actions`
+- Workflow: `.github/workflows/deploy-github-pages.yml`
 
 ## Home Page
 
