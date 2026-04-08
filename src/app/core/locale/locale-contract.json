@@ -1,0 +1,7 @@
+{
+  "defaultLocale": "en",
+  "locales": ["en", "de", "uk"],
+  "pathLocalizedLocales": ["de", "uk"],
+  "cookieName": "site_locale",
+  "cookieMaxAge": 31536000
+}
