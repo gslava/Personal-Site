@@ -1,0 +1,45 @@
+:host {
+  display: block;
+  block-size: 100%;
+}
+
+.home-page {
+  position: relative;
+  min-height: 100%;
+  block-size: 100%;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.home-page__scene {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.home-page__fox-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  padding: clamp(1.25rem, 3vw, 2.5rem);
+}
+
+.home-page__fox {
+  display: block;
+  height: auto;
+  aspect-ratio: 800 / 715;
+  object-fit: contain;
+  opacity: 0.3;
+  filter:
+    drop-shadow(0 0 8px rgba(255, 255, 255, 0.03))
+    drop-shadow(0 0 18px rgba(255, 255, 255, 0.015));
+}
+
+@media (max-width: 640px) {
+  .home-page__fox-layer {
+    padding-inline: 1rem;
+  }
+}

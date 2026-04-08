@@ -1,0 +1,48 @@
+<div class="site-shell">
+  <header class="site-header">
+    <a
+      class="site-header__brand"
+      [attr.href]="localeService.homeHref()"
+      i18n-aria-label="@@nav.homeAria"
+      aria-label="Home page"
+    >
+      <span class="site-header__brand-mark" aria-hidden="true"></span>
+      <span class="site-header__brand-text">HOME</span>
+    </a>
+
+    <nav class="site-nav" i18n-aria-label="@@nav.sectionsAria" aria-label="Site sections">
+      <a class="site-nav__link" routerLink="/technologies" routerLinkActive="site-nav__link--active" [routerLinkActiveOptions]="{ exact: true }" i18n="@@nav.technologies">
+        Technologies
+      </a>
+      <a class="site-nav__link" routerLink="/projects" routerLinkActive="site-nav__link--active" [routerLinkActiveOptions]="{ exact: true }" i18n="@@nav.projects">
+        Projects
+      </a>
+      <a class="site-nav__link" routerLink="/about-me" routerLinkActive="site-nav__link--active" [routerLinkActiveOptions]="{ exact: true }" i18n="@@nav.about">
+        About Me
+      </a>
+      <a class="site-nav__link" routerLink="/contact" routerLinkActive="site-nav__link--active" [routerLinkActiveOptions]="{ exact: true }" i18n="@@nav.contact">
+        Contact
+      </a>
+    </nav>
+
+    <div class="locale-switcher" i18n-aria-label="@@locale.switcherAria" aria-label="Language switcher">
+      @for (locale of localeService.localeLinks(); track locale.code) {
+        <a
+          class="locale-switcher__link"
+          [class.locale-switcher__link--active]="locale.isActive"
+          [href]="locale.href"
+          [attr.lang]="locale.code"
+          [attr.hreflang]="locale.code"
+          data-locale-link
+          [attr.data-locale-code]="locale.code"
+        >
+          {{ locale.label }}
+        </a>
+      }
+    </div>
+  </header>
+
+  <main class="site-main">
+    <router-outlet />
+  </main>
+</div>

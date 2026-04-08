@@ -1,0 +1,32 @@
+{
+  "pages": {
+    "technologies": {
+      "labels": {
+        "en": "Technologies",
+        "de": "Technologien",
+        "uk": "Технології"
+      }
+    },
+    "projects": {
+      "labels": {
+        "en": "Projects",
+        "de": "Projekte",
+        "uk": "Проєкти"
+      }
+    },
+    "about-me": {
+      "labels": {
+        "en": "About Me",
+        "de": "Über mich",
+        "uk": "Про мене"
+      }
+    },
+    "contact": {
+      "labels": {
+        "en": "Contact",
+        "de": "Kontakt",
+        "uk": "Контакти"
+      }
+    }
+  }
+}

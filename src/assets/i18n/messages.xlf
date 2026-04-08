@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en">
+  <file id="ngi18n" original="ng.template">
+    <unit id="meta.appTitle"><segment><source>HOME</source></segment></unit>
+    <unit id="meta.description"><segment><source>Personal site with an Angular 21 home page, a reference-driven particle sphere, and markdown-powered content sections.</source></segment></unit>
+    <unit id="route.homeTitle"><segment><source>HOME</source></segment></unit>
+    <unit id="route.technologiesTitle"><segment><source>Technologies</source></segment></unit>
+    <unit id="route.projectsTitle"><segment><source>Projects</source></segment></unit>
+    <unit id="route.aboutTitle"><segment><source>About Me</source></segment></unit>
+    <unit id="route.contactTitle"><segment><source>Contact</source></segment></unit>
+    <unit id="nav.homeAria"><segment><source>Home page</source></segment></unit>
+    <unit id="nav.sectionsAria"><segment><source>Site sections</source></segment></unit>
+    <unit id="nav.technologies"><segment><source> Technologies </source></segment></unit>
+    <unit id="nav.projects"><segment><source> Projects </source></segment></unit>
+    <unit id="nav.about"><segment><source> About Me </source></segment></unit>
+    <unit id="nav.contact"><segment><source> Contact </source></segment></unit>
+    <unit id="locale.switcherAria"><segment><source>Language switcher</source></segment></unit>
+  </file>
+</xliff>

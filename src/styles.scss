@@ -1,0 +1,51 @@
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100dvh;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.03), transparent 22%),
+    linear-gradient(180deg, #030405 0%, #020203 100%);
+  color: #f4f7fb;
+  font-family:
+    'Avenir Next',
+    'Segoe UI Variable',
+    'Inter Variable',
+    'Helvetica Neue',
+    sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at center, rgba(255, 255, 255, 0.05), transparent 54%);
+  opacity: 0.36;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+  --color-accent: #afd3ff;
+  --color-text-primary: #f4f7fb;
+  --color-text-secondary: rgba(230, 239, 250, 0.78);
+  --color-text-muted: rgba(206, 220, 238, 0.64);
+}

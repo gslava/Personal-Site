@@ -1,0 +1,13 @@
+<section #sceneRoot class="home-page">
+  <div class="home-page__fox-layer">
+    <img
+      class="home-page__fox"
+      src="fox.png"
+      alt="Fox emblem"
+      [style.width.px]="foxWidthPx()"
+      [style.maxWidth.px]="foxWidthPx()"
+    />
+  </div>
+
+  <app-particle-sphere class="home-page__scene"></app-particle-sphere>
+</section>

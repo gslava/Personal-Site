@@ -1,0 +1,103 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.markdown-page__panel {
+  width: 100%;
+  padding: clamp(1.8rem, 4vw, 3rem);
+  border: 1px solid rgba(166, 203, 255, 0.12);
+  border-radius: 1.75rem;
+  background:
+    linear-gradient(180deg, rgba(12, 18, 29, 0.9), rgba(9, 13, 22, 0.82)),
+    rgba(9, 13, 22, 0.82);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+}
+
+.markdown-page__prose {
+  color: var(--color-text-secondary);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.markdown-page__prose :is(h1, h2, h3, h4) {
+  margin: 0;
+  color: var(--color-text-primary);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+}
+
+.markdown-page__prose h1 {
+  font-size: clamp(2.4rem, 6vw, 4rem);
+}
+
+.markdown-page__prose h2 {
+  margin-top: 2.2rem;
+  font-size: clamp(1.45rem, 3vw, 2rem);
+}
+
+.markdown-page__prose h3 {
+  margin-top: 1.6rem;
+  font-size: 1.15rem;
+}
+
+.markdown-page__prose :is(p, ul, ol, blockquote, pre) {
+  margin: 1.1rem 0 0;
+}
+
+.markdown-page__prose :is(ul, ol) {
+  padding-left: 1.2rem;
+}
+
+.markdown-page__prose li + li {
+  margin-top: 0.45rem;
+}
+
+.markdown-page__prose strong {
+  color: var(--color-text-primary);
+}
+
+.markdown-page__prose a {
+  color: var(--color-accent);
+  text-decoration-color: rgba(175, 211, 255, 0.45);
+  text-underline-offset: 0.22em;
+}
+
+.markdown-page__prose a:hover {
+  text-decoration-color: currentColor;
+}
+
+.markdown-page__prose blockquote {
+  padding: 0.1rem 0 0.1rem 1rem;
+  border-left: 2px solid rgba(175, 211, 255, 0.34);
+  color: var(--color-text-muted);
+}
+
+.markdown-page__prose :is(code, pre) {
+  font-family:
+    'SFMono-Regular',
+    'JetBrains Mono',
+    'Menlo',
+    monospace;
+}
+
+.markdown-page__prose code {
+  padding: 0.14rem 0.4rem;
+  border-radius: 0.45rem;
+  background: rgba(170, 208, 255, 0.08);
+  color: var(--color-text-primary);
+  font-size: 0.92em;
+}
+
+.markdown-page__prose pre {
+  overflow-x: auto;
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba(170, 208, 255, 0.08);
+  border-radius: 1rem;
+  background: rgba(4, 7, 12, 0.72);
+}
+
+.markdown-page__prose pre code {
+  padding: 0;
+  background: transparent;
+}
