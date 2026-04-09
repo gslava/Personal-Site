@@ -34,7 +34,10 @@
   position: relative;
   z-index: 1;
   width: min(100%, 21.33rem);
-  padding: clamp(1.35rem, 3vw, 2rem);
+  padding:
+    calc(clamp(1.35rem, 3vw, 2rem) + 1.85rem)
+    clamp(1.35rem, 3vw, 2rem)
+    clamp(1.35rem, 3vw, 2rem);
   border: 1px solid rgba(179, 216, 255, 0.16);
   border-radius: 1.75rem;
   background:
@@ -44,15 +47,6 @@
   box-shadow:
     0 24px 60px rgba(0, 0, 0, 0.28),
     inset 0 0 0 1px rgba(255, 255, 255, 0.04);
-}
-
-.home-page__index-label {
-  margin: 0 0 1.15rem;
-  color: rgba(240, 246, 255, 0.68);
-  font-size: 0.74rem;
-  font-weight: 700;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
 }
 
 .home-page__index-nav {
@@ -200,6 +194,15 @@
 
 .home-page__prose a:hover {
   text-decoration-color: currentColor;
+}
+
+@media (min-width: 721px) {
+  .home-page__index-card {
+    border-color: transparent;
+    background: transparent;
+    backdrop-filter: none;
+    box-shadow: none;
+  }
 }
 
 @media (max-width: 720px) {

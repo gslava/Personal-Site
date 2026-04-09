@@ -17,21 +17,17 @@ import { LocaleService } from '../../../../core/services/locale.service';
 import { SiteLocaleCode } from '../../../../core/models/site-locale';
 
 type HomePageCopy = {
-  readonly indexLabel: string;
   readonly contentAriaLabel: string;
 };
 
 const HOME_PAGE_COPY: Record<SiteLocaleCode, HomePageCopy> = {
   en: {
-    indexLabel: 'Index',
     contentAriaLabel: 'Page sections',
   },
   de: {
-    indexLabel: 'Inhalt',
     contentAriaLabel: 'Seitenabschnitte',
   },
   uk: {
-    indexLabel: 'Зміст',
     contentAriaLabel: 'Розділи сторінки',
   },
 };
