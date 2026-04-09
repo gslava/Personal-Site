@@ -1,13 +1,35 @@
-<section #sceneRoot class="home-page">
-  <div class="home-page__fox-layer">
-    <img
-      class="home-page__fox"
-      src="fox.png"
-      alt="Fox emblem"
-      [style.width.px]="foxWidthPx()"
-      [style.maxWidth.px]="foxWidthPx()"
-    />
-  </div>
+<div class="home-page">
+  <section class="home-page__hero">
+    <app-particle-sphere class="home-page__scene"></app-particle-sphere>
 
-  <app-particle-sphere class="home-page__scene"></app-particle-sphere>
-</section>
+    <div class="home-page__hero-overlay">
+      <div class="home-page__index-card">
+        <p class="home-page__index-label">{{ copy().indexLabel }}</p>
+
+        <nav class="home-page__index-nav" [attr.aria-label]="copy().contentAriaLabel">
+          @for (section of sections(); track trackSection($index, section)) {
+            <a class="home-page__index-link" [href]="sectionHref(section.id)">
+              <span class="home-page__index-link-title">{{ section.title }}</span>
+            </a>
+          }
+        </nav>
+      </div>
+    </div>
+  </section>
+
+  <div class="home-page__sections" [attr.aria-label]="copy().contentAriaLabel">
+    @for (section of sections(); track trackSection($index, section); let last = $last) {
+      <section [attr.id]="section.id" class="home-page__section-card">
+        <div class="home-page__prose" [innerHTML]="section.html"></div>
+      </section>
+
+      @if (!last) {
+        <div class="home-page__divider" aria-hidden="true">
+          <span class="home-page__divider-line"></span>
+          <img class="home-page__divider-fox" src="fox.png" alt="" />
+          <span class="home-page__divider-line"></span>
+        </div>
+      }
+    }
+  </div>
+</div>

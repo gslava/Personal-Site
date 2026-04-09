@@ -89,7 +89,7 @@ const bootstrapSource = `// Generated from src/app/core/locale/locale-contract.j
   const preferredLocale = readLocaleCookie();
 
   if (isPathLocalizedLocale(preferredLocale)) {
-    window.location.replace(\`\${buildPathWithLocale(pathname, preferredLocale)}\${search}\${hash || '#/'}\`);
+    window.location.replace(\`\${buildPathWithLocale(pathname, preferredLocale)}\${search}\${hash || ''}\`);
     return;
   }
 

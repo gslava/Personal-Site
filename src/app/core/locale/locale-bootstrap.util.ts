@@ -69,7 +69,7 @@ export function buildLocaleHref(input: {
 }
 
 export function buildHomeHref(pathname: string, targetLocale: SiteLocaleCode): string {
-  return `${buildPathWithLocale(pathname, targetLocale)}#/`;
+  return buildPathWithLocale(pathname, targetLocale);
 }
 
 export function resolveLocaleBootstrapInstruction(input: {
@@ -137,5 +137,5 @@ export function isPathLocalizedLocaleCode(value: SiteLocaleCode | null | undefin
 }
 
 function normalizeHash(hash: string): string {
-  return hash || '#/';
+  return hash || '';
 }

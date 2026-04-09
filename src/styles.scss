@@ -1,6 +1,7 @@
 html {
   color-scheme: dark;
   scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--site-header-height, 5.75rem) + 1rem);
 }
 
 body {
@@ -44,8 +45,16 @@ a {
 }
 
 :root {
+  --site-header-height: 5.75rem;
   --color-accent: #afd3ff;
   --color-text-primary: #f4f7fb;
   --color-text-secondary: rgba(230, 239, 250, 0.78);
   --color-text-muted: rgba(206, 220, 238, 0.64);
+}
+
+.content-inline-divider {
+  width: min(100%, 17rem);
+  height: 1px;
+  margin: 1.8rem auto;
+  background: linear-gradient(90deg, transparent, rgba(214, 231, 255, 0.5), transparent);
 }
