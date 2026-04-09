@@ -1,5 +1,7 @@
 :host {
   display: block;
+  --home-index-card-blur: 14px;
+  --home-index-field-blur: 7px;
 }
 
 .home-page {
@@ -29,6 +31,8 @@
 }
 
 .home-page__index-card {
+  position: relative;
+  z-index: 1;
   width: min(100%, 21.33rem);
   padding: clamp(1.35rem, 3vw, 2rem);
   border: 1px solid rgba(179, 216, 255, 0.16);
@@ -36,7 +40,7 @@
   background:
     linear-gradient(180deg, rgba(10, 14, 22, 0.097), rgba(6, 9, 16, 0.107)),
     rgba(6, 9, 16, 0.1);
-  backdrop-filter: blur(14px);
+  backdrop-filter: blur(var(--home-index-card-blur));
   box-shadow:
     0 24px 60px rgba(0, 0, 0, 0.28),
     inset 0 0 0 1px rgba(255, 255, 255, 0.04);
@@ -79,6 +83,10 @@
     inset 0 0 0 1px rgba(200, 225, 255, 0.14),
     0 8px 20px rgba(0, 0, 0, 0.18);
   outline: none;
+}
+
+.home-page__mobile-blur-layer {
+  display: none;
 }
 
 .home-page__index-link-title {
@@ -195,6 +203,16 @@
 }
 
 @media (max-width: 720px) {
+  .home-page__mobile-blur-layer {
+    display: block;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background: rgba(7, 10, 18, 0.025);
+    backdrop-filter: blur(var(--home-index-field-blur));
+  }
+
   .home-page__index-card {
     border-radius: 1.45rem;
   }
