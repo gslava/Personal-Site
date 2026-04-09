@@ -6,8 +6,6 @@
       <div class="home-page__mobile-blur-layer" aria-hidden="true"></div>
 
       <div class="home-page__index-card">
-        <p class="home-page__index-label">{{ copy().indexLabel }}</p>
-
         <nav class="home-page__index-nav" [attr.aria-label]="copy().contentAriaLabel">
           @for (section of sections(); track trackSection($index, section)) {
             <a class="home-page__index-link" [href]="sectionHref(section.id)">
