@@ -80,7 +80,7 @@
   const preferredLocale = readLocaleCookie();
 
   if (isPathLocalizedLocale(preferredLocale)) {
-    window.location.replace(`${buildPathWithLocale(pathname, preferredLocale)}${search}${hash || '#/'}`);
+    window.location.replace(`${buildPathWithLocale(pathname, preferredLocale)}${search}${hash || ''}`);
     return;
   }
 

@@ -2,26 +2,36 @@
 
 Static-first personal website built with `Angular 21` and `TypeScript`, designed for deployment to both `Cloudflare Pages` and `GitHub Pages`.
 
-The project combines a visual landing page with a custom `Three.js` particle sphere, localized routing, and markdown-driven content pages.
+The site is now a localized single-page experience with:
+
+- a full-screen particle hero
+- a centered glass index card that links to on-page sections
+- markdown-driven content loaded from one file per locale
+- localized static output for `en`, `de`, and `uk`
 
 ## Highlights
 
 - `Angular 21` with standalone components
-- `TypeScript` with strict project setup
+- `TypeScript` with strict setup
 - build-time localization for `en`, `de`, `uk`
-- localized static output for `Cloudflare Pages` and `GitHub Pages`
-- custom `Three.js` particle sphere on the home page
-- markdown-powered content pages
-- hash-based routing for reliable static hosting
-- automated content and locale bootstrap checks before build/test/start
+- custom `Three.js` particle sphere on the hero section
+- single-page markdown content model
+- sticky header with centered fox mark and locale switcher
+- static hosting support for `Cloudflare Pages` and `GitHub Pages`
+- automated content and locale bootstrap checks before start, test, and build
 
-## Current Pages
+## Current Site Structure
 
-- `Home`
+The page is rendered as one continuous document with these sections:
+
+- `About Me`
+- `Work Experience`
+- `Education`
 - `Technologies`
 - `Projects`
-- `About Me`
 - `Contact`
+
+The hero index is generated from section `H1` headings in markdown and links to the corresponding anchors on the page.
 
 ## Tech Stack
 
@@ -44,33 +54,37 @@ Supported locales:
 - `de`
 - `uk`
 
-The site generates localized static builds with these paths:
+Localized static builds are generated with these paths:
 
 - `/` for English
 - `/de/` for German
 - `/uk/` for Ukrainian
 
-Language selection is preserved through locale persistence logic so repeat visits stay on the previously selected language.
+The selected language is preserved for repeat visits through locale persistence logic.
 
 ## Content Model
 
-Non-home page content is stored in markdown files:
+Each locale uses one markdown file:
 
 ```text
-src/assets/content/{locale}/{page}.md
+src/assets/content/{locale}/all-in-one-page.md
 ```
 
 Examples:
 
-- `src/assets/content/en/about-me.md`
-- `src/assets/content/de/projects.md`
-- `src/assets/content/uk/contact.md`
+- `src/assets/content/en/all-in-one-page.md`
+- `src/assets/content/de/all-in-one-page.md`
+- `src/assets/content/uk/all-in-one-page.md`
 
-Page registration lives in:
+Rules:
+
+- each top-level section starts with `# H1`
+- `---` starts a new page section
+- `~~` renders as a small inline divider inside a section
+
+Section registration lives in:
 
 - `src/app/core/content/content-registry.json`
-
-This keeps the site content easy to edit without touching Angular components.
 
 ## Project Structure
 
@@ -80,13 +94,12 @@ src/
     core/                # app shell, locale logic, content services
     features/
       home/              # home page and particle sphere
-    shared/
-      ui/                # reusable UI and markdown content page shell
+    shared/              # shared UI pieces
   assets/
-    content/             # localized markdown content
+    content/             # localized single-page markdown content
     i18n/                # translation files
 public/                  # static public assets
-scripts/                 # build and preview helper scripts
+scripts/                 # build, preview, validation helpers
 ```
 
 ## Local Development
@@ -190,43 +203,36 @@ GITHUB_PAGES_BASE_HREF=/your-repo-name/ npm run build:github
 Example:
 
 ```bash
-GITHUB_PAGES_BASE_HREF=/Personal-Site/ npm run build:github
+GITHUB_PAGES_BASE_HREF=/personal-site/ npm run build:github
 ```
 
-The project uses hash-based routing so deep links remain stable on static hosting.
+The site is built as localized static output and is designed to work on static hosting.
 
-For this repository, the expected GitHub Pages URL is:
+## Hero Section
 
-- `https://gslava.github.io/Personal-Site/`
-
-Recommended publishing setup:
-
-- Source: `GitHub Actions`
-- Workflow: `.github/workflows/deploy-github-pages.yml`
-
-## Home Page
-
-The home page contains:
+The hero contains:
 
 - a full-bleed particle scene
-- a centered fox emblem
+- a centered translucent index card
+- section links that scroll to anchors below
 
-The heavy visual logic is lazy-loaded so the rest of the site stays lightweight.
+The heavy visual logic is lazy-loaded so the rest of the page stays lightweight.
 
 ## Quality Gates
 
 Before start, test, and build, the project runs checks for:
 
 - repository hygiene
-- markdown content completeness
+- single-page markdown structure
 - locale bootstrap generation
 
 This reduces drift between localized builds, static preview, and deployment output.
 
 ## Notes
 
-- `npm run start` is the best way to validate language switching and refresh behavior.
-- Markdown content is intentionally separated from Angular view code to keep page editing simple.
+- `npm run start` is the best way to validate locale behavior.
+- Content editing is intentionally separated from Angular view code.
+- The current single-page structure is enforced by `scripts/check-content-files.mjs`.
 
 ## License
 

@@ -1,5 +1,26 @@
 {
   "pages": {
+    "about-me": {
+      "labels": {
+        "en": "About Me",
+        "de": "Über mich",
+        "uk": "Про мене"
+      }
+    },
+    "work-experience": {
+      "labels": {
+        "en": "Work Experience",
+        "de": "Berufserfahrung",
+        "uk": "Досвід роботи"
+      }
+    },
+    "education": {
+      "labels": {
+        "en": "Education",
+        "de": "Ausbildung",
+        "uk": "Освіта"
+      }
+    },
     "technologies": {
       "labels": {
         "en": "Technologies",
@@ -12,13 +33,6 @@
         "en": "Projects",
         "de": "Projekte",
         "uk": "Проєкти"
-      }
-    },
-    "about-me": {
-      "labels": {
-        "en": "About Me",
-        "de": "Über mich",
-        "uk": "Про мене"
       }
     },
     "contact": {

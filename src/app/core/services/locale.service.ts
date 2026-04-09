@@ -49,7 +49,7 @@ export class LocaleService {
     const location = this.document.defaultView?.location;
 
     if (!location) {
-      return targetLocale === 'en' ? '/#/' : `/${targetLocale}/#/`;
+      return targetLocale === 'en' ? '/' : `/${targetLocale}/`;
     }
 
     return buildLocaleHref({
@@ -63,7 +63,7 @@ export class LocaleService {
     const location = this.document.defaultView?.location;
 
     if (!location) {
-      return targetLocale === 'en' ? '/#/' : `/${targetLocale}/#/`;
+      return targetLocale === 'en' ? '/' : `/${targetLocale}/`;
     }
 
     return buildHomeHref(location.pathname, targetLocale);
@@ -74,6 +74,6 @@ export class LocaleService {
   }
 
   private getCurrentHash(): string {
-    return this.document.defaultView?.location.hash || '#/';
+    return this.document.defaultView?.location.hash || '';
   }
 }

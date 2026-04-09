@@ -1,22 +1,40 @@
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   DestroyRef,
-  ElementRef,
   NgZone,
   PLATFORM_ID,
-  ViewChild,
+  computed,
   inject,
   signal,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ParticleSphereComponent } from '../../components/particle-sphere/particle-sphere.component';
-import {
-  HOME_SCENE_CAMERA_FOV_DEG,
-  HOME_SCENE_CAMERA_Z,
-  HOME_SCENE_PARTICLE_RADIUS,
-} from '../../home-scene.constants';
+import { SinglePageContentService } from '../../../../core/content/single-page-content.service';
+import { SinglePageSection } from '../../../../core/content/single-page-content.models';
+import { LocaleService } from '../../../../core/services/locale.service';
+import { SiteLocaleCode } from '../../../../core/models/site-locale';
+
+type HomePageCopy = {
+  readonly indexLabel: string;
+  readonly contentAriaLabel: string;
+};
+
+const HOME_PAGE_COPY: Record<SiteLocaleCode, HomePageCopy> = {
+  en: {
+    indexLabel: 'Index',
+    contentAriaLabel: 'Page sections',
+  },
+  de: {
+    indexLabel: 'Inhalt',
+    contentAriaLabel: 'Seitenabschnitte',
+  },
+  uk: {
+    indexLabel: 'Зміст',
+    contentAriaLabel: 'Розділи сторінки',
+  },
+};
 
 @Component({
   selector: 'app-home-page',
@@ -25,44 +43,141 @@ import {
   styleUrl: './home-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomePageComponent implements AfterViewInit {
-  @ViewChild('sceneRoot', { static: true }) private readonly sceneRootRef!: ElementRef<HTMLElement>;
-
-  protected readonly foxWidthPx = signal(0);
-
+export class HomePageComponent {
+  private readonly contentService = inject(SinglePageContentService);
   private readonly document = inject(DOCUMENT);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly localeService = inject(LocaleService);
   private readonly ngZone = inject(NgZone);
   private readonly platformId = inject(PLATFORM_ID);
 
-  ngAfterViewInit(): void {
-    if (!isPlatformBrowser(this.platformId) || typeof ResizeObserver === 'undefined') {
+  private lastHandledHash = '';
+  private pendingHashScrollTimerId: number | null = null;
+
+  protected readonly pageContent = signal({
+    locale: this.localeService.currentLocale(),
+    sections: [] as readonly SinglePageSection[],
+    usedFallback: true,
+  });
+  protected readonly sections = computed(() => this.pageContent().sections);
+  protected readonly copy = computed(() => HOME_PAGE_COPY[this.pageContent().locale]);
+
+  constructor() {
+    if (!isPlatformBrowser(this.platformId)) {
       return;
     }
 
     const windowRef = this.document.defaultView;
+    const handleHistoryNavigation = (): void => {
+      this.lastHandledHash = '';
+      this.scheduleInitialHashScroll();
+    };
+
+    windowRef?.addEventListener('popstate', handleHistoryNavigation);
+    this.destroyRef.onDestroy(() => {
+      windowRef?.removeEventListener('popstate', handleHistoryNavigation);
+
+      if (windowRef && this.pendingHashScrollTimerId !== null) {
+        windowRef.clearTimeout(this.pendingHashScrollTimerId);
+      }
+    });
+
+    this.contentService
+      .loadPage(this.localeService.currentLocale())
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((content) => {
+        this.pageContent.set(content);
+        this.lastHandledHash = '';
+        this.scheduleInitialHashScroll();
+      });
+  }
+
+  protected sectionHref(id: string): string {
+    return `#${id}`;
+  }
+
+  protected trackSection(_index: number, section: SinglePageSection): string {
+    return section.id;
+  }
+
+  private scheduleInitialHashScroll(): void {
+    const windowRef = this.document.defaultView;
+    const hash = windowRef?.location.hash.slice(1) ?? '';
+
+    if (!windowRef || !hash || hash === this.lastHandledHash) {
+      return;
+    }
+
+    this.ngZone.runOutsideAngular(() => {
+      if (this.pendingHashScrollTimerId !== null) {
+        windowRef.clearTimeout(this.pendingHashScrollTimerId);
+      }
+
+      this.pendingHashScrollTimerId = windowRef.setTimeout(() => {
+        this.attemptHashScroll(hash, 12);
+        this.pendingHashScrollTimerId = null;
+      }, 80);
+    });
+  }
+
+  private scrollToElement(id: string, behavior: ScrollBehavior): void {
+    const windowRef = this.document.defaultView;
+    const target = this.document.getElementById(id);
+
+    if (!windowRef || !target) {
+      return;
+    }
+
+    const headerHeight = this.resolveHeaderOffset();
+    const nextTop = Math.max(0, target.getBoundingClientRect().top + windowRef.scrollY - headerHeight - 16);
+
+    this.lastHandledHash = id;
+    windowRef.scrollTo({
+      top: nextTop,
+      behavior,
+    });
+  }
+
+  private attemptHashScroll(id: string, attemptsLeft: number): void {
+    const windowRef = this.document.defaultView;
+    const target = this.document.getElementById(id);
 
     if (!windowRef) {
       return;
     }
 
-    const sceneRoot = this.sceneRootRef.nativeElement;
-    const updateFoxSize = (): void => {
-      const rect = sceneRoot.getBoundingClientRect();
-      const projectedRadius =
-        HOME_SCENE_PARTICLE_RADIUS *
-        (rect.height / (2 * Math.tan((HOME_SCENE_CAMERA_FOV_DEG * Math.PI) / 360) * HOME_SCENE_CAMERA_Z));
+    if (target) {
+      this.scrollToElement(id, 'auto');
 
-      // The fox should now be 3x larger than before: 30% of the sphere radius.
-      this.foxWidthPx.set(projectedRadius * 0.3);
-    };
+      if (this.isElementAligned(target) || attemptsLeft <= 1) {
+        return;
+      }
+    } else if (attemptsLeft <= 1) {
+      return;
+    }
 
-    this.ngZone.runOutsideAngular(() => {
-      const resizeObserver = new ResizeObserver(() => updateFoxSize());
-      resizeObserver.observe(sceneRoot);
-      updateFoxSize();
+    this.pendingHashScrollTimerId = windowRef.setTimeout(() => {
+      this.attemptHashScroll(id, attemptsLeft - 1);
+    }, 140);
+  }
 
-      this.destroyRef.onDestroy(() => resizeObserver.disconnect());
-    });
+  private isElementAligned(target: HTMLElement): boolean {
+    const headerHeight = this.resolveHeaderOffset();
+    const topDelta = Math.abs(target.getBoundingClientRect().top - (headerHeight + 16));
+
+    return topDelta < 24;
+  }
+
+  private resolveHeaderOffset(): number {
+    const windowRef = this.document.defaultView;
+
+    if (!windowRef) {
+      return 0;
+    }
+
+    const rootStyles = windowRef.getComputedStyle(this.document.documentElement);
+    const headerHeight = Number.parseFloat(rootStyles.getPropertyValue('--site-header-height'));
+
+    return Number.isFinite(headerHeight) ? headerHeight : 92;
   }
 }

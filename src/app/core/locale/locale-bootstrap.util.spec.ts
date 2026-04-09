@@ -32,19 +32,19 @@ describe('locale bootstrap utilities', () => {
     expect(
       buildLocaleHref({
         pathname: '/personal-site/de/',
-        hash: '#/projects',
+        hash: '#projects',
         targetLocale: 'en',
       }),
-    ).toBe('/personal-site/#/projects');
+    ).toBe('/personal-site/#projects');
     expect(
       buildLocaleHref({
         pathname: '/personal-site/de/',
-        hash: '#/projects',
+        hash: '#projects',
         targetLocale: 'uk',
       }),
-    ).toBe('/personal-site/uk/#/projects');
-    expect(buildHomeHref('/personal-site/uk/', 'en')).toBe('/personal-site/#/');
-    expect(buildHomeHref('/personal-site/', 'de')).toBe('/personal-site/de/#/');
+    ).toBe('/personal-site/uk/#projects');
+    expect(buildHomeHref('/personal-site/uk/', 'en')).toBe('/personal-site/');
+    expect(buildHomeHref('/personal-site/', 'de')).toBe('/personal-site/de/');
   });
 
   it('resolves the current locale from path first and document language second', () => {
@@ -58,13 +58,13 @@ describe('locale bootstrap utilities', () => {
       resolveLocaleBootstrapInstruction({
         pathname: '/',
         search: '',
-        hash: '#/projects',
+        hash: '#projects',
         cookieString: 'site_locale=de',
       }),
     ).toEqual({
       explicitLocale: null,
       persistLocale: 'de',
-      redirectUrl: '/de/#/projects',
+      redirectUrl: '/de/#projects',
     });
   });
 
@@ -73,13 +73,13 @@ describe('locale bootstrap utilities', () => {
       resolveLocaleBootstrapInstruction({
         pathname: '/personal-site/',
         search: '',
-        hash: '#/contact',
+        hash: '#contact',
         cookieString: 'site_locale=uk',
       }),
     ).toEqual({
       explicitLocale: null,
       persistLocale: 'uk',
-      redirectUrl: '/personal-site/uk/#/contact',
+      redirectUrl: '/personal-site/uk/#contact',
     });
   });
 
@@ -88,7 +88,7 @@ describe('locale bootstrap utilities', () => {
       resolveLocaleBootstrapInstruction({
         pathname: '/de/',
         search: '',
-        hash: '#/about-me',
+        hash: '#about-me',
         cookieString: 'site_locale=en',
       }),
     ).toEqual({
