@@ -4,7 +4,7 @@ export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    title: $localize`:@@route.homeTitle:HOME`,
+    title: $localize`:@@route.homeTitle:Viacheslav Guzhov | Java, Spring Boot & AI Automation Engineer`,
     loadComponent: () =>
       import('./features/home/pages/home-page/home-page.component').then((m) => m.HomePageComponent),
   },

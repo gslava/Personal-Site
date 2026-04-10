@@ -15,7 +15,7 @@ const missingFiles = [];
 const unexpectedFiles = [];
 const invalidFiles = [];
 const blockSeparatorPattern = /^\s*---\s*$/gm;
-const titlePattern = /^#\s+(.+)$/m;
+const titlePattern = /^#{1,2}\s+(.+)$/gm;
 const expectedSectionOrder = ['about-me', 'work-experience', 'education', 'technologies', 'projects', 'contact'];
 
 for (const locale of locales) {
@@ -45,13 +45,17 @@ for (const locale of locales) {
     continue;
   }
 
-  const titles = blocks.map((block) => block.match(titlePattern)?.[1]?.trim() ?? '__MISSING__');
   const expectedTitles = expectedSectionOrder.map((key) => contentRegistry.pages[key].labels[locale]);
 
   for (let index = 0; index < expectedTitles.length; index += 1) {
-    if (titles[index] !== expectedTitles[index]) {
+    const headings = Array.from(blocks[index].matchAll(titlePattern))
+      .map((match) => match[1]?.trim())
+      .filter(Boolean);
+    const title = headings.find((heading) => heading === expectedTitles[index]) ?? headings[0] ?? '__MISSING__';
+
+    if (title !== expectedTitles[index]) {
       invalidFiles.push(
-        `${filePath} (block ${index + 1}: expected "${expectedTitles[index]}", found "${titles[index]}")`,
+        `${filePath} (block ${index + 1}: expected "${expectedTitles[index]}", found "${title}")`,
       );
     }
   }

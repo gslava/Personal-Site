@@ -15,7 +15,8 @@ marked.setOptions({
 const BLOCK_SEPARATOR_PATTERN = /^\s*---\s*$/gm;
 const INLINE_DIVIDER_PATTERN = /^\s*~+\s*$/gm;
 const PARAGRAPH_BREAK_PATTERN = /\n\s*\n/g;
-const TITLE_PATTERN = /^#\s+(.+)$/m;
+const TITLE_PATTERN = /^#{1,2}\s+(.+)$/m;
+const HEADING_PATTERN = /^#{1,2}\s+(.+)$/gm;
 
 export function parseSinglePageMarkdown(markdown: string, locale: SiteLocaleCode): readonly SinglePageSection[] {
   const usedIds = new Set<string>();
@@ -55,7 +56,7 @@ function parseSinglePageBlock(
   index: number,
   usedIds: Set<string>,
 ): SinglePageSection {
-  const title = extractTitle(blockMarkdown) ?? `Section ${index + 1}`;
+  const title = extractTitle(blockMarkdown, locale) ?? `Section ${index + 1}`;
   const key = getContentPageKeyByLabel(title, locale) ?? createFallbackKey(title);
   const id = createUniqueId(key, usedIds);
 
@@ -68,8 +69,13 @@ function parseSinglePageBlock(
   };
 }
 
-function extractTitle(markdown: string): string | null {
-  return markdown.match(TITLE_PATTERN)?.[1]?.trim() ?? null;
+function extractTitle(markdown: string, locale: SiteLocaleCode): string | null {
+  const headings = Array.from(markdown.matchAll(HEADING_PATTERN))
+    .map((match) => match[1]?.trim())
+    .filter((heading): heading is string => Boolean(heading));
+  const knownSectionHeading = headings.find((heading) => getContentPageKeyByLabel(heading, locale));
+
+  return knownSectionHeading ?? headings[0] ?? null;
 }
 
 function extractSummary(markdown: string): string {
