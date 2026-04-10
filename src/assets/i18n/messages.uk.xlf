@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en" trgLang="uk">
   <file id="ngi18n" original="ng.template">
-    <unit id="meta.appTitle"><segment><source>HOME</source><target>HOME</target></segment></unit>
-    <unit id="meta.description"><segment><source>Personal site with an Angular 21 home page, a reference-driven particle sphere, and markdown-powered content sections.</source><target>Персональний сайт із домашньою сторінкою на Angular 21, референсною сферою частинок і markdown-розділами для контенту.</target></segment></unit>
-    <unit id="route.homeTitle"><segment><source>HOME</source><target>HOME</target></segment></unit>
+    <unit id="meta.appTitle"><segment><source>Viacheslav Guzhov | Java, Spring Boot &amp; AI Automation Engineer</source><target>Viacheslav Guzhov | Java, Spring Boot та AI Automation Engineer</target></segment></unit>
+    <unit id="meta.description"><segment><source>Viacheslav Guzhov is a Berlin-based Java, Spring Boot, and AI automation engineer building backend systems, integrations, and business workflow automation.</source><target>Viacheslav Guzhov - Java, Spring Boot та AI automation engineer у Берліні, який створює backend-системи, інтеграції та автоматизацію бізнес-процесів.</target></segment></unit>
+    <unit id="meta.canonicalHref"><segment><source>https://gslava.github.io/Personal-Site/</source><target>https://gslava.github.io/Personal-Site/uk/</target></segment></unit>
+    <unit id="route.homeTitle"><segment><source>Viacheslav Guzhov | Java, Spring Boot &amp; AI Automation Engineer</source><target>Viacheslav Guzhov | Java, Spring Boot та AI Automation Engineer</target></segment></unit>
     <unit id="route.technologiesTitle"><segment><source>Technologies</source><target>Технології</target></segment></unit>
     <unit id="route.projectsTitle"><segment><source>Projects</source><target>Проєкти</target></segment></unit>
     <unit id="route.aboutTitle"><segment><source>About Me</source><target>Про мене</target></segment></unit>

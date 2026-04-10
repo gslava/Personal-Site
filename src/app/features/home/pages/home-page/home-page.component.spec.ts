@@ -31,18 +31,18 @@ describe('HomePageComponent', () => {
   it('renders the index card and sections from markdown', () => {
     const fixture = TestBed.createComponent(HomePageComponent);
     httpTestingController.expectOne('assets/content/en/all-in-one-page.md').flush(
-      '# About Me\n\nSummary text.\n\n## Intro\n\nHello.\n\n---\n\n# Contact\n\nReach out.\n\n- Email: [hello](mailto:hello@example.com)\n',
+      '# Viacheslav Guzhov - Java, Spring Boot & AI Automation Engineer\n\n## About Me\n\nSummary text.\n\n---\n\n# Contact\n\nReach out.\n\n- Email: [hello](mailto:hello@example.com)\n',
     );
     fixture.detectChanges();
 
     const element = fixture.nativeElement as HTMLElement;
-    const indexLabel = element.querySelector('.home-page__index-label')?.textContent?.trim();
+    const pageHeading = element.querySelector('h1')?.textContent?.trim();
     const indexLinks = Array.from(element.querySelectorAll('.home-page__index-link-title')).map((node) =>
       node.textContent?.trim(),
     );
     const sections = Array.from(element.querySelectorAll('.home-page__section-card'));
 
-    expect(indexLabel).toBe('Index');
+    expect(pageHeading).toBe('Viacheslav Guzhov - Java, Spring Boot & AI Automation Engineer');
     expect(indexLinks).toEqual(['About Me', 'Contact']);
     expect(sections).toHaveLength(2);
   });

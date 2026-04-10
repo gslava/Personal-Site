@@ -37,6 +37,21 @@ describe('single-page-content.parser', () => {
     expect(section?.html).toContain('content-inline-divider');
   });
 
+  it('uses the first known section heading when a page h1 is present', () => {
+    const [section] = parseSinglePageMarkdown(
+      '# Viacheslav Guzhov - Java, Spring Boot & AI Automation Engineer\n\n## About Me\n\nSummary paragraph.\n',
+      'en',
+    );
+
+    expect(section).toMatchObject({
+      key: 'about-me',
+      id: 'about-me',
+      title: 'About Me',
+      summary: 'Summary paragraph.',
+    });
+    expect(section?.html).toContain('<h1>Viacheslav Guzhov - Java, Spring Boot &amp; AI Automation Engineer</h1>');
+  });
+
   it('creates unique fallback ids for duplicate unknown titles', () => {
     const sections = parseSinglePageMarkdown('# Tech Stack\n\nOne.\n\n---\n\n# Tech Stack\n\nTwo.\n', 'en');
 

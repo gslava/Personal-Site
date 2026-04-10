@@ -1,4 +1,6 @@
-# Про мене
+# Viacheslav Guzhov - Java, Spring Boot та AI Automation Engineer
+
+## Про мене
 
 Інженер-програміст із фокусом на **Java**, **Spring Boot**, **автоматизацію** та **інтеграцію AI**. Я розробляю бізнес-програмне забезпечення, яке зменшує обсяг ручної роботи, спрощує робочі процеси та перетворює повторювані задачі на надійні системи.
  
@@ -12,6 +14,7 @@
 - Email: [guzhov.viacheslav@gmail.com](mailto:guzhov.viacheslav@gmail.com)
 - Telegram: [@g_slava](https://t.me/g_slava)
 - WhatsApp: [Посилання для зв’язку](https://api.whatsapp.com/qr/NETY2M6VJROGA1)
+- LinkedIn: [Профіль LinkedIn](https://www.linkedin.com/in/viacheslav-g-996039b7/)
 
 ### Про мою роботу
 
@@ -300,3 +303,4 @@ Website: [nure.ua/en](https://nure.ua/en)
 - Email: [guzhov.viacheslav@gmail.com](mailto:guzhov.viacheslav@gmail.com)
 - Telegram: [@g_slava](https://t.me/g_slava)
 - WhatsApp: [Посилання для зв’язку](https://api.whatsapp.com/qr/NETY2M6VJROGA1)
+- LinkedIn: [Профіль LinkedIn](https://www.linkedin.com/in/viacheslav-g-996039b7/)

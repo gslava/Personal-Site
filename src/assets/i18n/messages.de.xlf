@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en" trgLang="de">
   <file id="ngi18n" original="ng.template">
-    <unit id="meta.appTitle"><segment><source>HOME</source><target>HOME</target></segment></unit>
-    <unit id="meta.description"><segment><source>Personal site with an Angular 21 home page, a reference-driven particle sphere, and markdown-powered content sections.</source><target>Persönliche Website mit einer Angular-21-Startseite, einer referenzbasierten Partikelsphäre und Markdown-basierten Inhaltsseiten.</target></segment></unit>
-    <unit id="route.homeTitle"><segment><source>HOME</source><target>HOME</target></segment></unit>
+    <unit id="meta.appTitle"><segment><source>Viacheslav Guzhov | Java, Spring Boot &amp; AI Automation Engineer</source><target>Viacheslav Guzhov | Java, Spring Boot &amp; KI-Automatisierung</target></segment></unit>
+    <unit id="meta.description"><segment><source>Viacheslav Guzhov is a Berlin-based Java, Spring Boot, and AI automation engineer building backend systems, integrations, and business workflow automation.</source><target>Viacheslav Guzhov ist ein in Berlin ansässiger Java-, Spring-Boot- und KI-Automatisierungsingenieur für Backend-Systeme, Integrationen und Geschäftsprozessautomatisierung.</target></segment></unit>
+    <unit id="meta.canonicalHref"><segment><source>https://gslava.github.io/Personal-Site/</source><target>https://gslava.github.io/Personal-Site/de/</target></segment></unit>
+    <unit id="route.homeTitle"><segment><source>Viacheslav Guzhov | Java, Spring Boot &amp; AI Automation Engineer</source><target>Viacheslav Guzhov | Java, Spring Boot &amp; KI-Automatisierung</target></segment></unit>
     <unit id="route.technologiesTitle"><segment><source>Technologies</source><target>Technologien</target></segment></unit>
     <unit id="route.projectsTitle"><segment><source>Projects</source><target>Projekte</target></segment></unit>
     <unit id="route.aboutTitle"><segment><source>About Me</source><target>Über mich</target></segment></unit>

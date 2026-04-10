@@ -1,4 +1,6 @@
-# About Me
+# Viacheslav Guzhov - Java, Spring Boot & AI Automation Engineer
+
+## About Me
 
 Software engineer focused on **Java**, **Spring Boot**, **automation**, and **AI integration**. I build business software that reduces manual work, simplifies workflows, and turns repetitive operations into reliable systems.
  
@@ -12,6 +14,7 @@ Work permit: Germany
 - Email: [guzhov.viacheslav@gmail.com](mailto:guzhov.viacheslav@gmail.com)
 - Telegram: [@g_slava](https://t.me/g_slava)
 - WhatsApp: [Contact link](https://api.whatsapp.com/qr/NETY2M6VJROGA1)
+- LinkedIn: [LinkedIn profile](https://www.linkedin.com/in/viacheslav-g-996039b7/)
 
 ### About My Work
 
@@ -302,3 +305,4 @@ If you want to discuss backend systems, automation, AI integration, or a potenti
 - Email: [guzhov.viacheslav@gmail.com](mailto:guzhov.viacheslav@gmail.com)
 - Telegram: [@g_slava](https://t.me/g_slava)
 - WhatsApp: [Contact link](https://api.whatsapp.com/qr/NETY2M6VJROGA1)
+- LinkedIn: [LinkedIn profile](https://www.linkedin.com/in/viacheslav-g-996039b7/)

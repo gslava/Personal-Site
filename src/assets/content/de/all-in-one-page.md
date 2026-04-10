@@ -1,4 +1,6 @@
-# Über mich
+# Viacheslav Guzhov - Java, Spring Boot & KI-Automatisierung
+
+## Über mich
 
 Softwareentwickler mit Fokus auf **Java**, **Spring Boot**, **Automatisierung** und **AI-Integration**. Ich entwickle Business-Software, die manuelle Arbeit reduziert, Arbeitsabläufe vereinfacht und wiederkehrende Aufgaben in zuverlässige Systeme verwandelt.
  
@@ -12,6 +14,7 @@ Arbeitserlaubnis: Deutschland
 - Email: [guzhov.viacheslav@gmail.com](mailto:guzhov.viacheslav@gmail.com)
 - Telegram: [@g_slava](https://t.me/g_slava)
 - WhatsApp: [Kontaktlink](https://api.whatsapp.com/qr/NETY2M6VJROGA1)
+- LinkedIn: [LinkedIn-Profil](https://www.linkedin.com/in/viacheslav-g-996039b7/)
 
 ### Über meine Arbeit
 
@@ -300,3 +303,4 @@ Wenn Sie über Backend-Systeme, Automatisierung, KI-Integration oder eine mögli
 - Email: [guzhov.viacheslav@gmail.com](mailto:guzhov.viacheslav@gmail.com)
 - Telegram: [@g_slava](https://t.me/g_slava)
 - WhatsApp: [Kontaktlink](https://api.whatsapp.com/qr/NETY2M6VJROGA1)
+- LinkedIn: [LinkedIn-Profil](https://www.linkedin.com/in/viacheslav-g-996039b7/)
