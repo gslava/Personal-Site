@@ -15,6 +15,8 @@ import { SinglePageContentService } from '../../../../core/content/single-page-c
 import { SinglePageSection } from '../../../../core/content/single-page-content.models';
 import { LocaleService } from '../../../../core/services/locale.service';
 import { SiteLocaleCode } from '../../../../core/models/site-locale';
+import { ReactiveGlassCardDirective } from '../../../../shared/directives/reactive-glass-card.directive';
+import { ScrollRevealDirective } from '../../../../shared/directives/scroll-reveal.directive';
 
 type HomePageCopy = {
   readonly contentAriaLabel: string;
@@ -34,7 +36,7 @@ const HOME_PAGE_COPY: Record<SiteLocaleCode, HomePageCopy> = {
 
 @Component({
   selector: 'app-home-page',
-  imports: [ParticleSphereComponent],
+  imports: [ParticleSphereComponent, ScrollRevealDirective, ReactiveGlassCardDirective],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

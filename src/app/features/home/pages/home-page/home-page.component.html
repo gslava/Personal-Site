@@ -17,12 +17,12 @@
 
   <div class="home-page__sections" [attr.aria-label]="copy().contentAriaLabel">
     @for (section of sections(); track trackSection($index, section); let last = $last) {
-      <section [attr.id]="section.id" class="home-page__section-card">
+      <section [attr.id]="section.id" class="home-page__section-card" appScrollReveal appReactiveGlassCard>
         <div class="home-page__prose" [innerHTML]="section.html"></div>
       </section>
 
       @if (!last) {
-        <div class="home-page__divider" aria-hidden="true">
+        <div class="home-page__divider" aria-hidden="true" appScrollReveal>
           <span class="home-page__divider-line"></span>
           <img class="home-page__divider-fox" src="fox.png" alt="" />
           <span class="home-page__divider-line"></span>
