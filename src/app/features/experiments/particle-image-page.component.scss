@@ -1,0 +1,136 @@
+:host {
+  display: block;
+}
+.image-experiment {
+  padding-top: 2rem;
+  padding-bottom: 3rem;
+}
+header {
+  margin: 2.5rem 0 1.5rem;
+}
+h1 {
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  letter-spacing: -0.05em;
+  line-height: 1.05;
+  margin: 0.5rem 0 1rem;
+}
+.intro {
+  color: var(--muted);
+  max-width: 58ch;
+  line-height: 1.7;
+}
+.image-stage {
+  position: relative;
+  background: #050607;
+  height: clamp(360px, 65vh, 740px);
+  border: 1px solid #ffffff20;
+  border-radius: 12px;
+  overflow: hidden;
+}
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  touch-action: none;
+  cursor: crosshair;
+}
+canvas:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -4px;
+}
+.image-stage--ready canvas {
+  opacity: 1;
+}
+.image-fallback {
+  position: absolute;
+  inset: 7%;
+  width: 86%;
+  height: 86%;
+  object-fit: contain;
+  pointer-events: none;
+}
+.image-stage--ready .image-fallback {
+  visibility: hidden;
+}
+.image-choices {
+  display: flex;
+  gap: 0.75rem;
+  border: 0;
+  margin: 1.5rem 0 0;
+  padding: 0;
+}
+legend {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-bottom: 0.75rem;
+}
+label {
+  position: relative;
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border: 1px solid #ffffff25;
+  border-radius: 8px;
+  cursor: pointer;
+}
+label.selected {
+  border-color: var(--accent);
+  background: #e5ab8010;
+}
+label:focus-within {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+.choice-number {
+  color: var(--muted);
+  font-size: 0.7rem;
+}
+.help,
+.credit,
+.status {
+  font-size: 0.8rem;
+  line-height: 1.7;
+  color: var(--muted);
+}
+.status:empty {
+  display: none;
+}
+.help {
+  margin-top: 1.5rem;
+  max-width: 75ch;
+}
+.credit {
+  margin-top: 1rem;
+}
+.credit a {
+  color: inherit;
+}
+@media (max-width: 600px) {
+  .image-experiment {
+    padding-top: 1.5rem;
+  }
+  header {
+    margin-top: 2rem;
+  }
+  .image-stage {
+    height: min(105vw, 480px);
+  }
+  .image-choices {
+    gap: 0.5rem;
+  }
+  label {
+    flex: 1;
+    justify-content: center;
+    padding: 0.9rem 0.3rem;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+  }
+}

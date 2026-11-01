@@ -4,7 +4,6 @@ import { fileURLToPath } from 'node:url';
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const repositoryRoot = resolve(scriptDirectory, '..');
-const npmCommand = process.platform === 'win32' ? 'npm.cmd' : 'npm';
 const children = [];
 
 function spawnChild(command, args, options = {}) {
@@ -16,6 +15,10 @@ function spawnChild(command, args, options = {}) {
   });
 
   children.push(child);
+  child.on('error', (error) => {
+    console.error(`Cannot start ${command}: ${error.message}`);
+    shutdown(1);
+  });
   return child;
 }
 
@@ -32,17 +35,21 @@ function shutdown(exitCode = 0) {
 process.on('SIGINT', () => shutdown(0));
 process.on('SIGTERM', () => shutdown(0));
 
-const buildWatcher = spawnChild(npmCommand, ['run', 'preview:release:build']);
-const staticServer = spawnChild('python3', ['-m', 'http.server', '4200', '-d', 'dist/personal-site/browser']);
+const buildWatcher = spawnChild(process.execPath, [
+  resolve(scriptDirectory, 'watch-localized-build.mjs'),
+]);
+const staticServer = spawnChild('python3', [
+  '-m',
+  'http.server',
+  '4200',
+  '-d',
+  'dist/personal-site/browser',
+]);
 
 buildWatcher.on('exit', (code) => {
-  if (code && code !== 0) {
-    shutdown(code);
-  }
+  shutdown(code ?? 1);
 });
 
 staticServer.on('exit', (code) => {
-  if (code && code !== 0) {
-    shutdown(code);
-  }
+  shutdown(code ?? 1);
 });

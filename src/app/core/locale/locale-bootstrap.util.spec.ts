@@ -9,6 +9,33 @@ import {
 } from './locale-bootstrap.util';
 
 describe('locale bootstrap utilities', () => {
+  it('switches locale before a nested route while retaining deployment prefix and hash', () => {
+    expect(getExplicitLocaleFromPath('/Personal-Site/uk/work/amazon-ads/')).toBe('uk');
+    expect(
+      buildLocaleHref({
+        pathname: '/Personal-Site/de/work/amazon-ads/',
+        hash: '#result',
+        targetLocale: 'uk',
+      }),
+    ).toBe('/Personal-Site/uk/work/amazon-ads/#result');
+    expect(
+      buildLocaleHref({ pathname: '/experiments/particles/', hash: '', targetLocale: 'de' }),
+    ).toBe('/de/experiments/particles/');
+    expect(
+      buildLocaleHref({ pathname: '/de/work/order-processing/', hash: '', targetLocale: 'en' }),
+    ).toBe('/work/order-processing/');
+    expect(buildHomeHref('/Personal-Site/uk/work/amazon-ads/', 'de')).toBe('/Personal-Site/de/');
+  });
+  it('keeps the nested destination when restoring a language preference', () => {
+    expect(
+      resolveLocaleBootstrapInstruction({
+        pathname: '/Personal-Site/work/amazon-ads/',
+        search: '?ref=work',
+        hash: '#result',
+        cookieString: 'site_locale=uk',
+      }).redirectUrl,
+    ).toBe('/Personal-Site/uk/work/amazon-ads/?ref=work#result');
+  });
   it('detects explicit locale from the trailing path segment', () => {
     expect(getExplicitLocaleFromPath('/')).toBeNull();
     expect(getExplicitLocaleFromPath('/de/')).toBe('de');

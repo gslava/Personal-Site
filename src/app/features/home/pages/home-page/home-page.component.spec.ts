@@ -1,49 +1,26 @@
 import { TestBed } from '@angular/core/testing';
-import { provideHttpClient } from '@angular/common/http';
-import { provideHttpClientTesting, HttpTestingController } from '@angular/common/http/testing';
 import { provideRouter } from '@angular/router';
 import { HomePageComponent } from './home-page.component';
 
 describe('HomePageComponent', () => {
-  let httpTestingController: HttpTestingController;
-
   beforeEach(async () => {
+    document.documentElement.lang = 'en';
     await TestBed.configureTestingModule({
       imports: [HomePageComponent],
-      providers: [provideRouter([]), provideHttpClient(), provideHttpClientTesting()],
+      providers: [provideRouter([])],
     }).compileComponents();
-
-    httpTestingController = TestBed.inject(HttpTestingController);
   });
-
-  afterEach(() => {
-    httpTestingController.verify();
-  });
-
-  it('creates the home page', () => {
+  it('introduces the engineer, links to three cases and keeps the particle canvas off Home', () => {
     const fixture = TestBed.createComponent(HomePageComponent);
-    httpTestingController.expectOne('assets/content/en/all-in-one-page.md').flush('# About Me\n\nSummary text.');
     fixture.detectChanges();
-
-    expect(fixture.componentInstance).toBeTruthy();
-  });
-
-  it('renders the index card and sections from markdown', () => {
-    const fixture = TestBed.createComponent(HomePageComponent);
-    httpTestingController.expectOne('assets/content/en/all-in-one-page.md').flush(
-      '# Viacheslav Guzhov - Java, Spring Boot & AI Automation Engineer\n\n## About Me\n\nSummary text.\n\n---\n\n# Contact\n\nReach out.\n\n- Email: [hello](mailto:hello@example.com)\n',
-    );
-    fixture.detectChanges();
-
     const element = fixture.nativeElement as HTMLElement;
-    const pageHeading = element.querySelector('h1')?.textContent?.trim();
-    const indexLinks = Array.from(element.querySelectorAll('.home-page__index-link-title')).map((node) =>
-      node.textContent?.trim(),
-    );
-    const sections = Array.from(element.querySelectorAll('.home-page__section-card'));
-
-    expect(pageHeading).toBe('Viacheslav Guzhov - Java, Spring Boot & AI Automation Engineer');
-    expect(indexLinks).toEqual(['About Me', 'Contact']);
-    expect(sections).toHaveLength(2);
+    expect(element.querySelectorAll('h1')).toHaveLength(1);
+    expect(element.querySelector('h1')?.textContent).toContain('Java Backend Developer');
+    expect(element.textContent).toContain('connect AI to everyday operations');
+    expect(element.querySelector('.metrics')).toBeNull();
+    expect(element.querySelectorAll('.project-row')).toHaveLength(3);
+    expect(element.querySelector('a[href="/work/inventory-management"]')).toBeTruthy();
+    expect(element.querySelector('canvas')).toBeNull();
+    expect(element.textContent).not.toMatch(/captcha/i);
   });
 });

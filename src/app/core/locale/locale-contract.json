@@ -1,4 +1,5 @@
 {
+  "routeRoots": ["work", "experience", "about", "contact", "experiments"],
   "defaultLocale": "en",
   "locales": ["en", "de", "uk"],
   "pathLocalizedLocales": ["de", "uk"],

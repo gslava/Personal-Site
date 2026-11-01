@@ -1,0 +1,205 @@
+<div class="visual-page container" [class.visual-page--cinematic]="!!cinematic">
+  <a class="text-link back" routerLink="/experiments">← {{ t.backExperiments }}</a>
+  <header class="visual-heading">
+    <div>
+      <p class="meta">{{ scene.stack }}</p>
+      <h1>{{ scene.title }}</h1>
+    </div>
+    <p class="intro">{{ scene.intro }}</p>
+  </header>
+  <div
+    class="stage"
+    tabindex="-1"
+    [class.stage--cinematic]="!!cinematic"
+    [class.stage--immersive]="immersive()"
+    [class.stage--unavailable]="unavailable()"
+    [attr.role]="immersive() ? 'dialog' : null"
+    [attr.aria-modal]="immersive() ? 'true' : null"
+    [attr.aria-label]="immersive() ? t.cinematicLab.dialog + ': ' + scene.title : null"
+    (keydown)="stageKeyboard($event)"
+  >
+    <img
+      class="scene-preview"
+      [src]="'images/experiments/' + scene.slug + '.webp'"
+      [alt]="scene.title"
+    />
+    <canvas
+      #canvas
+      tabindex="0"
+      role="img"
+      [attr.aria-label]="t.visualLab.canvas"
+      aria-describedby="scene-help"
+      (pointermove)="move($event)"
+      (pointerdown)="move($event)"
+      (keydown)="keyboard($event)"
+      (webglcontextlost)="contextLost($event)"
+      (webglcontextrestored)="initialize()"
+    ></canvas>
+    @if (!unavailable()) {
+      <div class="stage-label" aria-hidden="true">
+        <span class="live-dot" [class.live-dot--paused]="!playing()"></span
+        >{{ playing() ? t.visualLab.running : t.visualLab.pausedLabel }}
+      </div>
+      @if (!cinematic) {
+        <span class="stage-gesture" aria-hidden="true">{{ scene.gesture }} ↗</span>
+      }
+      @if (cinematic) {
+        <div class="stage-actions">
+          <button type="button" [attr.aria-label]="playing() ? t.pause : t.play" (click)="toggle()">
+            {{ playing() ? 'Ⅱ' : '▶' }}
+          </button>
+          @if (palettes.length > 1) {
+            <button
+              type="button"
+              [attr.aria-label]="t.cinematicLab.palette"
+              [title]="t.cinematicLab.palette"
+              (click)="cyclePalette()"
+            >
+              ◐
+            </button>
+          }
+          <button type="button" (click)="immersive() ? leaveCinema() : enterCinema()">
+            {{ immersive() ? t.cinematicLab.exit : t.cinematicLab.immersive }}
+            <span aria-hidden="true">{{ immersive() ? '↙' : '↗' }}</span>
+          </button>
+        </div>
+        <div class="camera-dock">
+          <p>{{ immersive() ? t.cinematicLab.cinemaHelp : scene.gesture }}</p>
+          <div class="camera-presets" role="group" [attr.aria-label]="t.cinematicLab.camera">
+            @for (preset of cinematic.presets; track preset; let i = $index) {
+              <button type="button" [attr.aria-pressed]="camera() === i" (click)="chooseCamera(i)">
+                <span aria-hidden="true">0{{ i + 1 }}</span
+                >{{ preset }}
+              </button>
+            }
+          </div>
+        </div>
+      }
+    }
+    @if (unavailable() && immersive()) {
+      <button class="cinema-emergency-exit" type="button" (click)="leaveCinema()">
+        {{ t.cinematicLab.exit }}
+      </button>
+    }
+  </div>
+  @if (unavailable()) {
+    <div class="fallback" role="status">
+      <p>{{ t.visualLab.unavailable }}</p>
+      <button class="button" type="button" (click)="initialize()">{{ t.visualLab.retry }}</button>
+    </div>
+  }
+  <section class="controls" [attr.aria-label]="t.visualLab.controls">
+    <div class="playback">
+      <button
+        class="button button--primary"
+        type="button"
+        [disabled]="unavailable()"
+        [attr.aria-pressed]="playing()"
+        (click)="toggle()"
+      >
+        {{ playing() ? t.pause : t.play }}
+      </button>
+      <button class="reset" type="button" [disabled]="unavailable()" (click)="reset()">
+        {{ t.visualLab.reset }} ↺
+      </button>
+    </div>
+    <label
+      >{{ t.visualLab.speed }} <output>{{ speed().toFixed(1) }}×</output
+      ><input
+        type="range"
+        min="0"
+        max="5"
+        step="0.1"
+        [value]="speed()"
+        [disabled]="unavailable()"
+        (input)="change($event, 'speed')"
+    /></label>
+    @if (earth) {
+      <label
+        >{{ t.orbitalLab.count }} <output>{{ satelliteCount() }}</output>
+        <input
+          type="range"
+          min="0"
+          max="32"
+          step="1"
+          [value]="satelliteCount()"
+          [disabled]="unavailable()"
+          (input)="change($event, 'satelliteCount')"
+        />
+      </label>
+      <label
+        >{{ t.orbitalLab.distance }} <output>{{ (orbitalDistance() * 6371).toFixed(0) }} km</output>
+        <input
+          type="range"
+          min="0.15"
+          max="2"
+          step="0.05"
+          [value]="orbitalDistance()"
+          [disabled]="unavailable()"
+          (input)="change($event, 'orbitalDistance')"
+        />
+      </label>
+    } @else {
+      <label
+        >{{ cinematic?.parameter || t.visualLab.intensity }}
+        <output>{{ intensity().toFixed(1) }}</output
+        ><input
+          type="range"
+          min="0.3"
+          max="2"
+          step="0.1"
+          [value]="intensity()"
+          [disabled]="unavailable()"
+          (input)="change($event, 'intensity')"
+      /></label>
+    }
+    @if (palettes.length > 1) {
+      <label
+        >{{ t.visualLab.palette
+        }}<select
+          [value]="palette()"
+          [disabled]="unavailable()"
+          (change)="change($event, 'palette')"
+        >
+          @for (name of palettes; track name; let i = $index) {
+            <option [value]="i">{{ name }}</option>
+          }
+        </select></label
+      >
+    }
+  </section>
+  @if (cinematic) {
+    <div class="quality-row">
+      <label
+        >{{ t.cinematicLab.quality
+        }}<select [value]="quality()" [disabled]="unavailable()" (change)="changeQuality($event)">
+          @for (option of ['auto', 'performance', 'high']; track option; let i = $index) {
+            <option [value]="option">{{ t.cinematicLab.qualityOptions[i] }}</option>
+          }
+        </select></label
+      >
+      <p>{{ t.cinematicLab.qualityHelp }}</p>
+    </div>
+  }
+  <p class="scene-help" id="scene-help">
+    {{ t.visualLab.help }}
+    @if (!playing() && !unavailable()) {
+      {{ t.visualLab.paused }}
+    }
+  </p>
+  <section class="scene-details">
+    <h2>{{ t.visualLab.technical }}</h2>
+    <div>
+      <p>{{ scene.detail }}</p>
+      <p class="meta">{{ t.visualLab.local }}</p>
+    </div>
+  </section>
+  <nav class="other-worlds" [attr.aria-label]="t.visualLab.next">
+    @for (other of others; track other.slug) {
+      <a [routerLink]="'/experiments/' + other.slug"
+        ><span class="meta">{{ t.visualLab.next }}</span
+        ><span>{{ other.title }} ↗</span></a
+      >
+    }
+  </nav>
+</div>

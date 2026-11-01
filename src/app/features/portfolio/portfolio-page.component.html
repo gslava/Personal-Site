@@ -1,0 +1,468 @@
+<div class="page container" [class.page--home]="page() === 'home'">
+  @switch (page()) {
+    @case ('home') {
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero__title">
+          <p class="hero__name">Viacheslav Guzhov</p>
+          <h1 id="hero-title"><app-heading-text [text]="t.heroTitle" /></h1>
+          <p class="hero__focus">
+            <span>{{ t.heroFocus }}</span>
+            <span>{{ t.heroBackend }}</span>
+          </p>
+        </div>
+        <div class="hero__intro">
+          <p class="lead">{{ t.intro }}</p>
+          <div class="actions">
+            <a class="button button--primary" routerLink="/" fragment="projects"
+              >{{ t.selected }} <span aria-hidden="true">↓</span></a
+            >
+            <div class="cv-action">
+              <a
+                class="text-link"
+                href="cv/viacheslav-guzhov-cv.pdf"
+                download="Viacheslav Guzhov - CV.pdf"
+                >{{ t.cv }} <span aria-hidden="true">↓</span></a
+              >
+              <span class="cv-note">{{ t.cvNote }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero__facts" appRuleReveal="bottom">
+          <span>{{ t.location }}</span
+          ><span>{{ t.permit }}</span
+          ><span>{{ t.languageItems[0] }} / {{ t.languageItems[1] }}</span>
+        </div>
+      </section>
+    }
+    @case ('work') {
+      <header class="page-heading">
+        <h1><app-heading-text [text]="t.workTitle" /></h1>
+        <p class="lead">{{ t.workIntro }}</p>
+      </header>
+    }
+    @case ('case') {
+      @if (project(); as p) {
+        <header class="page-heading case-heading">
+          <a class="text-link back-link" routerLink="/work"
+            ><span aria-hidden="true">←</span> {{ t.backWork }}</a
+          >
+          <p class="meta">{{ p.category }}</p>
+          <h1><app-heading-text [text]="p.title" /></h1>
+          <p class="lead">{{ p.summary }}</p>
+          <p class="stack-line">
+            <span>{{ t.stackLabel }}</span> {{ p.stack.join(' · ') }}
+          </p>
+          @if (connectedProjects().length) {
+            <nav class="case-connections" [attr.aria-label]="t.projectConnections">
+              <span class="meta">{{ t.projectConnections }}</span>
+              @for (connected of connectedProjects(); track connected.slug) {
+                <a class="text-link" [routerLink]="'/work/' + connected.slug">
+                  {{ connected.title }} <span aria-hidden="true">→</span>
+                </a>
+              }
+            </nav>
+          }
+        </header>
+        <a
+          class="case-interface"
+          [href]="'images/projects/' + p.slug + '.webp'"
+          target="_blank"
+          rel="noopener"
+        >
+          <img
+            [src]="'images/projects/' + p.slug + '.webp'"
+            [srcset]="
+              'images/projects/' +
+              p.slug +
+              '-768.webp 768w, ' +
+              'images/projects/' +
+              p.slug +
+              '-1024.webp 1024w, ' +
+              'images/projects/' +
+              p.slug +
+              '.webp 1536w'
+            "
+            sizes="(max-width: 767px) calc(100vw - 36px), (max-width: 1223px) calc(100vw - 64px), 1160px"
+            [alt]="p.imageAlt"
+            width="1536"
+            height="1024"
+            decoding="async"
+            fetchpriority="high"
+          />
+        </a>
+        <section appRuleReveal class="case-summary" aria-labelledby="case-summary-title">
+          <h2 appEntrance id="case-summary-title">{{ t.caseSummaryTitle }}</h2>
+          <div class="case-summary__grid">
+            @for (item of p.snapshot; track $index; let i = $index) {
+              <article>
+                <h3>{{ t.caseSummaryLabels[i] }}</h3>
+                <p>{{ item }}</p>
+              </article>
+            }
+          </div>
+        </section>
+        <section class="workflow" aria-labelledby="workflow-title">
+          <h2 appEntrance id="workflow-title">{{ t.workflowTitle }}</h2>
+          <ol>
+            @for (step of p.workflow; track step) {
+              <li>{{ step }}</li>
+            }
+          </ol>
+          <p class="meta">{{ t.workflowNote }}</p>
+        </section>
+        <div class="case-body">
+          @for (section of p.sections; track $index; let i = $index) {
+            <section>
+              <h2 appEntrance>{{ t.caseLabels[i] }}</h2>
+              <p>{{ section }}</p>
+            </section>
+          }
+        </div>
+        @if (nextProject(); as next) {
+          <a class="next-project" [routerLink]="'/work/' + next.slug"
+            ><span
+              ><span class="meta">{{ t.nextProject }}</span
+              ><strong>{{ next.title }}</strong></span
+            ><span class="next-project__arrow" aria-hidden="true">→</span></a
+          >
+        }
+      }
+    }
+    @case ('about') {
+      <header class="page-heading">
+        <h1><app-heading-text [text]="t.aboutTitle" /></h1>
+      </header>
+      <section id="about-me" class="about-layout" aria-label="Viacheslav Guzhov">
+        <div>
+          <p class="lead">{{ t.about }}</p>
+          <a
+            class="text-link"
+            href="cv/viacheslav-guzhov-cv.pdf"
+            download="Viacheslav Guzhov - CV.pdf"
+            >{{ t.cv }} <span aria-hidden="true">↓</span></a
+          ><span class="cv-note">{{ t.cvNote }}</span>
+        </div>
+        <img
+          class="portrait"
+          src="images/viacheslav-avatar.png"
+          width="1254"
+          height="1254"
+          [alt]="t.portraitAlt"
+          fetchpriority="high"
+        />
+      </section>
+    }
+    @case ('contact') {
+      <header class="page-heading">
+        <h1><app-heading-text [text]="t.contactTitle" /></h1>
+        <p class="lead">{{ t.contactIntro }}</p>
+      </header>
+      <section class="contact-layout">
+        <a class="email-card" href="mailto:guzhov.viacheslav@gmail.com"
+          ><span>{{ t.email }}</span
+          ><strong>guzhov.viacheslav<wbr />@gmail.com</strong><span aria-hidden="true">↗</span></a
+        >
+        <div class="contact-groups">
+          <section class="contact-group">
+            <h2 appEntrance>{{ t.elsewhere }}</h2>
+            <a class="contact-row" href="https://www.linkedin.com/in/viacheslav-guzhov/"
+              >LinkedIn <span aria-hidden="true">↗</span></a
+            ><a class="contact-row" href="https://github.com/GSlava"
+              >GitHub <span aria-hidden="true">↗</span></a
+            ><a
+              class="contact-row"
+              href="cv/viacheslav-guzhov-cv.pdf"
+              download="Viacheslav Guzhov - CV.pdf"
+              >{{ t.cv }} <span aria-hidden="true">↓</span></a
+            >
+            <p class="cv-note">{{ t.cvNote }}</p>
+          </section>
+          <section class="contact-group">
+            <h2 appEntrance>{{ t.messengers }}</h2>
+            <a class="contact-row" href="https://t.me/g_slava"
+              >Telegram <span aria-hidden="true">↗</span></a
+            ><a class="contact-row" href="https://api.whatsapp.com/qr/NETY2M6VJROGA1"
+              >WhatsApp <span aria-hidden="true">↗</span></a
+            >
+          </section>
+        </div>
+      </section>
+      <div class="contact-facts">
+        <p>{{ t.location }}<br />{{ t.permit }}</p>
+        <p>{{ t.languageItems.join(' / ') }}</p>
+      </div>
+    }
+    @case ('experiments') {
+      <header class="page-heading">
+        <p class="meta">{{ t.cinematicLab.eyebrow }}</p>
+        <h1><app-heading-text [text]="t.cinematicLab.title" /></h1>
+        <p class="lead">{{ t.experimentIntro }}</p>
+      </header>
+      <div class="cinematic-grid">
+        <a class="cinematic-card cinematic-card--hero" routerLink="/experiments/particles">
+          <img
+            src="images/experiments/particles.webp"
+            alt=""
+            width="1200"
+            height="750"
+            loading="eager"
+          />
+          <div class="cinematic-card__top">
+            <span>01 / {{ t.cinematicLab.live }}</span
+            ><span aria-hidden="true">↗</span>
+          </div>
+          <div class="cinematic-card__body">
+            <p class="meta">Three.js / WebGL</p>
+            <h2>{{ t.particleTitle }}</h2>
+            <p class="cinematic-card__intro">{{ t.particleIntro }}</p>
+            <span class="cinematic-card__enter"
+              >{{ t.openExperiment }} <span aria-hidden="true">↗</span></span
+            >
+          </div>
+        </a>
+        <a class="cinematic-card" routerLink="/experiments/interactive-particles">
+          <img
+            src="images/experiments/interactive-particles.png"
+            alt=""
+            width="1200"
+            height="750"
+            loading="lazy"
+          />
+          <div class="cinematic-card__top">
+            <span>02 / {{ t.cinematicLab.live }}</span
+            ><span aria-hidden="true">↗</span>
+          </div>
+          <div class="cinematic-card__body">
+            <p class="meta">{{ t.imageParticles.eyebrow }}</p>
+            <h2>{{ t.imageParticles.title }}</h2>
+            <p class="cinematic-card__intro">{{ t.imageParticles.intro }}</p>
+            <span class="cinematic-card__enter"
+              >{{ t.openExperiment }} <span aria-hidden="true">↗</span></span
+            >
+          </div>
+        </a>
+        @for (
+          scene of [t.networkFields.neural, t.networkFields.services];
+          track scene.slug;
+          let i = $index
+        ) {
+          <a
+            class="cinematic-card cinematic-card--network"
+            [routerLink]="'/experiments/' + scene.slug"
+          >
+            <img
+              [src]="'images/experiments/' + scene.slug + '.webp'"
+              alt=""
+              width="1200"
+              height="750"
+              loading="lazy"
+            />
+            <div class="cinematic-card__top">
+              <span>0{{ i + 3 }} / {{ t.cinematicLab.live }}</span
+              ><span aria-hidden="true">↗</span>
+            </div>
+            <div class="cinematic-card__body">
+              <p class="meta">tsParticles / Canvas</p>
+              <h2>{{ scene.title }}</h2>
+              <p class="cinematic-card__intro">{{ scene.intro }}</p>
+              <span class="cinematic-card__enter"
+                >{{ t.openExperiment }} <span aria-hidden="true">↗</span></span
+              >
+            </div>
+          </a>
+        }
+        <a class="cinematic-card cinematic-card--project" [href]="t.monkShift.url">
+          <div class="cinematic-card__top">
+            <span>05 / macOS</span><span aria-hidden="true">↗</span>
+          </div>
+          <div class="cinematic-card__body">
+            <p class="meta">SwiftUI / AppKit</p>
+            <h2>{{ t.monkShift.title }}</h2>
+            <p class="cinematic-card__intro">{{ t.monkShift.intro }}</p>
+            <span class="cinematic-card__enter"
+              >{{ t.monkShift.open }} <span aria-hidden="true">↗</span></span
+            >
+          </div>
+        </a>
+      </div>
+    }
+    @case ('not-found') {
+      <header class="page-heading">
+        <p class="meta">404</p>
+        <h1><app-heading-text [text]="t.notFoundTitle" /></h1>
+        <p class="lead">{{ t.notFoundIntro }}</p>
+        <a class="button button--primary" routerLink="/"
+          >{{ t.home }} <span aria-hidden="true">→</span></a
+        >
+      </header>
+    }
+  }
+  @if (page() === 'home' || page() === 'work') {
+    <section
+      id="projects"
+      class="projects-section"
+      [class.section]="page() === 'home'"
+      [attr.aria-label]="t.featured"
+    >
+      @if (page() === 'home') {
+        <div class="section-heading">
+          <h2 appEntrance>{{ t.featured }}</h2>
+          <a class="text-link" routerLink="/work"
+            >{{ t.allWork }} <span aria-hidden="true">→</span></a
+          >
+        </div>
+      }
+      <div class="project-list">
+        @for (p of visibleProjects(); track p.slug) {
+          <article class="project-row" appRuleReveal>
+            <div class="project-row__title">
+              <p class="meta">{{ p.category }}</p>
+              @if (page() === 'work') {
+                <h2>
+                  <a [routerLink]="'/work/' + p.slug">{{ p.title }}</a>
+                </h2>
+              } @else {
+                <h3>
+                  <a [routerLink]="'/work/' + p.slug">{{ p.title }}</a>
+                </h3>
+              }
+            </div>
+            <div class="project-row__detail">
+              <p>{{ p.summary }}</p>
+              @if (page() === 'work') {
+                <p class="project-role">
+                  <strong>{{ t.roleLabel }}:</strong> {{ p.contribution }}
+                </p>
+              }
+              <p class="stack-line">{{ p.stack.join(' / ') }}</p>
+              <a class="text-link" [routerLink]="'/work/' + p.slug"
+                >{{ t.readCase }} <span aria-hidden="true">→</span></a
+              >
+            </div>
+          </article>
+        }
+      </div>
+    </section>
+    @if (page() === 'work') {
+      <section class="section">
+        <h2 appEntrance>{{ t.more }}</h2>
+        <div class="more-projects">
+          @for (p of t.additional; track p[0]) {
+            <article>
+              <h3>{{ p[0] }}</h3>
+              <p>{{ p[1] }}</p>
+              <p class="stack-line">{{ p[2] }}</p>
+            </article>
+          }
+        </div>
+      </section>
+    }
+  }
+  @if (page() === 'home' || page() === 'about') {
+    <section id="work-experience" class="section">
+      <div class="section-heading">
+        <h2 appEntrance>{{ t.experienceTitle }}</h2>
+        @if (page() === 'home') {
+          <a class="text-link" routerLink="/about" fragment="work-experience"
+            >{{ t.aboutLink }} <span aria-hidden="true">→</span></a
+          >
+        }
+      </div>
+      <div class="timeline" [class.timeline--compact]="page() === 'home'">
+        @for (job of t.jobs; track job.company) {
+          <article appRuleReveal>
+            <div class="timeline__date">
+              <span>{{ job.date }}</span
+              ><span>{{ job.place }}</span>
+            </div>
+            <div>
+              <h3>{{ job.title }}</h3>
+              <p class="company">{{ job.company }}</p>
+              @if (page() === 'home') {
+                <p class="job-summary">{{ job.summary }}</p>
+              } @else {
+                <ul>
+                  @for (bullet of job.bullets; track bullet) {
+                    <li>{{ bullet }}</li>
+                  }
+                </ul>
+              }
+            </div>
+          </article>
+        }
+      </div>
+      @if (page() === 'about') {
+        <div class="related-work">
+          <span>{{ t.relatedWork }}</span>
+          @for (p of t.projects; track p.slug) {
+            <a [routerLink]="'/work/' + p.slug">{{ p.title }}</a>
+          }
+        </div>
+      }
+    </section>
+  }
+  @if (page() === 'about') {
+    <section id="technologies" class="section">
+      <h2 appEntrance>{{ t.capabilities }}</h2>
+      <div class="capabilities">
+        @for (group of t.capabilityItems; track group.title) {
+          <article>
+            <h3>{{ group.title }}</h3>
+            <ul class="technology-list">
+              @for (technology of group.items; track technology) {
+                <li>{{ technology }}</li>
+              }
+            </ul>
+          </article>
+        }
+      </div>
+      <div class="ai-practice">
+        <h3>{{ t.aiTitle }}</h3>
+        <p>{{ t.aiDescription }}</p>
+        <a class="text-link" routerLink="/work/company-knowledge-assistant"
+          >{{ t.readCase }} <span aria-hidden="true">→</span></a
+        >
+      </div>
+    </section>
+    <section id="education" class="section profile-details">
+      <div>
+        <h2 appEntrance>{{ t.education }}</h2>
+        <div class="education">
+          @for (degree of t.degrees; track degree; let i = $index) {
+            <article>
+              <p class="meta">{{ i === 0 ? '2022 - 2024' : '2007 - 2011' }}</p>
+              <h3>{{ degree }}</h3>
+              <p>{{ t.university }}</p>
+            </article>
+          }
+        </div>
+      </div>
+      <div>
+        <h2 appEntrance>{{ t.languages }}</h2>
+        <ul class="language-list">
+          @for (language of t.languageItems; track language) {
+            <li>{{ language }}</li>
+          }
+        </ul>
+        <p class="location">{{ t.location }}<br />{{ t.permit }}</p>
+      </div>
+    </section>
+  }
+  @if (page() !== 'contact' && page() !== 'experiments' && page() !== 'not-found') {
+    <section id="contact" class="contact-cta section" appRuleReveal>
+      <div>
+        <h2 appEntrance>{{ t.contactTitle }}</h2>
+        <a class="email-link" href="mailto:guzhov.viacheslav@gmail.com"
+          >guzhov.viacheslav<wbr />@gmail.com</a
+        >
+      </div>
+      <div class="actions">
+        <a class="button button--primary" href="mailto:guzhov.viacheslav@gmail.com"
+          >{{ t.email }} <span aria-hidden="true">↗</span></a
+        ><a class="text-link" href="https://www.linkedin.com/in/viacheslav-guzhov/"
+          >LinkedIn <span aria-hidden="true">↗</span></a
+        >
+      </div>
+    </section>
+  }
+</div>

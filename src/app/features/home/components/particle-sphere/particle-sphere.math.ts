@@ -5,10 +5,10 @@ export function projectPointerToPlane(
   camera: import('three').PerspectiveCamera,
   clientX: number,
   clientY: number,
-  windowRef: Window,
+  viewport: Pick<DOMRect, 'left' | 'top' | 'width' | 'height'>,
 ): import('three').Vector3 {
-  const x = -1 + (2 * clientX) / windowRef.innerWidth;
-  const y = -1 + (2 * clientY) / windowRef.innerHeight;
+  const x = -1 + (2 * (clientX - viewport.left)) / Math.max(1, viewport.width);
+  const y = -1 + (2 * (clientY - viewport.top)) / Math.max(1, viewport.height);
 
   const position = new THREE.Vector3(x, y, 0.5).unproject(camera);
   const direction = position.sub(camera.position).normalize();

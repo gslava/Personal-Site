@@ -47,6 +47,14 @@ export class ParticleSphereComponent implements AfterViewInit {
   private destroyed = false;
   private isVisible = true;
 
+  constructor() {
+    this.destroyRef.onDestroy(() => {
+      this.destroyed = true;
+      this.cleanupCallbacks.forEach((cleanup) => cleanup());
+      this.cleanupCallbacks = [];
+    });
+  }
+
   async ngAfterViewInit(): Promise<void> {
     if (!isPlatformBrowser(this.platformId)) {
       return;
@@ -63,6 +71,8 @@ export class ParticleSphereComponent implements AfterViewInit {
         import('three/examples/jsm/misc/GPUComputationRenderer.js'),
       ]);
 
+      if (this.destroyed) return;
+
       this.ngZone.runOutsideAngular(() => {
         this.initializeScene(three, gpuComputationModule.GPUComputationRenderer);
       });
@@ -72,7 +82,10 @@ export class ParticleSphereComponent implements AfterViewInit {
     }
   }
 
-  private initializeScene(THREE: ThreeModule, GPUComputationRenderer: GpuComputationRendererClass): void {
+  private initializeScene(
+    THREE: ThreeModule,
+    GPUComputationRenderer: GpuComputationRendererClass,
+  ): void {
     const canvas = this.canvasRef.nativeElement;
     const windowRef = this.document.defaultView;
 
@@ -139,7 +152,10 @@ export class ParticleSphereComponent implements AfterViewInit {
         fboSize * (windowRef.innerWidth / 1366),
         fboSize * (windowRef.innerWidth / 1366),
       );
-      particles.material.uniforms['uWindowResolution'].value.set(windowRef.innerWidth, windowRef.innerHeight);
+      particles.material.uniforms['uWindowResolution'].value.set(
+        windowRef.innerWidth,
+        windowRef.innerHeight,
+      );
       simulation.acceleration.material.uniforms['uWindowResolution'].value.set(
         windowRef.innerWidth,
         windowRef.innerHeight,
@@ -178,7 +194,8 @@ export class ParticleSphereComponent implements AfterViewInit {
 
     const updateIntroState = (elapsed: number): void => {
       const introProgress = Math.min(1, elapsed / 1.35);
-      simulation.acceleration.material.uniforms['radius'].value = simulationRadius * easeOutExpo(introProgress);
+      simulation.acceleration.material.uniforms['radius'].value =
+        simulationRadius * easeOutExpo(introProgress);
 
       if (introAnimating && elapsed >= 1) {
         introAnimating = false;
@@ -215,7 +232,9 @@ export class ParticleSphereComponent implements AfterViewInit {
           0.006 * (0.3 * Math.min(0.3, 1 - centerDistance / halfWindow));
       }
 
-      particles.material.uniforms['uPositions'].value = gpuCompute.getCurrentRenderTarget(simulation.positions).texture;
+      particles.material.uniforms['uPositions'].value = gpuCompute.getCurrentRenderTarget(
+        simulation.positions,
+      ).texture;
       particles.material.uniforms['uTime'].value = elapsed * 0.5;
       renderer.render(scene, camera);
 
@@ -237,11 +256,14 @@ export class ParticleSphereComponent implements AfterViewInit {
     const handleMouseMove = (event: MouseEvent): void => {
       const nowMs = windowRef.performance.now();
       syncMouse(nowMs);
-      projectedMouse.copy(projectPointerToPlane(THREE, camera, event.clientX, event.clientY, windowRef));
+      const bounds = canvas.getBoundingClientRect();
+      projectedMouse.copy(
+        projectPointerToPlane(THREE, camera, event.clientX, event.clientY, bounds),
+      );
 
       screenMouse.set(
-        Math.abs(event.clientX - windowRef.innerWidth / 2),
-        Math.abs(event.clientY - windowRef.innerHeight / 2),
+        Math.abs(event.clientX - bounds.left - bounds.width / 2),
+        Math.abs(event.clientY - bounds.top - bounds.height / 2),
       );
 
       if (!initMouseMove) {
@@ -313,12 +335,6 @@ export class ParticleSphereComponent implements AfterViewInit {
         renderer.dispose();
       },
     );
-
-    this.destroyRef.onDestroy(() => {
-      this.destroyed = true;
-      this.cleanupCallbacks.forEach((cleanup) => cleanup());
-      this.cleanupCallbacks = [];
-    });
   }
 
   private supportsInteractiveCanvas(): boolean {

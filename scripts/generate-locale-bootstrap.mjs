@@ -12,6 +12,7 @@ const bootstrapSource = `// Generated from src/app/core/locale/locale-contract.j
   const defaultLocale = ${JSON.stringify(contract.defaultLocale)};
   const locales = ${JSON.stringify(contract.locales)};
   const pathLocalizedLocales = ${JSON.stringify(contract.pathLocalizedLocales)};
+  const routeRoots = ${JSON.stringify(contract.routeRoots)};
   const localeCookieName = ${JSON.stringify(contract.cookieName)};
   const localeMaxAge = ${JSON.stringify(contract.cookieMaxAge)};
   const pathname = window.location.pathname || '/';
@@ -22,7 +23,7 @@ const bootstrapSource = `// Generated from src/app/core/locale/locale-contract.j
   const isPathLocalizedLocale = (value) => pathLocalizedLocales.includes(value);
   const getPathSegments = (value) => value.split('/').filter(Boolean);
   const getExplicitLocaleFromPath = (value) => {
-    const localeSegment = getPathSegments(value).at(-1);
+    const localeSegment = getPathSegments(value).find(segment => isLocaleCode(segment));
     return isLocaleCode(localeSegment) ? localeSegment : null;
   };
   const stripTrailingLocaleSegment = (segments) => {
@@ -36,11 +37,9 @@ const bootstrapSource = `// Generated from src/app/core/locale/locale-contract.j
     return normalizedSegments;
   };
   const buildPathWithLocale = (value, locale) => {
-    const segments = stripTrailingLocaleSegment(getPathSegments(value));
-
-    if (isPathLocalizedLocale(locale)) {
-      segments.push(locale);
-    }
+    const segments = getPathSegments(value).filter(segment => !isLocaleCode(segment));
+    const routeIndex = segments.findIndex(segment => routeRoots.includes(segment));
+    if (isPathLocalizedLocale(locale)) segments.splice(routeIndex < 0 ? segments.length : routeIndex, 0, locale);
 
     return segments.length > 0 ? \`/\${segments.join('/')}/\` : '/';
   };

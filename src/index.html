@@ -2,7 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title i18n="@@meta.appTitle">Viacheslav Guzhov | Java, Spring Boot &amp; AI Automation Engineer</title>
+    <title i18n="@@meta.appTitle">
+      Viacheslav Guzhov | Java, Spring Boot &amp; AI Automation Engineer
+    </title>
     <base href="/" />
     <meta
       name="description"
@@ -20,6 +22,10 @@
     <link rel="alternate" hreflang="uk" href="https://gslava.github.io/Personal-Site/uk/" />
     <link rel="alternate" hreflang="x-default" href="https://gslava.github.io/Personal-Site/" />
     <link rel="icon" type="image/png" sizes="256x256" href="favicon.png?v=2" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    <meta name="theme-color" content="#111315" />
     <link rel="alternate icon" type="image/x-icon" href="favicon.ico?v=2" />
     <script type="application/ld+json">
       {
@@ -42,13 +48,20 @@
               "name": "Kharkiv National University of Radio Electronics",
               "url": "https://nure.ua/en"
             },
-            "sameAs": ["https://www.linkedin.com/in/viacheslav-g-996039b7/"],
+            "sameAs": ["https://www.linkedin.com/in/viacheslav-guzhov/"],
             "knowsAbout": [
               "Java",
+              "Python",
+              "Full-stack development",
+              "Data analysis",
               "Spring Boot",
               "Backend development",
               "Business process automation",
               "AI integration",
+              "Retrieval-augmented generation (RAG)",
+              "Vector databases",
+              "AI agents",
+              "Model Context Protocol (MCP)",
               "Microservices",
               "API integrations",
               "PostgreSQL",
@@ -100,15 +113,22 @@
           }
 
           const headerHeight =
-            Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--site-header-height')) ||
-            92;
+            Number.parseFloat(
+              getComputedStyle(document.documentElement).getPropertyValue('--site-header-height'),
+            ) || 92;
 
           window.scrollTo({
-            top: Math.max(0, target.getBoundingClientRect().top + window.scrollY - headerHeight - 16),
+            top: Math.max(
+              0,
+              target.getBoundingClientRect().top + window.scrollY - headerHeight - 16,
+            ),
             behavior: 'auto',
           });
 
-          if (Math.abs(target.getBoundingClientRect().top - (headerHeight + 16)) < 24 || Date.now() - startedAt > 4000) {
+          if (
+            Math.abs(target.getBoundingClientRect().top - (headerHeight + 16)) < 24 ||
+            Date.now() - startedAt > 4000
+          ) {
             window.clearInterval(timerId);
           }
         }, 180);

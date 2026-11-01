@@ -1,17 +1,26 @@
-<div class="site-shell">
-  <header #siteHeader class="site-header">
-    <div class="site-header__spacer" aria-hidden="true"></div>
-
-    <button
-      type="button"
-      class="site-header__home-button"
-      [attr.aria-label]="scrollTopLabel()"
-      (click)="scrollToTop()"
+<a class="skip-link" href="#main-content">{{ t.skip }}</a>
+<header class="site-header" tabindex="-1">
+  <div class="header-inner container">
+    <a routerLink="/" class="site-header__home-button" [attr.aria-label]="t.home"
+      ><img
+        class="site-header__home-icon"
+        src="images/fox-64.webp"
+        width="32"
+        height="32"
+        alt=""
+      /><span>VG<span class="brand-dot">.</span></span></a
     >
-      <img class="site-header__home-icon" src="fox.png" alt="" />
-    </button>
-
-    <nav class="locale-switcher" [attr.aria-label]="localeSwitcherLabel()">
+    <nav id="primary-navigation" class="primary-nav" [attr.aria-label]="t.menu">
+      @for (item of navigation; track item.path) {
+        <a [routerLink]="'/' + item.path" routerLinkActive="active" ariaCurrentWhenActive="page">{{
+          item.label
+        }}</a>
+      }
+      <a class="nav-cv" href="cv/viacheslav-guzhov-cv.pdf" download="Viacheslav Guzhov - CV.pdf"
+        >CV <span aria-hidden="true">↓</span></a
+      >
+    </nav>
+    <nav class="locale-switcher" [attr.aria-label]="t.language">
       @for (locale of localeService.localeLinks(); track locale.code) {
         <a
           class="locale-switcher__link"
@@ -19,16 +28,111 @@
           [href]="locale.href"
           [attr.lang]="locale.code"
           [attr.hreflang]="locale.code"
+          [attr.aria-current]="locale.isActive ? 'true' : null"
           data-locale-link
           [attr.data-locale-code]="locale.code"
+          >{{ locale.label }}</a
         >
-          {{ locale.label }}
+      }
+    </nav>
+    <button
+      #menuButton
+      type="button"
+      class="menu-button"
+      [attr.aria-expanded]="menuOpen()"
+      aria-controls="mobile-navigation"
+      aria-haspopup="dialog"
+      [attr.aria-label]="menuOpen() ? t.close : t.menu"
+      (click)="toggleMenu()"
+    >
+      <span class="hamburger" [class.is-open]="menuOpen()" aria-hidden="true"></span>
+    </button>
+  </div>
+</header>
+<dialog
+  #mobileMenu
+  id="mobile-navigation"
+  class="mobile-menu"
+  [class.mobile-menu--open]="menuOpen()"
+  [class.mobile-menu--closing]="!menuOpen()"
+  aria-labelledby="mobile-menu-title"
+  (cancel)="onMenuCancel($event)"
+  (close)="onDialogClosed()"
+>
+  <div class="mobile-menu__inner">
+    <div class="mobile-menu__header">
+      <span class="mobile-menu__mask"
+        ><span id="mobile-menu-title" class="mobile-menu__title">{{ t.menu }}</span></span
+      >
+      <button
+        type="button"
+        class="mobile-menu__close"
+        [attr.aria-label]="t.close"
+        (click)="closeMenu()"
+      >
+        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <circle cx="24" cy="24" r="21" pathLength="1" />
+          <path d="M18 18 30 30M30 18 18 30" />
+        </svg>
+      </button>
+    </div>
+    <nav class="mobile-menu__nav" [attr.aria-label]="t.menu">
+      @for (item of navigation; track item.path; let i = $index) {
+        <a
+          [routerLink]="'/' + item.path"
+          routerLinkActive="active"
+          ariaCurrentWhenActive="page"
+          [style.--item-index]="i"
+          (click)="closeMenu(false, true)"
+        >
+          <span class="mobile-menu__mask mobile-menu__number" aria-hidden="true"
+            ><span>{{ '0' + (i + 1) }}</span></span
+          >
+          <span class="mobile-menu__mask mobile-menu__label"
+            ><span>{{ item.label }}</span></span
+          >
+          <span class="mobile-menu__mask mobile-menu__arrow" aria-hidden="true"
+            ><span>↗</span></span
+          >
         </a>
       }
     </nav>
-  </header>
-
-  <main class="site-main">
-    <router-outlet />
-  </main>
-</div>
+    <div class="mobile-menu__bottom">
+      <a
+        class="mobile-menu__cv"
+        href="cv/viacheslav-guzhov-cv.pdf"
+        download="Viacheslav Guzhov - CV.pdf"
+        (click)="closeMenu()"
+      >
+        <span>{{ t.cv }}</span
+        ><span aria-hidden="true">↓</span>
+      </a>
+      <nav class="mobile-menu__locales" [attr.aria-label]="t.language">
+        @for (locale of localeService.localeLinks(); track locale.code) {
+          <a
+            [class.active]="locale.isActive"
+            [href]="locale.href"
+            [attr.lang]="locale.code"
+            [attr.hreflang]="locale.code"
+            [attr.aria-current]="locale.isActive ? 'true' : null"
+            data-locale-link
+            [attr.data-locale-code]="locale.code"
+            >{{ locale.label }}</a
+          >
+        }
+      </nav>
+    </div>
+  </div>
+</dialog>
+<main id="main-content" tabindex="-1"><router-outlet /></main>
+<footer class="site-footer container">
+  <div>
+    <a routerLink="/" class="footer-name">Viacheslav Guzhov</a>
+    <p>{{ t.footer }}</p>
+  </div>
+  <div class="footer-links">
+    <a href="https://github.com/GSlava">GitHub ↗</a
+    ><a href="https://www.linkedin.com/in/viacheslav-guzhov/">LinkedIn ↗</a
+    ><a routerLink="/experiments">{{ t.nav[3] }}</a>
+  </div>
+</footer>

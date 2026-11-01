@@ -1,0 +1,95 @@
+<section
+  class="network-experiment container"
+  [class.network-experiment--services]="kind === 'services'"
+>
+  <a class="text-link" routerLink="/experiments">← {{ t.backExperiments }}</a>
+  <header>
+    <p class="meta">{{ scene.eyebrow }}</p>
+    <h1>{{ scene.title }}</h1>
+    <p class="intro">{{ scene.intro }}</p>
+  </header>
+  <div
+    class="network-stage"
+    [class.network-stage--ready]="status() === 'ready'"
+    [attr.aria-busy]="status() === 'loading'"
+  >
+    <img
+      class="network-fallback"
+      [src]="'images/experiments/' + scene.slug + '.webp'"
+      [alt]="scene.title"
+      width="1158"
+      height="709"
+    />
+    <canvas
+      #canvas
+      tabindex="0"
+      role="img"
+      [attr.aria-label]="scene.title"
+      aria-describedby="network-help"
+      (pointermove)="pointer($event)"
+      (pointerdown)="pointer($event)"
+      (pointerleave)="endInteraction()"
+      (pointerup)="endInteraction()"
+      (pointercancel)="endInteraction()"
+      (keydown)="keyboard($event)"
+      (keyup)="endInteraction()"
+      (blur)="endInteraction()"
+    ></canvas>
+    <div class="stage-caption" aria-hidden="true">
+      <span>{{ scene.caption }}</span
+      ><span>{{ playing() ? t.networkFields.live : t.networkFields.still }}</span>
+    </div>
+  </div>
+  <div class="network-controls">
+    <button
+      class="button"
+      type="button"
+      [attr.aria-pressed]="playing()"
+      [disabled]="status() !== 'ready'"
+      (click)="toggle()"
+    >
+      {{ playing() ? t.pause : t.play }}
+    </button>
+    <button
+      class="button pulse-button"
+      type="button"
+      [disabled]="status() !== 'ready'"
+      (click)="pulse()"
+    >
+      {{ t.networkFields.pulse }}
+    </button>
+    <label
+      >{{ t.networkFields.density }}
+      <select [disabled]="status() === 'loading'" (change)="setDensity($event)">
+        @for (option of t.networkFields.densities; track option; let i = $index) {
+          <option [value]="i" [selected]="density() === i">{{ option }}</option>
+        }
+      </select>
+    </label>
+    <label class="strength-control" for="network-strength"
+      >{{ t.networkFields.strength }}
+      <input
+        id="network-strength"
+        type="range"
+        min="0.25"
+        max="2"
+        step="0.25"
+        [value]="strength()"
+        (input)="setStrength($event)"
+      />
+    </label>
+  </div>
+  <p class="status" role="status">
+    @if (status() === 'loading') {
+      {{ t.networkFields.loading }}
+    }
+    @if (status() === 'fallback') {
+      {{ t.networkFields.fallback }}
+    }
+  </p>
+  <p class="help" id="network-help">{{ scene.help }} {{ t.networkFields.keyboard }}</p>
+  <div class="network-notes">
+    <p>{{ scene.note }}</p>
+    <a href="https://particles.js.org/" target="_blank" rel="noopener noreferrer">tsParticles ↗</a>
+  </div>
+</section>

@@ -4,7 +4,8 @@ import { SiteLocaleCode } from '../models/site-locale';
 type PathLocalizedSiteLocaleCode = Exclude<SiteLocaleCode, 'en'>;
 
 const localeCodes = localeContract.locales as readonly SiteLocaleCode[];
-const pathLocalizedLocaleCodes = localeContract.pathLocalizedLocales as readonly PathLocalizedSiteLocaleCode[];
+const pathLocalizedLocaleCodes =
+  localeContract.pathLocalizedLocales as readonly PathLocalizedSiteLocaleCode[];
 
 export const SITE_LOCALE_CODES = localeCodes;
 export const DEFAULT_SITE_LOCALE = localeContract.defaultLocale as SiteLocaleCode;
@@ -24,14 +25,18 @@ export function isSiteLocaleCode(value: string | undefined): value is SiteLocale
 
 export function getExplicitLocaleFromPath(pathname: string): SiteLocaleCode | null {
   const segments = getPathSegments(pathname);
-  const localeSegment = segments.at(-1);
+  const localeSegment = segments.find((segment) => isSiteLocaleCode(segment));
 
   return isSiteLocaleCode(localeSegment) ? localeSegment : null;
 }
 
 export function resolveDocumentLocale(lang: string | null | undefined): SiteLocaleCode {
   const normalized = (lang || DEFAULT_SITE_LOCALE).toLowerCase();
-  return normalized.startsWith('de') ? 'de' : normalized.startsWith('uk') ? 'uk' : DEFAULT_SITE_LOCALE;
+  return normalized.startsWith('de')
+    ? 'de'
+    : normalized.startsWith('uk')
+      ? 'uk'
+      : DEFAULT_SITE_LOCALE;
 }
 
 export function resolveCurrentLocale(input: {
@@ -69,7 +74,10 @@ export function buildLocaleHref(input: {
 }
 
 export function buildHomeHref(pathname: string, targetLocale: SiteLocaleCode): string {
-  return buildPathWithLocale(pathname, targetLocale);
+  const segments = getPathSegments(buildPathWithLocale(pathname, targetLocale));
+  const routeIndex = segments.findIndex((segment) => localeContract.routeRoots.includes(segment));
+  const home = routeIndex < 0 ? segments : segments.slice(0, routeIndex);
+  return home.length ? `/${home.join('/')}/` : '/';
 }
 
 export function resolveLocaleBootstrapInstruction(input: {
@@ -108,11 +116,10 @@ export function resolveLocaleBootstrapInstruction(input: {
 }
 
 export function buildPathWithLocale(pathname: string, locale: SiteLocaleCode): string {
-  const segments = stripTrailingLocaleSegment(getPathSegments(pathname));
-
-  if (isPathLocalizedLocaleCode(locale)) {
-    segments.push(locale);
-  }
+  const segments = getPathSegments(pathname).filter((segment) => !isSiteLocaleCode(segment));
+  const routeIndex = segments.findIndex((segment) => localeContract.routeRoots.includes(segment));
+  if (isPathLocalizedLocaleCode(locale))
+    segments.splice(routeIndex < 0 ? segments.length : routeIndex, 0, locale);
 
   return segments.length > 0 ? `/${segments.join('/')}/` : '/';
 }
@@ -132,7 +139,9 @@ export function stripTrailingLocaleSegment(segments: readonly string[]): string[
   return normalizedSegments;
 }
 
-export function isPathLocalizedLocaleCode(value: SiteLocaleCode | null | undefined): value is PathLocalizedSiteLocaleCode {
+export function isPathLocalizedLocaleCode(
+  value: SiteLocaleCode | null | undefined,
+): value is PathLocalizedSiteLocaleCode {
   return value === 'de' || value === 'uk';
 }
 

@@ -7,16 +7,22 @@ const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const angularCliBin = resolve(scriptDirectory, '../node_modules/@angular/cli/bin/ng.js');
 
 if (!rawBaseHref) {
-  console.error('Missing GITHUB_PAGES_BASE_HREF. Example: GITHUB_PAGES_BASE_HREF=/personal-site/ npm run build:github');
+  console.error(
+    'Missing GITHUB_PAGES_BASE_HREF. Example: GITHUB_PAGES_BASE_HREF=/personal-site/ npm run build:github',
+  );
   process.exit(1);
 }
 
 const normalizedBaseHref = `/${rawBaseHref.replace(/^\/+|\/+$/g, '')}/`;
 
 try {
-  const output = execFileSync(process.execPath, [angularCliBin, 'build', '--localize', '--base-href', normalizedBaseHref, '--progress=false'], {
-    encoding: 'utf8',
-  });
+  const output = execFileSync(
+    process.execPath,
+    [angularCliBin, 'build', '--localize', '--base-href', normalizedBaseHref, '--progress=false'],
+    {
+      encoding: 'utf8',
+    },
+  );
   process.stdout.write(output);
 } catch (error) {
   if (typeof error?.stdout === 'string') {
@@ -25,5 +31,10 @@ try {
   if (typeof error?.stderr === 'string') {
     process.stderr.write(error.stderr);
   }
-  process.exit(typeof error?.status === 'number' ? error.status : 1);
+  if (!error?.stderr) {
+    console.error('GitHub Pages build failed:', error?.message || error);
+  }
+  // A failed spawn can carry status=0 (for example EPERM in a sandbox).
+  // Never let npm's postbuild step publish stale output after a launch failure.
+  process.exit(Number.isInteger(error?.status) && error.status > 0 ? error.status : 1);
 }

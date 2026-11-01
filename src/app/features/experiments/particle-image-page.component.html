@@ -1,0 +1,66 @@
+<section class="image-experiment container">
+  <a class="text-link" routerLink="/experiments">← {{ t.backExperiments }}</a>
+  <header>
+    <p class="meta">{{ t.imageParticles.eyebrow }}</p>
+    <h1>{{ t.imageParticles.title }}</h1>
+    <p class="intro">{{ t.imageParticles.intro }}</p>
+  </header>
+  <div
+    class="image-stage"
+    [class.image-stage--ready]="status() === 'ready'"
+    [attr.aria-busy]="status() === 'loading'"
+  >
+    <img class="image-fallback" [src]="imagePath()" [alt]="t.imageParticles.images[selected()]" />
+    <canvas
+      #canvas
+      tabindex="0"
+      role="img"
+      [attr.aria-label]="t.imageParticles.title + ': ' + t.imageParticles.images[selected()]"
+      aria-describedby="particle-image-help"
+      (pointermove)="pointer($event)"
+      (pointerdown)="pointer($event)"
+      (pointerup)="endInteraction()"
+      (pointerleave)="endInteraction()"
+      (pointercancel)="endInteraction()"
+      (keydown)="keyboard($event)"
+      (keyup)="endInteraction()"
+      (blur)="endInteraction()"
+      (webglcontextlost)="contextLost($event)"
+      (webglcontextrestored)="selectImage(selected())"
+    ></canvas>
+  </div>
+  <fieldset class="image-choices">
+    <legend>{{ t.imageParticles.choose }}</legend>
+    @for (source of sources; track source; let i = $index) {
+      <label [class.selected]="selected() === i">
+        <input
+          type="radio"
+          name="particle-image"
+          [value]="i"
+          [checked]="selected() === i"
+          (change)="selectImage(i)"
+        />
+        <span class="choice-number" aria-hidden="true">0{{ i + 1 }}</span>
+        <span>{{ t.imageParticles.images[i] }}</span>
+      </label>
+    }
+  </fieldset>
+  <p class="status" role="status">
+    @if (status() === 'loading') {
+      {{ t.imageParticles.loading }}
+    }
+    @if (status() === 'fallback') {
+      {{ t.imageParticles.fallback }}
+    }
+  </p>
+  <p class="help" id="particle-image-help">{{ t.imageParticles.help }}</p>
+  <p class="credit">
+    {{ t.imageParticles.credit }}
+    <a
+      href="https://tympanus.net/codrops/2019/01/17/interactive-particles-with-three-js/"
+      target="_blank"
+      rel="noopener noreferrer"
+      >Bruno Imbrizi / Codrops ↗</a
+    >
+  </p>
+</section>

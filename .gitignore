@@ -41,6 +41,10 @@ testem.log
 __screenshots__/
 reference/
 
+# Local agent instructions and implementation plans
+AGENTS.[mM][dD]
+PLANS.[mM][dD]
+
 # System files
 .DS_Store
 **/.DS_Store
