@@ -24,26 +24,12 @@
 .case-heading .stack-line {
   margin-top: 1.25rem;
 }
-.case-interface {
-  display: block;
-  margin: 0 0 3rem;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  cursor: zoom-in;
-}
 .case-connections {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
   gap: 0.75rem 1.5rem;
   margin-top: 1.5rem;
-}
-.case-interface img {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 3 / 2;
 }
 .case-summary {
   border-top: 1px solid var(--line);

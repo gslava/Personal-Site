@@ -1,0 +1,47 @@
+<div class="case-interface" [class.case-interface--revealed]="revealed()">
+  <span class="case-interface__surface">
+    <img
+      class="case-interface__monochrome"
+      [src]="'images/projects/' + slug + '.webp'"
+      [srcset]="
+        'images/projects/' +
+        slug +
+        '-768.webp 768w, ' +
+        'images/projects/' +
+        slug +
+        '-1024.webp 1024w, ' +
+        'images/projects/' +
+        slug +
+        '.webp 1536w'
+      "
+      sizes="(max-width: 767px) calc(100vw - 36px), (max-width: 1223px) calc(100vw - 64px), 1160px"
+      [alt]="imageAlt"
+      width="1536"
+      height="1024"
+      decoding="async"
+      fetchpriority="high"
+      (load)="onImageLoad()"
+    />
+    <img
+      class="case-interface__color"
+      [src]="'images/projects/' + slug + '.webp'"
+      [srcset]="
+        'images/projects/' +
+        slug +
+        '-768.webp 768w, ' +
+        'images/projects/' +
+        slug +
+        '-1024.webp 1024w, ' +
+        'images/projects/' +
+        slug +
+        '.webp 1536w'
+      "
+      sizes="(max-width: 767px) calc(100vw - 36px), (max-width: 1223px) calc(100vw - 64px), 1160px"
+      alt=""
+      aria-hidden="true"
+      width="1536"
+      height="1024"
+      decoding="async"
+    />
+  </span>
+</div>

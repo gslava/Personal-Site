@@ -185,7 +185,7 @@
           "Reporting & company knowledge"
         ],
         "featured": true,
-        "imageAlt": "Schematic IMS workspace with abstract order rows, inventory and reporting panels, and entry points to order automation and the knowledge assistant.",
+        "imageAlt": "Illustrative IMS dashboard showing ORD-1044, East and DG-07, with consistent order context and visible links to Order Automation and Knowledge Assistant.",
         "relatedSlugs": ["order-processing", "company-knowledge-assistant"]
       },
       {
@@ -212,7 +212,7 @@
           "Print or route for human review"
         ],
         "featured": true,
-        "imageAlt": "Schematic IMS order automation interface with preparation, rules, carrier and document stages, an abstract queue and a human review panel.",
+        "imageAlt": "Illustrative Order Processing in the same IMS shell, with ORD-1044 paused by DG-07, processing settings, review steps and a contextual link to Knowledge Assistant.",
         "relatedSlugs": ["inventory-management", "company-knowledge-assistant"]
       },
       {
@@ -239,7 +239,7 @@
           "Answer in chat"
         ],
         "featured": true,
-        "imageAlt": "Schematic IMS knowledge assistant with company files, business records and a vector knowledge base connected to chat through RAG, MCP and Skills.",
+        "imageAlt": "Illustrative Knowledge Assistant in the same IMS shell, opened from Order Automation with ORD-1044 and DG-07 context, cited sources and a return to the same review task.",
         "relatedSlugs": ["inventory-management", "order-processing"]
       },
       {
@@ -266,7 +266,7 @@
           "Apply approved changes"
         ],
         "featured": false,
-        "imageAlt": "Schematic advertising workspace connecting campaign and keyword data to AI suggestions, human approval, editing or rejection, and approved changes.",
+        "imageAlt": "Illustrative Amazon Ads console connecting campaign, ad group, keyword, metrics and an automation rule to a pending bid change and approval.",
         "relatedSlugs": []
       },
       {
@@ -293,7 +293,7 @@
           "Unified catalog & statistics"
         ],
         "featured": false,
-        "imageAlt": "Schematic product catalog across five marketplaces, with abstract channel states, product statistics and an editable content panel with review and export.",
+        "imageAlt": "Illustrative standalone content catalog with a selected product, five marketplace content states, its AI draft, review controls and statistics for the displayed products.",
         "relatedSlugs": []
       }
     ],
@@ -583,7 +583,7 @@
           "Berichte & Unternehmenswissen"
         ],
         "featured": true,
-        "imageAlt": "Schematischer IMS-Arbeitsbereich mit abstrakten Bestellzeilen, Bestand und Berichten sowie Zugängen zu Bestellautomatisierung und Wissensassistent.",
+        "imageAlt": "Illustrative IMS-Übersicht mit ORD-1044, East und DG-07, passenden Kontextdaten und sichtbaren Links zu Order Automation und Knowledge Assistant.",
         "relatedSlugs": ["order-processing", "company-knowledge-assistant"]
       },
       {
@@ -610,7 +610,7 @@
           "Drucken oder zur Prüfung weiterleiten"
         ],
         "featured": true,
-        "imageAlt": "Schematische IMS-Bestellautomatisierung mit Vorbereitung, Regeln, Versand und Dokumenten, abstrakter Warteschlange und manueller Prüfung.",
+        "imageAlt": "Illustratives Auftragsmodul in derselben IMS-Oberfläche mit durch DG-07 angehaltenem Auftrag ORD-1044, Einstellungen, Prüfschritten und kontextbezogenem Link zum Wissensassistenten.",
         "relatedSlugs": ["inventory-management", "company-knowledge-assistant"]
       },
       {
@@ -637,7 +637,7 @@
           "Antwort im Chat"
         ],
         "featured": true,
-        "imageAlt": "Schematischer IMS-Wissensassistent: Dateien, Geschäftsdaten und Vektorwissensbasis sind über RAG, MCP und Skills mit dem Chat verbunden.",
+        "imageAlt": "Illustrativer Wissensassistent in derselben IMS-Oberfläche, aus Order Automation mit ORD-1044 und DG-07 geöffnet, mit Quellen und Rückkehr zum gleichen Prüfvorgang.",
         "relatedSlugs": ["inventory-management", "order-processing"]
       },
       {
@@ -664,7 +664,7 @@
           "Freigegebene Änderungen umsetzen"
         ],
         "featured": false,
-        "imageAlt": "Schematischer Werbe-Arbeitsbereich: Kampagnen- und Keyword-Daten führen zu KI-Vorschlägen, manueller Freigabe, Bearbeitung oder Ablehnung und freigegebenen Änderungen.",
+        "imageAlt": "Illustrative Amazon-Ads-Konsole, die Kampagne, Anzeigengruppe, Keyword, Kennzahlen und Automatisierungsregel mit einer vorgeschlagenen Gebotsänderung und Freigaben verbindet.",
         "relatedSlugs": []
       },
       {
@@ -691,7 +691,7 @@
           "Gemeinsamer Katalog & Statistiken"
         ],
         "featured": false,
-        "imageAlt": "Schematischer Produktkatalog für fünf Marktplätze mit abstrakten Kanalzuständen, Produktstatistiken und bearbeitbaren Inhalten mit Prüfung und Export.",
+        "imageAlt": "Illustrativer eigenständiger Inhaltsdienst mit ausgewähltem Produkt, Inhaltsstatus auf fünf Marktplätzen, passendem KI-Entwurf, Prüfung und Statistiken der angezeigten Produkte.",
         "relatedSlugs": []
       }
     ],
@@ -981,7 +981,7 @@
           "Звітність і знання компанії"
         ],
         "featured": true,
-        "imageAlt": "Схематичний інтерфейс IMS: умовні рядки замовлень, залишки, звіти та переходи до автоматизації замовлень і асистента знань.",
+        "imageAlt": "Ілюстративний дашборд IMS із ORD-1044, East і DG-07, узгодженим контекстом та видимими переходами до Order Automation і Knowledge Assistant.",
         "relatedSlugs": ["order-processing", "company-knowledge-assistant"]
       },
       {
@@ -1008,7 +1008,7 @@
           "Надрукувати або передати на перевірку"
         ],
         "featured": true,
-        "imageAlt": "Схематичний інтерфейс автоматизації замовлень IMS: підготовка, правила, перевізник, документи, умовна черга та панель ручної перевірки.",
+        "imageAlt": "Ілюстративний модуль обробки в тій самій оболонці IMS: ORD-1044 зупинено правилом DG-07, показано налаштування, кроки перевірки та перехід до асистента з контекстом замовлення.",
         "relatedSlugs": ["inventory-management", "company-knowledge-assistant"]
       },
       {
@@ -1035,7 +1035,7 @@
           "Відповідь у чаті"
         ],
         "featured": true,
-        "imageAlt": "Схематичний асистент знань IMS: файли компанії, бізнес-дані й векторна база знань пов’язані з чатом через RAG, MCP і Skills.",
+        "imageAlt": "Ілюстративний асистент у тій самій оболонці IMS, відкритий з Order Automation із контекстом ORD-1044 і DG-07, джерелами та поверненням до тієї самої перевірки.",
         "relatedSlugs": ["inventory-management", "order-processing"]
       },
       {
@@ -1062,7 +1062,7 @@
           "Застосувати схвалені зміни"
         ],
         "featured": false,
-        "imageAlt": "Схематичний рекламний інтерфейс: дані кампаній і ключових слів, AI-пропозиції, схвалення, редагування чи відхилення людиною та застосування схвалених змін.",
+        "imageAlt": "Ілюстративна консоль Amazon Ads зі зв’язком між кампанією, групою, ключовим словом, метриками та правилом автоматизації, запропонованою зміною ставки й погодженням.",
         "relatedSlugs": []
       },
       {
@@ -1089,7 +1089,7 @@
           "Спільний каталог і статистика"
         ],
         "featured": false,
-        "imageAlt": "Схематичний каталог товарів для п’яти маркетплейсів: умовні стани каналів, статистика товарів і панель редагування контенту з перевіркою та експортом.",
+        "imageAlt": "Ілюстративний окремий каталог контенту: вибраний товар, стани контенту п’яти маркетплейсів, відповідна AI-чернетка, перевірка та статистика показаних товарів.",
         "relatedSlugs": []
       }
     ],

@@ -1,0 +1,74 @@
+:host {
+  display: block;
+  margin: 0 0 3rem;
+}
+.case-interface {
+  display: block;
+  border-radius: var(--radius);
+}
+.case-interface__surface {
+  display: block;
+  position: relative;
+  isolation: isolate;
+  transform: translateY(0) scale(1);
+  transition: transform 250ms var(--ease-out);
+}
+.case-interface__surface::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 3% 2% 2%;
+  border-radius: 12px;
+  box-shadow: 0 16px 28px rgb(0 0 0 / 32%);
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+.case-interface img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+}
+.case-interface__monochrome {
+  filter: grayscale(1);
+}
+.case-interface .case-interface__color {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+.case-interface--revealed .case-interface__color,
+.case-interface--revealed .case-interface__surface::before {
+  opacity: 1;
+}
+.case-interface--revealed .case-interface__surface {
+  transform: translateY(-6px) scale(1.015);
+}
+@media (hover: hover) and (pointer: fine) {
+  .case-interface:hover .case-interface__surface {
+    transform: translateY(-6px) scale(1.015);
+  }
+  .case-interface:hover .case-interface__color,
+  .case-interface:hover .case-interface__surface::before {
+    opacity: 1;
+  }
+}
+@media (hover: none), (pointer: coarse) {
+  .case-interface__surface,
+  .case-interface__surface::before,
+  .case-interface .case-interface__color {
+    transition-duration: var(--motion-duration);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .case-interface .case-interface__surface,
+  .case-interface:hover .case-interface__surface {
+    transform: none;
+    transition: none;
+  }
+  .case-interface .case-interface__color,
+  .case-interface__surface::before {
+    transition-duration: 200ms;
+  }
+}

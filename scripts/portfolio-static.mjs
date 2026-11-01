@@ -131,14 +131,11 @@ export function fallbackHtml(locale, path, base) {
           ) +
           '</nav>'
         : '') +
-      '<a href="' +
-      esc(base + 'images/projects/' + project.slug + '.webp') +
-      '">' +
       '<img class="static-experiment-preview" src="' +
       esc(base + 'images/projects/' + project.slug + '.webp') +
       '" alt="' +
       esc(project.imageAlt) +
-      '" width="1536" height="1024"></a>' +
+      '" width="1536" height="1024">' +
       section(
         t.caseSummaryTitle,
         project.snapshot

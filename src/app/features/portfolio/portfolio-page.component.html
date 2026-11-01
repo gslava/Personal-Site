@@ -63,33 +63,7 @@
             </nav>
           }
         </header>
-        <a
-          class="case-interface"
-          [href]="'images/projects/' + p.slug + '.webp'"
-          target="_blank"
-          rel="noopener"
-        >
-          <img
-            [src]="'images/projects/' + p.slug + '.webp'"
-            [srcset]="
-              'images/projects/' +
-              p.slug +
-              '-768.webp 768w, ' +
-              'images/projects/' +
-              p.slug +
-              '-1024.webp 1024w, ' +
-              'images/projects/' +
-              p.slug +
-              '.webp 1536w'
-            "
-            sizes="(max-width: 767px) calc(100vw - 36px), (max-width: 1223px) calc(100vw - 64px), 1160px"
-            [alt]="p.imageAlt"
-            width="1536"
-            height="1024"
-            decoding="async"
-            fetchpriority="high"
-          />
-        </a>
+        <app-project-artwork [slug]="p.slug" [imageAlt]="p.imageAlt" />
         <section appRuleReveal class="case-summary" aria-labelledby="case-summary-title">
           <h2 appEntrance id="case-summary-title">{{ t.caseSummaryTitle }}</h2>
           <div class="case-summary__grid">

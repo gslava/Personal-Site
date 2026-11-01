@@ -5,10 +5,17 @@ import { HeadingTextComponent } from '../../shared/components/heading-text/headi
 import { EntranceDirective } from '../../shared/directives/entrance.directive';
 import { RuleRevealDirective } from '../../shared/directives/rule-reveal.directive';
 import { PortfolioContentService } from '../../core/content/portfolio-content';
+import { ProjectArtworkComponent } from './project-artwork.component';
 
 @Component({
   selector: 'app-portfolio-page',
-  imports: [RouterLink, HeadingTextComponent, EntranceDirective, RuleRevealDirective],
+  imports: [
+    RouterLink,
+    HeadingTextComponent,
+    EntranceDirective,
+    RuleRevealDirective,
+    ProjectArtworkComponent,
+  ],
   templateUrl: './portfolio-page.component.html',
   styleUrls: [
     './portfolio-details.scss',

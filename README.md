@@ -125,16 +125,17 @@ When adding a top-level route, also update `locale-contract.json` route roots.
 ## Design and motion
 
 Graphite surfaces, off-white text, a copper accent and the preserved fox mark.
-The text-led Home has no decorative image download. Project pages include schematic
-interface drawings with abstract table rows and fields, readable functional labels
-and action arrows in a shared light gray, graphite and teal palette. Images have
-responsive WebP versions, localized alt text and full-size links. The three IMS
-drawings share a navigation shell; Ads shows data, suggestions and human approval;
-the standalone content service connects a catalog to editable content and statistics.
-Drawings summarize documented functions without records, metrics, company screens
-or claims about exact product UI. Editable SVG sources and a generation script
-are retained. Technologies on About separate programming languages from backend
-frameworks and present each group as a list of individual technologies.
+The text-led Home has no decorative image download. Project pages show the restored
+interface illustrations with transparent space around their browser windows.
+Desktop hover crossfades monochrome into color, lifts the artwork slightly and
+reveals a soft shadow. On touch devices, this happens one second after image load.
+Reduced motion removes the lift. Images retain
+responsive WebP versions and localized alt text. Clicking artwork does not navigate.
+The illustrations
+use fictional records, share consistent IMS module navigation and summarize
+documented functions; they are not screenshots of company systems. Earlier SVG
+schematics remain as historical sources. Technologies on About separate programming
+languages from backend frameworks and list individual technologies within each group.
 About uses a minimal, hand-drawn avatar with a transparent background and
 ivory/copper linework. Social previews retain the original photograph.
 Asset details are documented in
