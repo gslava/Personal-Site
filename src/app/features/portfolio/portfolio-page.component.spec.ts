@@ -33,6 +33,12 @@ describe('PortfolioPageComponent', () => {
       expect(summary.textContent).toContain('My contribution');
       expect(fixture.nativeElement.querySelector('.case-metric')).toBeNull();
       const image = fixture.nativeElement.querySelector('.case-interface img') as HTMLImageElement;
+      expect(
+        summary.compareDocumentPosition(image) & Node.DOCUMENT_POSITION_FOLLOWING,
+      ).toBeTruthy();
+      expect(
+        fixture.nativeElement.querySelector('.case-artwork figcaption')?.textContent,
+      ).toContain('fictional data');
       expect(image.getAttribute('src')).toBe(`images/projects/${current}.webp`);
       expect(image.getAttribute('srcset')).toContain(`${current}-768.webp 768w`);
       expect(image.getAttribute('alt')?.length).toBeGreaterThan(20);
@@ -81,7 +87,12 @@ describe('Employer-focused portfolio', () => {
     expect(root.querySelectorAll('.project-row')).toHaveLength(3);
     expect(root.querySelector('a[href="/work/company-knowledge-assistant"]')).not.toBeNull();
     expect(root.querySelector('a[href="/work/amazon-ads"]')).toBeNull();
-    expect(root.querySelectorAll('.job-summary')).toHaveLength(2);
+    expect(root.querySelectorAll('.job-summary')).toHaveLength(4);
+    expect(root.querySelectorAll('.project-role')).toHaveLength(3);
+    expect(root.querySelector('.project-row__detail > p')?.textContent).toBe(
+      'One workspace for marketplace orders, inventory and operations.',
+    );
+    expect(root.querySelector('.cv-action .button--secondary')).not.toBeNull();
     expect(root.querySelector('.timeline ul')).toBeNull();
     expect(root.querySelector('img')).toBeNull();
     const cv = root.querySelector<HTMLAnchorElement>('a[download]');
@@ -92,9 +103,45 @@ describe('Employer-focused portfolio', () => {
 
   it('combines full experience, illustrated avatar, AI skills, education and languages on About', async () => {
     const root = await render('about');
-    expect(root.querySelectorAll('.timeline li')).toHaveLength(7);
-    expect(root.querySelectorAll('.related-work a')).toHaveLength(5);
-    expect(root.querySelector('.timeline .related-work')).toBeNull();
+    expect(root.querySelectorAll('.timeline li')).toHaveLength(11);
+    expect(root.querySelectorAll('.timeline li strong')).toHaveLength(11);
+    expect(root.querySelector('.timeline li')?.textContent).toContain(
+      'Own delivery from stakeholder requirements',
+    );
+    const anchors = [...root.querySelectorAll<HTMLAnchorElement>('.about-sections a')];
+    expect(anchors).toHaveLength(4);
+    for (const anchor of anchors) {
+      const id = anchor.getAttribute('href')?.split('#')[1];
+      expect(id).toBeTruthy();
+      expect(root.querySelector('#' + id)).not.toBeNull();
+    }
+    expect(root.querySelector('#about-me .button--secondary')).not.toBeNull();
+    expect(
+      [...root.querySelectorAll('.timeline h3')].map((item) => item.textContent?.trim()),
+    ).toEqual([
+      'Senior Software & Automation Engineer',
+      'Senior Software Developer',
+      'Mid-Level Software Developer',
+      'Junior Software Developer',
+    ]);
+    expect(
+      [...root.querySelectorAll('.timeline__date > span:first-child')].map((item) =>
+        item.textContent?.trim(),
+      ),
+    ).toEqual(['Feb 2024 - present', '2016 - 2023', '2013 - 2015', '2011 - 2012']);
+    expect(root.querySelectorAll('.experience-projects a')).toHaveLength(1);
+    expect(root.querySelector('.experience-projects a')?.getAttribute('href')).toBe('/work');
+    expect(root.querySelector('.experience-projects a')?.textContent).toContain('All projects');
+    expect(root.querySelector('.related-work')).toBeNull();
+    expect(root.querySelector('.ai-practice')).toBeNull();
+    expect(root.textContent).not.toContain('AI connected to company knowledge and tools');
+    expect(
+      [...root.querySelectorAll('.company')].slice(1).map((el) => el.textContent?.trim()),
+    ).toEqual([
+      'E-commerce company (confidential / NDA)',
+      'E-commerce company (confidential / NDA)',
+      'E-commerce company (confidential / NDA)',
+    ]);
     expect(root.querySelector('.portrait')?.getAttribute('src')).toBe(
       'images/viacheslav-avatar.png',
     );

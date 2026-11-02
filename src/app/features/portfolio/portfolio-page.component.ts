@@ -19,6 +19,7 @@ import { ProjectArtworkComponent } from './project-artwork.component';
   templateUrl: './portfolio-page.component.html',
   styleUrls: [
     './portfolio-details.scss',
+    './portfolio-projects.scss',
     './portfolio-page.component.scss',
     './portfolio-experiments.scss',
   ],

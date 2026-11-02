@@ -131,7 +131,12 @@
 }
 .mobile-menu__locales {
   display: flex;
-  gap: 1rem;
+  width: fit-content;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
   margin-top: 1.75rem;
 }
 .mobile-menu__locales a {
@@ -143,10 +148,17 @@
   text-decoration: none;
   font-size: 0.875rem;
 }
+.mobile-menu__locales a {
+  border-radius: 4px;
+}
 .mobile-menu__locales .active {
+  background: var(--line);
   color: var(--accent);
-  text-decoration: underline;
-  text-underline-offset: 8px;
+  font-weight: 600;
+}
+.mobile-menu__locales a:not(.active):hover {
+  color: var(--text);
+  background: var(--line);
 }
 // Keep these declarations at the stylesheet root so Angular scopes their
 // keyframe names consistently in optimized builds.

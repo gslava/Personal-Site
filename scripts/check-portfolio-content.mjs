@@ -67,14 +67,21 @@ for (const [locale, text] of Object.entries(data)) {
   assert.equal(text.nav.length, 5);
   assert.equal(text.projects.length, 5);
   assert.equal(text.additional.length, 5);
-  assert.equal(text.jobs.length, 2);
+  assert.equal(text.jobs.length, 4);
+  assert.deepEqual(
+    text.jobs.map((job) => job.id),
+    ['freelance', 'senior', 'mid', 'junior'],
+  );
+  assert.deepEqual(
+    text.jobs.slice(1).map((job) => job.date),
+    ['2016 - 2023', '2013 - 2015', '2011 - 2012'],
+  );
+  assert.deepEqual(
+    text.jobs.slice(1).map((job) => job.title),
+    ['Senior Software Developer', 'Mid-Level Software Developer', 'Junior Software Developer'],
+  );
   assert.equal(text.capabilityItems.length, 7);
-  assert.deepEqual(text.capabilityItems[0].items, [
-    'Java',
-    'Python',
-    'TypeScript',
-    'JavaScript',
-  ]);
+  assert.deepEqual(text.capabilityItems[0].items, ['Java', 'Python', 'TypeScript', 'JavaScript']);
   for (const group of text.capabilityItems) {
     assert(group.title.trim().length > 0 && group.items.length > 0);
   }
@@ -85,7 +92,8 @@ for (const [locale, text] of Object.entries(data)) {
   assert.equal(text.caseSummaryLabels.length, 3);
   assert.equal(text.caseLabels.length, 3);
   assert.equal(text.languageItems.length, 3);
-  assert(text.aiDescription.includes('RAG'));
+  assert(!('aiTitle' in text) && !('aiDescription' in text) && !('relatedWork' in text));
+  assert(text.jobs.slice(1).every((job) => job.company.endsWith(' / NDA)')));
   assert(text.cvNote.includes('PDF'));
   assert(text.portraitAlt.trim().length > 10);
   assert(existsSync(new URL('../public/cv/viacheslav-guzhov-cv.pdf', import.meta.url)));
@@ -104,6 +112,9 @@ for (const [locale, text] of Object.entries(data)) {
     assert(p.workflow.length >= 3 && p.workflow.length <= 4);
     assert(p.workflow.every((step) => step.trim().length > 5));
     assert(p.contribution.length > 20);
+    assert(p.homeSummary.length > 15 && p.homeSummary.length < p.summary.length);
+    const rendered = fallbackHtml(locale, 'work/' + p.slug, '/');
+    assert(rendered.includes('<figcaption>' + text.illustrationNote + '</figcaption>'));
     assert(p.imageAlt.trim().length > 20, p.slug + ': missing interface description');
     assert.equal(new Set(p.relatedSlugs).size, p.relatedSlugs.length);
     for (const related of p.relatedSlugs) {
@@ -161,7 +172,27 @@ for (const [locale, text] of Object.entries(data)) {
   const prefix = '/Personal-Site/' + (locale === 'en' ? '' : locale + '/');
   const profileFallback = fallbackHtml(locale, 'about', prefix);
   assert(profileFallback.includes('href="' + prefix + 'cv/viacheslav-guzhov-cv.pdf"'));
-  assert(profileFallback.includes(text.aiDescription));
+  assert(profileFallback.includes('href="' + prefix + 'work/">' + text.allWork + '</a>'));
+  assert(!profileFallback.includes('undefined'));
+  for (const id of ['work-experience', 'technologies', 'education', 'languages']) {
+    assert(profileFallback.includes('id="' + id + '"'));
+    assert(profileFallback.includes('href="' + prefix + 'about/#' + id + '"'));
+  }
+  for (const job of text.jobs) {
+    const escape = (value) => value.replaceAll('&', '&amp;');
+    assert(homeFallback.includes(escape(job.title)) && homeFallback.includes(job.date));
+    assert(profileFallback.includes(escape(job.title)) && profileFallback.includes(job.date));
+    assert.equal(job.bulletHighlights.length, job.bullets.length);
+    job.bullets.forEach((bullet, i) => {
+      assert.equal(bullet.split(job.bulletHighlights[i]).length, 2);
+      assert(profileFallback.replace(/<[^>]*>/g, '').includes(escape(bullet)));
+      assert(profileFallback.includes('<strong>' + escape(job.bulletHighlights[i]) + '</strong>'));
+    });
+  }
+  assert(caseFallback.indexOf(text.caseSummaryTitle) < caseFallback.indexOf('<img'));
+  for (const p of text.projects.filter((p) => p.featured)) {
+    assert(homeFallback.includes(p.contribution.replaceAll('&', '&amp;')));
+  }
   assert(profileFallback.includes('Python'));
   assert(profileFallback.includes('TypeScript'));
   assert(profileFallback.includes('JavaScript'));

@@ -78,21 +78,30 @@
 }
 .locale-switcher {
   display: flex;
-  gap: 1px;
-  border-left: 1px solid var(--line);
-  padding-left: 1rem;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
 }
 .locale-switcher__link {
   display: grid;
   place-items: center;
   min-height: 44px;
-  min-width: 36px;
+  min-width: 44px;
+  border-radius: 4px;
   font-size: 0.8rem;
   text-decoration: none;
   color: var(--muted);
 }
 .locale-switcher__link--active {
+  background: var(--line);
   color: var(--accent);
+  font-weight: 600;
+}
+.locale-switcher__link:not(.locale-switcher__link--active):hover {
+  color: var(--text);
+  background: var(--line);
 }
 .menu-button {
   display: none;
@@ -172,11 +181,6 @@
   }
   .site-header__home-button {
     margin-right: auto;
-  }
-  .locale-switcher {
-    border: 0;
-    padding: 0;
-    gap: 4px;
   }
   .locale-switcher__link {
     min-width: 44px;

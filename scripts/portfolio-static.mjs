@@ -54,14 +54,21 @@ export function fallbackHtml(locale, path, base) {
     info = pageInfo(locale, path);
   path = canonicalPath(path);
   const link = (href, label) => '<a href="' + esc(href) + '">' + esc(label) + '</a>';
-  const section = (title, body) => '<section><h2>' + esc(title) + '</h2>' + body + '</section>';
+  const section = (title, body, id) =>
+    '<section' +
+    (id ? ' id="' + esc(id) + '"' : '') +
+    '><h2>' +
+    esc(title) +
+    '</h2>' +
+    body +
+    '</section>';
   const paragraph = (text) => '<p>' + esc(text) + '</p>';
   const list = (items) =>
     '<ul>' + items.map((item) => '<li>' + esc(item) + '</li>').join('') + '</ul>';
   const cv =
     '<a href="' +
     esc(base + 'cv/viacheslav-guzhov-cv.pdf') +
-    '" download="Viacheslav Guzhov - CV.pdf">' +
+    '" class="button button--secondary" download="Viacheslav Guzhov - CV.pdf">' +
     esc(t.cv) +
     '</a> ' +
     esc(t.cvNote);
@@ -72,8 +79,8 @@ export function fallbackHtml(locale, path, base) {
       .map((p) =>
         section(
           p.title,
-          paragraph(p.summary) +
-            (path === 'work' ? paragraph(t.roleLabel + ': ' + p.contribution) : '') +
+          paragraph(path === 'work' ? p.summary : p.homeSummary) +
+            paragraph(t.roleLabel + ': ' + p.contribution) +
             paragraph(p.stack.join(' / ')) +
             link(base + 'work/' + p.slug + '/', t.readCase),
         ),
@@ -85,7 +92,24 @@ export function fallbackHtml(locale, path, base) {
         section(
           j.title,
           paragraph(j.company + ' / ' + j.date + ' / ' + j.place) +
-            (detailed ? list(j.bullets) : paragraph(j.summary)),
+            (detailed
+              ? '<ul>' +
+                j.bullets
+                  .map((bullet, i) => {
+                    const [before, after] = bullet.split(j.bulletHighlights[i]);
+                    return (
+                      '<li>' +
+                      esc(before) +
+                      '<strong>' +
+                      esc(j.bulletHighlights[i]) +
+                      '</strong>' +
+                      esc(after) +
+                      '</li>'
+                    );
+                  })
+                  .join('') +
+                '</ul>'
+              : paragraph(j.summary)),
         ),
       )
       .join('');
@@ -131,17 +155,19 @@ export function fallbackHtml(locale, path, base) {
           ) +
           '</nav>'
         : '') +
-      '<img class="static-experiment-preview" src="' +
-      esc(base + 'images/projects/' + project.slug + '.webp') +
-      '" alt="' +
-      esc(project.imageAlt) +
-      '" width="1536" height="1024">' +
       section(
         t.caseSummaryTitle,
         project.snapshot
           .map((item, i) => section(t.caseSummaryLabels[i], paragraph(item)))
           .join(''),
       ) +
+      '<figure><img class="static-experiment-preview" src="' +
+      esc(base + 'images/projects/' + project.slug + '.webp') +
+      '" alt="' +
+      esc(project.imageAlt) +
+      '" width="1536" height="1024"><figcaption>' +
+      esc(t.illustrationNote) +
+      '</figcaption></figure>' +
       section(
         t.workflowTitle,
         '<ol>' +
@@ -154,13 +180,24 @@ export function fallbackHtml(locale, path, base) {
     body =
       paragraph(t.about) +
       cv +
-      section(t.experienceTitle, jobs(true)) +
+      '<nav aria-label="' +
+      esc(t.sectionNavigation) +
+      '">' +
+      [
+        ['work-experience', t.experienceTitle],
+        ['technologies', t.capabilities],
+        ['education', t.education],
+        ['languages', t.languages],
+      ]
+        .map(([id, label]) => link(base + 'about/#' + id, label))
+        .join(' ') +
+      '</nav>' +
+      section(t.experienceTitle, jobs(true) + link(base + 'work/', t.allWork), 'work-experience') +
       section(
         t.capabilities,
         t.capabilityItems.map((group) => section(group.title, list(group.items))).join(''),
+        'technologies',
       ) +
-      section(t.aiTitle, paragraph(t.aiDescription)) +
-      link(base + 'work/company-knowledge-assistant/', t.readCase) +
       section(
         t.education,
         t.degrees
@@ -168,8 +205,9 @@ export function fallbackHtml(locale, path, base) {
             paragraph(d + ' / ' + t.university + ' / ' + (i === 0 ? '2022 - 2024' : '2007 - 2011')),
           )
           .join(''),
+        'education',
       ) +
-      section(t.languages, list(t.languageItems));
+      section(t.languages, list(t.languageItems), 'languages');
   else if (path === 'experiments')
     body =
       paragraph(t.experimentIntro) +

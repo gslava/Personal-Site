@@ -18,7 +18,7 @@
             >
             <div class="cv-action">
               <a
-                class="text-link"
+                class="button button--secondary"
                 href="cv/viacheslav-guzhov-cv.pdf"
                 download="Viacheslav Guzhov - CV.pdf"
                 >{{ t.cv }} <span aria-hidden="true">↓</span></a
@@ -49,9 +49,11 @@
           <p class="meta">{{ p.category }}</p>
           <h1><app-heading-text [text]="p.title" /></h1>
           <p class="lead">{{ p.summary }}</p>
-          <p class="stack-line">
-            <span>{{ t.stackLabel }}</span> {{ p.stack.join(' · ') }}
-          </p>
+          <ul class="project-stack" [attr.aria-label]="t.stackLabel">
+            @for (technology of p.stack; track technology) {
+              <li>{{ technology }}</li>
+            }
+          </ul>
           @if (connectedProjects().length) {
             <nav class="case-connections" [attr.aria-label]="t.projectConnections">
               <span class="meta">{{ t.projectConnections }}</span>
@@ -63,7 +65,6 @@
             </nav>
           }
         </header>
-        <app-project-artwork [slug]="p.slug" [imageAlt]="p.imageAlt" />
         <section appRuleReveal class="case-summary" aria-labelledby="case-summary-title">
           <h2 appEntrance id="case-summary-title">{{ t.caseSummaryTitle }}</h2>
           <div class="case-summary__grid">
@@ -75,6 +76,10 @@
             }
           </div>
         </section>
+        <figure class="case-artwork">
+          <app-project-artwork [slug]="p.slug" [imageAlt]="p.imageAlt" />
+          <figcaption>{{ t.illustrationNote }}</figcaption>
+        </figure>
         <section class="workflow" aria-labelledby="workflow-title">
           <h2 appEntrance id="workflow-title">{{ t.workflowTitle }}</h2>
           <ol>
@@ -110,7 +115,7 @@
         <div>
           <p class="lead">{{ t.about }}</p>
           <a
-            class="text-link"
+            class="button button--secondary"
             href="cv/viacheslav-guzhov-cv.pdf"
             download="Viacheslav Guzhov - CV.pdf"
             >{{ t.cv }} <span aria-hidden="true">↓</span></a
@@ -125,6 +130,12 @@
           fetchpriority="high"
         />
       </section>
+      <nav class="about-sections" [attr.aria-label]="t.sectionNavigation">
+        <a routerLink="/about" fragment="work-experience">{{ t.experienceTitle }}</a>
+        <a routerLink="/about" fragment="technologies">{{ t.capabilities }}</a>
+        <a routerLink="/about" fragment="education">{{ t.education }}</a>
+        <a routerLink="/about" fragment="languages">{{ t.languages }}</a>
+      </nav>
     }
     @case ('contact') {
       <header class="page-heading">
@@ -288,7 +299,7 @@
       }
       <div class="project-list">
         @for (p of visibleProjects(); track p.slug) {
-          <article class="project-row" appRuleReveal>
+          <article class="project-row">
             <div class="project-row__title">
               <p class="meta">{{ p.category }}</p>
               @if (page() === 'work') {
@@ -302,16 +313,20 @@
               }
             </div>
             <div class="project-row__detail">
-              <p>{{ p.summary }}</p>
-              @if (page() === 'work') {
-                <p class="project-role">
-                  <strong>{{ t.roleLabel }}:</strong> {{ p.contribution }}
-                </p>
-              }
-              <p class="stack-line">{{ p.stack.join(' / ') }}</p>
-              <a class="text-link" [routerLink]="'/work/' + p.slug"
-                >{{ t.readCase }} <span aria-hidden="true">→</span></a
-              >
+              <p>{{ page() === 'home' ? p.homeSummary : p.summary }}</p>
+              <p class="project-role">
+                <strong>{{ t.roleLabel }}</strong> {{ p.contribution }}
+              </p>
+              <div class="project-row__footer">
+                <ul class="project-stack" [attr.aria-label]="t.stackLabel">
+                  @for (technology of p.stack; track technology) {
+                    <li>{{ technology }}</li>
+                  }
+                </ul>
+                <a class="button button--case" [routerLink]="'/work/' + p.slug"
+                  >{{ t.readCase }} <span aria-hidden="true">→</span></a
+                >
+              </div>
             </div>
           </article>
         }
@@ -343,8 +358,8 @@
         }
       </div>
       <div class="timeline" [class.timeline--compact]="page() === 'home'">
-        @for (job of t.jobs; track job.company) {
-          <article appRuleReveal>
+        @for (job of t.jobs; track job.id) {
+          <article>
             <div class="timeline__date">
               <span>{{ job.date }}</span
               ><span>{{ job.place }}</span>
@@ -356,8 +371,12 @@
                 <p class="job-summary">{{ job.summary }}</p>
               } @else {
                 <ul>
-                  @for (bullet of job.bullets; track bullet) {
-                    <li>{{ bullet }}</li>
+                  @for (bullet of job.bullets; track bullet; let i = $index) {
+                    @let parts = bullet.split(job.bulletHighlights[i]);
+                    <li>
+                      {{ parts[0] }}<strong>{{ job.bulletHighlights[i] }}</strong
+                      >{{ parts[1] }}
+                    </li>
                   }
                 </ul>
               }
@@ -366,11 +385,10 @@
         }
       </div>
       @if (page() === 'about') {
-        <div class="related-work">
-          <span>{{ t.relatedWork }}</span>
-          @for (p of t.projects; track p.slug) {
-            <a [routerLink]="'/work/' + p.slug">{{ p.title }}</a>
-          }
+        <div class="experience-projects">
+          <a class="button button--case" routerLink="/work">
+            {{ t.allWork }} <span aria-hidden="true">→</span>
+          </a>
         </div>
       }
     </section>
@@ -390,13 +408,6 @@
           </article>
         }
       </div>
-      <div class="ai-practice">
-        <h3>{{ t.aiTitle }}</h3>
-        <p>{{ t.aiDescription }}</p>
-        <a class="text-link" routerLink="/work/company-knowledge-assistant"
-          >{{ t.readCase }} <span aria-hidden="true">→</span></a
-        >
-      </div>
     </section>
     <section id="education" class="section profile-details">
       <div>
@@ -411,7 +422,7 @@
           }
         </div>
       </div>
-      <div>
+      <div id="languages">
         <h2 appEntrance>{{ t.languages }}</h2>
         <ul class="language-list">
           @for (language of t.languageItems; track language) {
@@ -423,7 +434,7 @@
     </section>
   }
   @if (page() !== 'contact' && page() !== 'experiments' && page() !== 'not-found') {
-    <section id="contact" class="contact-cta section" appRuleReveal>
+    <section id="contact" class="contact-cta section">
       <div>
         <h2 appEntrance>{{ t.contactTitle }}</h2>
         <a class="email-link" href="mailto:guzhov.viacheslav@gmail.com"

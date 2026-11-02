@@ -121,14 +121,32 @@ h3 {
 .button:active {
   transform: scale(0.97);
 }
+.button--secondary {
+  border-color: var(--muted);
+}
+.button--secondary:hover {
+  border-color: var(--text);
+  background: var(--line);
+}
+.button--case {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: transparent;
+}
+.button--case:hover {
+  background: var(--accent);
+  color: var(--background);
+}
 .text-link {
   display: inline-flex;
   gap: 0.8rem;
   align-items: center;
   min-height: 44px;
   font-size: 0.9rem;
-  text-decoration: none;
-  color: var(--text);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--accent);
+  color: var(--accent);
 }
 .text-link span {
   color: var(--accent);

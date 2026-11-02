@@ -1,4 +1,4 @@
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, ViewportScroller } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -43,6 +43,10 @@ export class SiteShellComponent {
   private closeTimer?: ReturnType<typeof setTimeout>;
   private restoreScroll?: () => void;
   constructor() {
+    inject(ViewportScroller).setOffset(() => [
+      0,
+      (this.document.querySelector('.site-header')?.getBoundingClientRect().height ?? 80) + 24,
+    ]);
     afterNextRender(() => {
       const window = this.document.defaultView;
       if (!window?.matchMedia) return;

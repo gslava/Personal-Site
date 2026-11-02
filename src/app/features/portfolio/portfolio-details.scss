@@ -21,7 +21,7 @@
 .case-heading .meta {
   margin-top: 0;
 }
-.case-heading .stack-line {
+.case-heading .project-stack {
   margin-top: 1.25rem;
 }
 .case-connections {
@@ -33,7 +33,15 @@
 }
 .case-summary {
   border-top: 1px solid var(--line);
-  padding-top: 1.5rem;
+  padding-block: 1.5rem;
+  margin-bottom: 2rem;
+}
+.case-summary__grid article {
+  padding-left: 1rem;
+  border-left: 2px solid var(--line);
+}
+.case-summary__grid article:nth-child(2) {
+  border-color: var(--accent);
 }
 .case-summary h2,
 .workflow h2 {
@@ -265,4 +273,36 @@
 .experiment-grid .experiment-card .meta {
   font-size: 0.7rem;
   margin: 0;
+}
+
+.case-artwork {
+  margin: 0 0 3rem;
+}
+.case-artwork app-project-artwork {
+  margin-bottom: 0.75rem;
+}
+.case-artwork figcaption {
+  max-width: 75ch;
+  color: var(--muted);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+.about-sections {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.5rem;
+  margin-top: 2rem;
+  padding-block: 0.75rem;
+  border-block: 1px solid var(--line);
+}
+.about-sections a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--secondary);
+  font-size: 0.9rem;
+  text-decoration-color: var(--line);
+}
+.about-sections a:hover {
+  color: var(--accent);
 }
