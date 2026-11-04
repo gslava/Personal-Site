@@ -45,6 +45,7 @@
       [attr.aria-label]="menuOpen() ? t.close : t.menu"
       (click)="toggleMenu()"
     >
+      <span class="menu-button__label">{{ t.menu }}</span>
       <span class="hamburger" [class.is-open]="menuOpen()" aria-hidden="true"></span>
     </button>
   </div>

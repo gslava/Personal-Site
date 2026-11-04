@@ -1,6 +1,12 @@
 {
   "en": {
-    "nav": ["Work", "Experience", "About", "Experiments", "Contact"],
+    "nav": [
+      "Work",
+      "Experience",
+      "About",
+      "Experiments",
+      "Contact"
+    ],
     "skip": "Skip to content",
     "menu": "Menu",
     "close": "Close menu",
@@ -9,15 +15,15 @@
     "footer": "Java backend development & AI automation",
     "heroTitle": "Java Backend Developer",
     "role": "Java Backend Developer",
-    "intro": "Over 10 years building business software. I develop Java and Spring Boot backends, deliver internal web applications and connect AI to everyday operations.",
+    "intro": "Over 10 years building business software: Java and Spring Boot backends, internal web applications and AI automation.",
     "location": "Berlin, Germany",
     "permit": "Authorized to work in Germany",
     "selected": "Selected projects",
     "contact": "Get in touch",
-    "workTitle": "Selected projects",
-    "workIntro": "Backend systems, internal web applications and AI tools for e-commerce teams. From order fulfillment to product analytics and company-wide knowledge access.",
+    "workTitle": "Projects",
+    "workIntro": "Backend systems, automation and applied AI for e-commerce teams.",
     "featured": "Selected projects",
-    "allWork": "All projects",
+    "allWork": "View projects",
     "readCase": "View case study",
     "roleLabel": "My contribution",
     "more": "Other work",
@@ -30,7 +36,10 @@
     "experienceIntro": "From e-commerce systems to independent backend and AI automation projects.",
     "education": "Education",
     "university": "Kharkiv National University of Radio Electronics",
-    "degrees": ["Master of Software Engineering", "Bachelor’s Degree in Computer Science"],
+    "degrees": [
+      "Master of Software Engineering",
+      "Bachelor’s Degree in Computer Science"
+    ],
     "contactTitle": "Get in touch",
     "contactIntro": "For Java backend, full-stack and AI automation roles, contact me by email or LinkedIn.",
     "email": "Email me",
@@ -55,20 +64,42 @@
     "backWork": "All work",
     "nextProject": "Next project",
     "caseSummaryTitle": "Project at a glance",
-    "caseSummaryLabels": ["Challenge", "My contribution", "Result"],
-    "caseLabels": ["Implementation", "Key decisions", "What changed"],
+    "caseSummaryLabels": [
+      "Challenge",
+      "My contribution",
+      "Result"
+    ],
+    "caseLabels": [
+      "Implementation",
+      "Key decisions",
+      "What changed"
+    ],
     "capabilityItems": [
       {
         "title": "Programming languages",
-        "items": ["Java", "Python", "TypeScript", "JavaScript"]
+        "items": [
+          "Java",
+          "Python",
+          "TypeScript",
+          "JavaScript"
+        ]
       },
       {
         "title": "Backend",
-        "items": ["Spring Boot", "Hibernate / JPA", "REST APIs", "RabbitMQ"]
+        "items": [
+          "Spring Boot",
+          "Hibernate / JPA",
+          "REST APIs",
+          "RabbitMQ"
+        ]
       },
       {
         "title": "Web interfaces",
-        "items": ["React", "Angular", "Vaadin"]
+        "items": [
+          "React",
+          "Angular",
+          "Vaadin"
+        ]
       },
       {
         "title": "Data & analytics",
@@ -82,7 +113,13 @@
       },
       {
         "title": "AI integration",
-        "items": ["RAG", "Vector databases", "MCP", "AI agents", "Skills"]
+        "items": [
+          "RAG",
+          "Vector databases",
+          "MCP",
+          "AI agents",
+          "Skills"
+        ]
       },
       {
         "title": "Delivery & infrastructure",
@@ -156,7 +193,10 @@
           "Developed backend modules for order processing, inventory management and reporting.",
           "Automated data exchange and supplier document processing."
         ],
-        "bulletHighlights": ["backend modules", "Automated data exchange"]
+        "bulletHighlights": [
+          "backend modules",
+          "Automated data exchange"
+        ]
       },
       {
         "id": "junior",
@@ -169,23 +209,26 @@
           "Built internal tools for inventory management and supplier data processing.",
           "Streamlined order processing, reduced errors and manual work, and accelerated product content creation."
         ],
-        "bulletHighlights": ["internal tools", "reduced errors and manual work"]
+        "bulletHighlights": [
+          "internal tools",
+          "reduced errors and manual work"
+        ]
       }
     ],
     "additional": [
       [
         "Internal Services Portal",
-        "Built an employee dashboard with access permissions and settings for internal services: content creation, review and advertising analysis, payment information and other tools outside the main operations platform.",
+        "Employee access to internal services, with permissions and settings in one dashboard.",
         "Internal web applications · Access control · Service settings"
       ],
       [
         "Product Analytics & Planning",
-        "Built a product-level report combining sales, days of stock, purchase plans, marketplace and average profitability, seasonality and competitor data from marketplaces and Helium10. It gave staff one place to assess products and plan purchases.",
+        "Product reporting combines sales, stock, profitability and competitor data to support purchase planning.",
         "Data integration · Business reporting · Helium10"
       ],
       [
         "Customer Review Analysis",
-        "Collected customer reviews and used AI to analyze feedback for business decisions. Made review information available through internal services alongside other product and operational data.",
+        "AI analysis of customer reviews, available alongside product and operational data.",
         "Data collection · AI analysis · Internal tools"
       ],
       [
@@ -195,8 +238,8 @@
       ],
       [
         "Browser Automation",
-        "Reports, product updates and shipment information where API coverage was limited.",
-        "Java, Selenium / Selenide"
+        "Web scraping, reports, product updates and shipment information where API coverage was limited.",
+        "Java, Selenium / Selenide, Web scraping"
       ]
     ],
     "projects": [
@@ -210,7 +253,13 @@
           "I built most of the backend and integrations, including reporting and order automation.",
           "The team could manage orders and inventory, monitor automated fulfillment and open the knowledge assistant from IMS."
         ],
-        "stack": ["Java", "Spring Boot", "PostgreSQL", "React", "RabbitMQ"],
+        "stack": [
+          "Java",
+          "Spring Boot",
+          "PostgreSQL",
+          "React",
+          "RabbitMQ"
+        ],
         "sections": [
           "I implemented APIs for orders, warehouse shipments, reviews and incoming deliveries. Connections covered Amazon, Walmart, eBay, Sears, BestBuy, company warehouses and fulfillment services.",
           "Orders from more than ten marketplaces were normalized into one format. Dashboards and product analytics used shared records for inventory, shipments, deliveries and reports.",
@@ -225,7 +274,10 @@
         ],
         "featured": true,
         "imageAlt": "Illustrative IMS dashboard showing ORD-1044, East and DG-07, with consistent order context and visible links to Order Automation and Knowledge Assistant.",
-        "relatedSlugs": ["order-processing", "company-knowledge-assistant"],
+        "relatedSlugs": [
+          "order-processing",
+          "company-knowledge-assistant"
+        ],
         "homeSummary": "One workspace for marketplace orders, inventory and operations."
       },
       {
@@ -238,7 +290,13 @@
           "I built most of the backend and the automated workflow inside IMS, from order receipt through label and invoice printing.",
           "Staff could configure routine processing and review exceptions without manually repeating the fulfillment sequence."
         ],
-        "stack": ["Java", "Spring Boot", "PostgreSQL", "Vaadin", "RabbitMQ"],
+        "stack": [
+          "Java",
+          "Spring Boot",
+          "PostgreSQL",
+          "Vaadin",
+          "RabbitMQ"
+        ],
         "sections": [
           "I built the workflow from order receipt through shipping-label and invoice printing, including weight, dimensions and customs data.",
           "Configurable rules covered dangerous goods, carriers and conflicts. Packing instructions, international shipments, PDF formats and printer types were handled within the workflow.",
@@ -253,7 +311,10 @@
         ],
         "featured": true,
         "imageAlt": "Illustrative Order Processing in the same IMS shell, with ORD-1044 paused by DG-07, processing settings, review steps and a contextual link to Knowledge Assistant.",
-        "relatedSlugs": ["inventory-management", "company-knowledge-assistant"],
+        "relatedSlugs": [
+          "inventory-management",
+          "company-knowledge-assistant"
+        ],
         "homeSummary": "Automated fulfillment with shipping rules and exception review."
       },
       {
@@ -266,7 +327,12 @@
           "I built a chat assistant combining a vector knowledge base with file and database access, using RAG, MCP and Skills.",
           "Employees could ask about customer orders, product details, supplier defects, sales seasonality and advertising in one place."
         ],
-        "stack": ["RAG", "Vector databases", "MCP", "AI Skills"],
+        "stack": [
+          "RAG",
+          "Vector databases",
+          "MCP",
+          "AI Skills"
+        ],
         "sections": [
           "I connected business records covering orders, products, supplier defects, sales seasonality and advertising to the employee chat in IMS.",
           "Vector retrieval supplied knowledge context; MCP and task-specific Skills provided access to files, structured data and business workflows.",
@@ -281,7 +347,10 @@
         ],
         "featured": true,
         "imageAlt": "Illustrative Knowledge Assistant in the same IMS shell, opened from Order Automation with ORD-1044 and DG-07 context, cited sources and a return to the same review task.",
-        "relatedSlugs": ["inventory-management", "order-processing"],
+        "relatedSlugs": [
+          "inventory-management",
+          "order-processing"
+        ],
         "homeSummary": "Company answers from business records, files and databases."
       },
       {
@@ -294,7 +363,12 @@
           "I built most of the application and its AI-assisted suggestion workflow.",
           "Users could approve, adjust or reject suggestions before applying them."
         ],
-        "stack": ["Java", "Spring Boot", "PostgreSQL", "Vaadin"],
+        "stack": [
+          "Java",
+          "Spring Boot",
+          "PostgreSQL",
+          "Vaadin"
+        ],
         "sections": [
           "I integrated the Amazon Ads API, Helium10 and web research by an AI agent into the suggestion review workflow.",
           "Suggestions covered keywords, negative keywords, bids and campaigns for products without advertising. Each suggestion could be edited or rejected.",
@@ -322,7 +396,12 @@
           "I built a dedicated service for marketplace-specific AI content, editing, export and a shared product catalog.",
           "Staff could create product content and inspect products and statistics across marketplaces in one service."
         ],
-        "stack": ["Java", "Spring Boot", "React", "AI"],
+        "stack": [
+          "Java",
+          "Spring Boot",
+          "React",
+          "AI"
+        ],
         "sections": [
           "I built a separate service with marketplace-specific AI content, editing and export for Amazon, Walmart, BestBuy, Sears and eBay.",
           "A shared catalog connected product visibility across all five marketplaces. Product statistics sat alongside the content tools.",
@@ -341,11 +420,15 @@
         "homeSummary": "Product content and a shared catalog across five marketplaces."
       }
     ],
-    "heroFocus": "AI automation & RAG",
+    "heroFocus": "Spring Boot · AI automation & RAG",
     "cv": "Download CV",
     "cvNote": "PDF · English",
     "languages": "Languages",
-    "languageItems": ["English C1", "German B1", "Ukrainian native"],
+    "languageItems": [
+      "English C1",
+      "German B1",
+      "Ukrainian native"
+    ],
     "workflowTitle": "How it works",
     "workflowNote": "Simplified workflow. Company data and internal screens are not shown.",
     "stackLabel": "Stack",
@@ -358,7 +441,10 @@
       "speed": "Motion speed",
       "intensity": "Intensity",
       "palette": "Color palette",
-      "palettes": ["Cosmic / copper", "Emerald / rose"],
+      "palettes": [
+        "Cosmic / copper",
+        "Emerald / rose"
+      ],
       "reset": "Reset scene",
       "help": "Move your pointer or drag on the scene. Keyboard: focus the scene and use the arrow keys.",
       "paused": "Paused — you can still explore with the controls.",
@@ -372,7 +458,7 @@
       "pausedLabel": "Paused"
     },
     "cinematicLab": {
-      "title": "Worlds made of mathematics.",
+      "title": "Experiments",
       "intro": "Explore four interactive browser experiments and MonkShift, a native macOS app for focused work.",
       "eyebrow": "Interactive studies / Particles & networks",
       "classic": "More ways to play",
@@ -381,7 +467,11 @@
       "immersive": "Enter cinema mode",
       "exit": "Exit cinema mode",
       "quality": "Rendering quality",
-      "qualityOptions": ["Auto", "Performance", "High detail"],
+      "qualityOptions": [
+        "Auto",
+        "Performance",
+        "High detail"
+      ],
       "qualityHelp": "Auto reduces resolution when rendering slows down. High detail uses more GPU power.",
       "camera": "Choose your viewpoint",
       "palette": "Change colors",
@@ -400,7 +490,11 @@
       "eyebrow": "Images in motion / Three.js",
       "intro": "An image made of tiny particles. Move through it, leave a trail, and watch it find its shape again.",
       "choose": "Choose an image",
-      "images": ["Fox", "Owl", "Jellyfish"],
+      "images": [
+        "Fox",
+        "Owl",
+        "Jellyfish"
+      ],
       "help": "Move your pointer or drag your finger across the image. With the canvas focused, use the arrow keys. Choose another image below.",
       "loading": "Preparing the particles…",
       "fallback": "The interactive view is unavailable. You can still browse the three images.",
@@ -412,36 +506,62 @@
       "still": "STILL FIELD",
       "pulse": "Send a pulse",
       "density": "Density",
-      "densities": ["Airy", "Dense", "Immersive"],
+      "densities": [
+        "Airy",
+        "Dense",
+        "Immersive"
+      ],
       "strength": "Mouse response",
       "loading": "Connecting the field…",
       "fallback": "The live field is unavailable. The network preview remains visible.",
       "keyboard": "Focus the field: arrow keys move the interaction, Enter sends a pulse, Space pauses.",
       "neural": {
         "slug": "neural-field",
-        "title": "A thought takes shape",
+        "title": "Particle Field",
         "eyebrow": "01 / Neural field · tsParticles",
         "intro": "Hundreds of points, countless possible connections. An abstract neural field that gathers around your attention.",
         "caption": "ATTENTION → CONNECTION",
-        "help": "Move your mouse to draw the network toward you. Click or tap to send a wave through its connections. On a touch screen, drag sideways.",
-        "note": "An artistic study of attention and neural connections. Each point belongs to a living, shifting web; this is a visual metaphor, not a model of the brain."
+        "help": "Move your mouse to draw the network toward you. Click or tap to send a wave through its connections. On a touch screen, drag sideways."
       },
       "services": {
         "slug": "service-constellation",
-        "title": "Independent. Connected.",
+        "title": "Particle Clusters",
         "eyebrow": "02 / Service constellation · tsParticles",
         "intro": "Separate clusters, a shared rhythm. Streams of points weave an abstract network of independent services.",
         "caption": "LOCAL MOTION → SHARED SYSTEM",
-        "help": "Move your mouse to open a swirling space in the network. Click or tap to send a wave across the clusters. On a touch screen, drag sideways.",
-        "note": "A visual metaphor for microservices: independent clusters connected by moving streams. The motion is procedural, not live traffic or measured system data."
+        "help": "Move your mouse to open a swirling space in the network. Click or tap to send a wave across the clusters. On a touch screen, drag sideways."
       }
     },
     "heroBackend": "Java Spring Boot",
     "sectionNavigation": "On this page",
-    "illustrationNote": "Illustration of documented functionality with fictional data. Company screens and data are not shown."
+    "illustrationNote": "Illustration of documented functionality with fictional data. Company screens and data are not shown.",
+    "introHighlight": "Over 10 years",
+    "illustrationLabel": "Illustrative interface · fictional data",
+    "viewIllustration": "Enlarge illustration",
+    "copyEmail": "Copy email",
+    "emailCopied": "Email copied",
+    "copyEmailFailed": "Could not copy. Select and copy the email address above.",
+    "workPortalTitle": "Projects",
+    "workPortalIntro": "Marketplace operations, automated fulfillment and applied AI. See the systems behind the experience.",
+    "earlierExperience": "Earlier: Junior and Mid-Level Software Developer, 2011–2015. Internal tools, orders, inventory and reporting.",
+    "workGroups": [
+      "IMS platform & modules",
+      "Independent products"
+    ],
+    "workGroupIntros": [
+      "One operations platform, with focused case studies of its fulfillment and knowledge tools.",
+      "Dedicated tools for advertising decisions and marketplace content."
+    ],
+    "closeIllustration": "Close illustration"
   },
   "de": {
-    "nav": ["Projekte", "Erfahrung", "Über mich", "Experimente", "Kontakt"],
+    "nav": [
+      "Projekte",
+      "Erfahrung",
+      "Über mich",
+      "Experimente",
+      "Kontakt"
+    ],
     "skip": "Zum Inhalt",
     "menu": "Menü",
     "close": "Menü schließen",
@@ -450,15 +570,15 @@
     "footer": "Java-Backend-Entwicklung & KI-Automatisierung",
     "heroTitle": "Java Backend Developer",
     "role": "Java Backend Developer",
-    "intro": "Seit über 10 Jahren entwickle ich Unternehmenssoftware: Java- und Spring-Boot-Backends, interne Webanwendungen und KI für betriebliche Abläufe.",
+    "intro": "Seit über 10 Jahren entwickle ich Unternehmenssoftware: Java- und Spring-Boot-Backends, interne Webanwendungen und KI-Automatisierung.",
     "location": "Berlin, Deutschland",
     "permit": "Arbeitserlaubnis für Deutschland",
     "selected": "Ausgewählte Projekte",
     "contact": "Kontakt aufnehmen",
-    "workTitle": "Ausgewählte Projekte",
-    "workIntro": "Backend-Systeme, interne Webanwendungen und KI-Werkzeuge für E-Commerce-Teams. Von der Auftragsabwicklung über Produktanalysen bis zum Zugriff auf Unternehmenswissen.",
+    "workTitle": "Projekte",
+    "workIntro": "Backend-Systeme, Automatisierung und angewandte KI für E-Commerce-Teams.",
     "featured": "Ausgewählte Projekte",
-    "allWork": "Alle Projekte",
+    "allWork": "Projekte ansehen",
     "readCase": "Fallstudie ansehen",
     "roleLabel": "Mein Beitrag",
     "more": "Weitere Arbeiten",
@@ -471,7 +591,10 @@
     "experienceIntro": "Von E-Commerce-Systemen zu selbstständigen Backend- und KI-Projekten.",
     "education": "Ausbildung",
     "university": "Nationale Universität für Radioelektronik Charkiw",
-    "degrees": ["Master in Software Engineering", "Bachelor in Informatik"],
+    "degrees": [
+      "Master in Software Engineering",
+      "Bachelor in Informatik"
+    ],
     "contactTitle": "Kontakt",
     "contactIntro": "Für Positionen in Java-Backend, Full-Stack und KI-Automatisierung erreichen Sie mich per E-Mail oder LinkedIn.",
     "email": "E-Mail schreiben",
@@ -496,20 +619,42 @@
     "backWork": "Alle Projekte",
     "nextProject": "Nächstes Projekt",
     "caseSummaryTitle": "Projekt im Überblick",
-    "caseSummaryLabels": ["Aufgabe", "Mein Beitrag", "Ergebnis"],
-    "caseLabels": ["Umsetzung", "Wichtige Entscheidungen", "Ergebnis im Arbeitsalltag"],
+    "caseSummaryLabels": [
+      "Aufgabe",
+      "Mein Beitrag",
+      "Ergebnis"
+    ],
+    "caseLabels": [
+      "Umsetzung",
+      "Wichtige Entscheidungen",
+      "Ergebnis im Arbeitsalltag"
+    ],
     "capabilityItems": [
       {
         "title": "Programmiersprachen",
-        "items": ["Java", "Python", "TypeScript", "JavaScript"]
+        "items": [
+          "Java",
+          "Python",
+          "TypeScript",
+          "JavaScript"
+        ]
       },
       {
         "title": "Backend",
-        "items": ["Spring Boot", "Hibernate / JPA", "REST APIs", "RabbitMQ"]
+        "items": [
+          "Spring Boot",
+          "Hibernate / JPA",
+          "REST APIs",
+          "RabbitMQ"
+        ]
       },
       {
         "title": "Weboberflächen",
-        "items": ["React", "Angular", "Vaadin"]
+        "items": [
+          "React",
+          "Angular",
+          "Vaadin"
+        ]
       },
       {
         "title": "Daten & Analysen",
@@ -523,7 +668,13 @@
       },
       {
         "title": "KI-Integration",
-        "items": ["RAG", "Vektordatenbanken", "MCP", "KI-Agenten", "Skills"]
+        "items": [
+          "RAG",
+          "Vektordatenbanken",
+          "MCP",
+          "KI-Agenten",
+          "Skills"
+        ]
       },
       {
         "title": "Bereitstellung & Infrastruktur",
@@ -597,7 +748,10 @@
           "Entwickelte Backend-Module für Auftragsverarbeitung, Bestandsverwaltung und Berichte.",
           "Automatisierte den Datenaustausch und die Verarbeitung von Lieferantendokumenten."
         ],
-        "bulletHighlights": ["Backend-Module", "Automatisierte den Datenaustausch"]
+        "bulletHighlights": [
+          "Backend-Module",
+          "Automatisierte den Datenaustausch"
+        ]
       },
       {
         "id": "junior",
@@ -610,23 +764,26 @@
           "Entwickelte interne Werkzeuge für Bestandsverwaltung und die Verarbeitung von Lieferantendaten.",
           "Vereinfachte die Auftragsverarbeitung, reduzierte Fehler und manuelle Arbeit und beschleunigte die Erstellung von Produktinhalten."
         ],
-        "bulletHighlights": ["interne Werkzeuge", "reduzierte Fehler und manuelle Arbeit"]
+        "bulletHighlights": [
+          "interne Werkzeuge",
+          "reduzierte Fehler und manuelle Arbeit"
+        ]
       }
     ],
     "additional": [
       [
         "Portal für interne Dienste",
-        "Entwickelte ein Mitarbeiter-Dashboard mit Zugriffsrechten und Einstellungen für interne Dienste: Inhaltserstellung, Bewertungs- und Werbeanalysen, Zahlungsübersichten und weitere Werkzeuge außerhalb der zentralen Betriebsplattform.",
+        "Zugang zu internen Services mit Berechtigungen und Einstellungen in einem Mitarbeiter-Dashboard.",
         "Interne Webanwendungen · Zugriffssteuerung · Diensteinstellungen"
       ],
       [
         "Produktanalyse & Einkaufsplanung",
-        "Erstellte einen Bericht je Produkt mit Verkäufen, Bestandsreichweite, Einkaufsplänen, Gewinn je Marktplatz und im Durchschnitt, Saisonalität und Wettbewerbsdaten aus Marktplätzen und Helium10. Er bündelte die Grundlage für Produktbewertung und Einkauf.",
+        "Produktberichte verbinden Absatz, Bestände, Rentabilität und Wettbewerbsdaten für die Einkaufsplanung.",
         "Datenintegration · Geschäftsberichte · Helium10"
       ],
       [
         "Analyse von Kundenbewertungen",
-        "Sammelte Kundenbewertungen und setzte KI zur Auswertung für Geschäftsentscheidungen ein. Bewertungsinformationen standen über interne Dienste neben weiteren Produkt- und Betriebsdaten zur Verfügung.",
+        "KI-Analyse von Kundenbewertungen neben Produkt- und Betriebsdaten.",
         "Datenerfassung · KI-Analyse · Interne Werkzeuge"
       ],
       [
@@ -636,8 +793,8 @@
       ],
       [
         "Browser-Automatisierung",
-        "Berichte, Produktdaten und Versandinformationen bei begrenzter API-Abdeckung.",
-        "Java, Selenium / Selenide"
+        "Web Scraping, Berichte, Produktdaten und Versandinformationen bei begrenzter API-Abdeckung.",
+        "Java, Selenium / Selenide, Web scraping"
       ]
     ],
     "projects": [
@@ -651,7 +808,13 @@
           "Ich entwickelte den Großteil des Backends und der Integrationen, einschließlich Berichten und Auftragsautomatisierung.",
           "Das Team konnte Aufträge und Bestände verwalten, die automatische Abwicklung überwachen und den Wissensassistenten aus IMS öffnen."
         ],
-        "stack": ["Java", "Spring Boot", "PostgreSQL", "React", "RabbitMQ"],
+        "stack": [
+          "Java",
+          "Spring Boot",
+          "PostgreSQL",
+          "React",
+          "RabbitMQ"
+        ],
         "sections": [
           "Ich implementierte APIs für Bestellungen, Lagerlieferungen, Bewertungen und Wareneingänge. Angebunden waren Amazon, Walmart, eBay, Sears, BestBuy, eigene Lager und Fulfillment-Dienste.",
           "Aufträge aus mehr als zehn Marktplätzen wurden in ein gemeinsames Format überführt. Dashboards und Produktanalysen nutzten dieselben Datensätze für Bestände, Sendungen und Berichte.",
@@ -666,7 +829,10 @@
         ],
         "featured": true,
         "imageAlt": "Illustrative IMS-Übersicht mit ORD-1044, East und DG-07, passenden Kontextdaten und sichtbaren Links zu Order Automation und Knowledge Assistant.",
-        "relatedSlugs": ["order-processing", "company-knowledge-assistant"],
+        "relatedSlugs": [
+          "order-processing",
+          "company-knowledge-assistant"
+        ],
         "homeSummary": "Ein Arbeitsbereich für Marktplatzaufträge, Bestände und Abläufe."
       },
       {
@@ -679,7 +845,13 @@
           "Ich entwickelte den Großteil des Backends und den automatischen Ablauf in IMS, vom Auftragseingang bis zum Etiketten- und Rechnungsdruck.",
           "Mitarbeitende konnten Routineabläufe konfigurieren und Ausnahmen prüfen, ohne die gesamte Abwicklung manuell zu wiederholen."
         ],
-        "stack": ["Java", "Spring Boot", "PostgreSQL", "Vaadin", "RabbitMQ"],
+        "stack": [
+          "Java",
+          "Spring Boot",
+          "PostgreSQL",
+          "Vaadin",
+          "RabbitMQ"
+        ],
         "sections": [
           "Ich entwickelte den Ablauf vom Auftragseingang bis zum Druck von Versandetiketten und Rechnungen, einschließlich Gewicht, Abmessungen und Zolldaten.",
           "Konfigurierbare Regeln berücksichtigten Gefahrgut, Versanddienste und Konflikte. Verpackungshinweise, internationale Sendungen, PDF-Formate und Druckertypen gehörten zum Ablauf.",
@@ -694,7 +866,10 @@
         ],
         "featured": true,
         "imageAlt": "Illustratives Auftragsmodul in derselben IMS-Oberfläche mit durch DG-07 angehaltenem Auftrag ORD-1044, Einstellungen, Prüfschritten und kontextbezogenem Link zum Wissensassistenten.",
-        "relatedSlugs": ["inventory-management", "company-knowledge-assistant"],
+        "relatedSlugs": [
+          "inventory-management",
+          "company-knowledge-assistant"
+        ],
         "homeSummary": "Automatisierter Versand mit Regeln und Prüfung von Ausnahmen."
       },
       {
@@ -707,7 +882,12 @@
           "Ich entwickelte einen Chat-Assistenten mit Vektor-Wissensbasis sowie Datei- und Datenbankzugriff über RAG, MCP und Skills.",
           "Mitarbeiter konnten an einer Stelle Fragen zu Kundenaufträgen, Produktdetails, Lieferantendefekten, Saisonalität und Werbung stellen."
         ],
-        "stack": ["RAG", "Vektordatenbanken", "MCP", "AI Skills"],
+        "stack": [
+          "RAG",
+          "Vektordatenbanken",
+          "MCP",
+          "AI Skills"
+        ],
         "sections": [
           "Ich verband Geschäftsdaten zu Aufträgen, Produkten, Lieferantenmängeln, saisonalen Verkäufen und Werbung mit dem Mitarbeiterchat in IMS.",
           "Vektorsuche lieferte Wissenskontext; MCP und aufgabenspezifische Skills ermöglichten den Zugriff auf Dateien, strukturierte Daten und Geschäftsabläufe.",
@@ -722,7 +902,10 @@
         ],
         "featured": true,
         "imageAlt": "Illustrativer Wissensassistent in derselben IMS-Oberfläche, aus Order Automation mit ORD-1044 und DG-07 geöffnet, mit Quellen und Rückkehr zum gleichen Prüfvorgang.",
-        "relatedSlugs": ["inventory-management", "order-processing"],
+        "relatedSlugs": [
+          "inventory-management",
+          "order-processing"
+        ],
         "homeSummary": "Unternehmensantworten aus Geschäftsdaten, Dateien und Datenbanken."
       },
       {
@@ -735,7 +918,12 @@
           "Ich entwickelte den Großteil der Anwendung und des KI-gestützten Vorschlagsprozesses.",
           "Anwender konnten Vorschläge vor der Umsetzung freigeben, ändern oder ablehnen."
         ],
-        "stack": ["Java", "Spring Boot", "PostgreSQL", "Vaadin"],
+        "stack": [
+          "Java",
+          "Spring Boot",
+          "PostgreSQL",
+          "Vaadin"
+        ],
         "sections": [
           "Ich integrierte die Amazon Ads API, Helium10 und Webrecherchen eines KI-Agenten in den Prüfprozess für Vorschläge.",
           "Vorschläge betrafen Keywords, negative Keywords, Gebote und Kampagnen für Produkte ohne Werbung. Jeder Vorschlag ließ sich bearbeiten oder ablehnen.",
@@ -763,7 +951,12 @@
           "Ich entwickelte einen eigenen Dienst für marktplatzspezifische KI-Inhalte, Bearbeitung, Export und einen gemeinsamen Produktkatalog.",
           "Mitarbeitende konnten Produktinhalte erstellen und Produkte sowie Statistiken aller Marktplätze in einem Dienst einsehen."
         ],
-        "stack": ["Java", "Spring Boot", "React", "AI"],
+        "stack": [
+          "Java",
+          "Spring Boot",
+          "React",
+          "AI"
+        ],
         "sections": [
           "Ich entwickelte einen separaten Dienst für marktplatzspezifische KI-Inhalte, Bearbeitung und Export für Amazon, Walmart, BestBuy, Sears und eBay.",
           "Ein gemeinsamer Katalog verband die Produktsicht über alle fünf Marktplätze. Produktstatistiken standen neben den Inhaltswerkzeugen bereit.",
@@ -782,11 +975,15 @@
         "homeSummary": "Produktinhalte und ein gemeinsamer Katalog für fünf Marktplätze."
       }
     ],
-    "heroFocus": "KI-Automatisierung & RAG",
+    "heroFocus": "Spring Boot · KI-Automatisierung & RAG",
     "cv": "Lebenslauf herunterladen",
     "cvNote": "PDF · Englisch",
     "languages": "Sprachen",
-    "languageItems": ["Englisch C1", "Deutsch B1", "Ukrainisch Muttersprache"],
+    "languageItems": [
+      "Englisch C1",
+      "Deutsch B1",
+      "Ukrainisch Muttersprache"
+    ],
     "workflowTitle": "So funktioniert der Ablauf",
     "workflowNote": "Vereinfachter Ablauf. Unternehmensdaten und interne Oberflächen werden nicht gezeigt.",
     "stackLabel": "Technologien",
@@ -799,7 +996,10 @@
       "speed": "Geschwindigkeit",
       "intensity": "Intensität",
       "palette": "Farbpalette",
-      "palettes": ["Kosmos / Kupfer", "Smaragd / Rosa"],
+      "palettes": [
+        "Kosmos / Kupfer",
+        "Smaragd / Rosa"
+      ],
       "reset": "Szene zurücksetzen",
       "help": "Bewege den Zeiger oder ziehe über die Szene. Tastatur: Szene fokussieren und Pfeiltasten verwenden.",
       "paused": "Pausiert — die Steuerelemente bleiben verfügbar.",
@@ -813,7 +1013,7 @@
       "pausedLabel": "Pausiert"
     },
     "cinematicLab": {
-      "title": "Welten aus Mathematik.",
+      "title": "Experimente",
       "intro": "Entdecke vier interaktive Browser-Experimente und MonkShift, eine native macOS-App für konzentriertes Arbeiten.",
       "eyebrow": "Interaktive Studien / Partikel & Netzwerke",
       "classic": "Noch mehr entdecken",
@@ -822,7 +1022,11 @@
       "immersive": "Kinomodus öffnen",
       "exit": "Kinomodus verlassen",
       "quality": "Renderqualität",
-      "qualityOptions": ["Automatisch", "Leistung", "Hohe Details"],
+      "qualityOptions": [
+        "Automatisch",
+        "Leistung",
+        "Hohe Details"
+      ],
       "qualityHelp": "Automatik reduziert bei langsamem Rendering die Auflösung. Hohe Details benötigen mehr GPU-Leistung.",
       "camera": "Blickwinkel wählen",
       "palette": "Farben wechseln",
@@ -841,7 +1045,11 @@
       "eyebrow": "Bilder in Bewegung / Three.js",
       "intro": "Ein Bild aus winzigen Partikeln. Bewege dich hindurch, hinterlasse eine Spur und sieh zu, wie es wieder seine Form findet.",
       "choose": "Bild auswählen",
-      "images": ["Fuchs", "Eule", "Qualle"],
+      "images": [
+        "Fuchs",
+        "Eule",
+        "Qualle"
+      ],
       "help": "Bewege den Mauszeiger oder ziehe deinen Finger über das Bild. Mit fokussierter Zeichenfläche funktionieren auch die Pfeiltasten. Wähle unten ein anderes Bild.",
       "loading": "Partikel werden vorbereitet…",
       "fallback": "Die interaktive Ansicht ist nicht verfügbar. Du kannst weiterhin die drei Bilder ansehen.",
@@ -853,36 +1061,62 @@
       "still": "RUHENDES FELD",
       "pulse": "Impuls senden",
       "density": "Dichte",
-      "densities": ["Luftig", "Dicht", "Intensiv"],
+      "densities": [
+        "Luftig",
+        "Dicht",
+        "Intensiv"
+      ],
       "strength": "Mausreaktion",
       "loading": "Das Netzwerk entsteht…",
       "fallback": "Das interaktive Feld ist nicht verfügbar. Die Netzwerkvorschau bleibt sichtbar.",
       "keyboard": "Feld fokussieren: Pfeiltasten bewegen die Interaktion, Enter sendet einen Impuls, Leertaste pausiert.",
       "neural": {
         "slug": "neural-field",
-        "title": "Ein Gedanke nimmt Form an",
+        "title": "Partikelfeld",
         "eyebrow": "01 / Neuronales Feld · tsParticles",
         "intro": "Hunderte Punkte, unzählige mögliche Verbindungen. Ein abstraktes neuronales Feld, das sich um deine Aufmerksamkeit sammelt.",
         "caption": "AUFMERKSAMKEIT → VERBINDUNG",
-        "help": "Bewege die Maus, um das Netzwerk zu dir zu ziehen. Klicke oder tippe, um eine Welle durch die Verbindungen zu senden. Auf Touchscreens seitwärts ziehen.",
-        "note": "Eine künstlerische Studie über Aufmerksamkeit und neuronale Verbindungen. Die Punkte bilden ein bewegliches Netz: eine visuelle Metapher, kein Gehirnmodell."
+        "help": "Bewege die Maus, um das Netzwerk zu dir zu ziehen. Klicke oder tippe, um eine Welle durch die Verbindungen zu senden. Auf Touchscreens seitwärts ziehen."
       },
       "services": {
         "slug": "service-constellation",
-        "title": "Unabhängig. Verbunden.",
+        "title": "Partikelcluster",
         "eyebrow": "02 / Service-Konstellation · tsParticles",
         "intro": "Getrennte Cluster, ein gemeinsamer Rhythmus. Punktströme bilden ein abstraktes Netzwerk unabhängiger Services.",
         "caption": "LOKALE BEWEGUNG → GEMEINSAMES SYSTEM",
-        "help": "Bewege die Maus, um einen wirbelnden Freiraum im Netzwerk zu öffnen. Klicke oder tippe, um eine Welle über die Cluster zu senden. Auf Touchscreens seitwärts ziehen.",
-        "note": "Eine visuelle Metapher für Microservices: unabhängige Cluster, verbunden durch bewegte Ströme. Die Bewegung ist prozedural, kein Live-Traffic und keine gemessenen Systemdaten."
+        "help": "Bewege die Maus, um einen wirbelnden Freiraum im Netzwerk zu öffnen. Klicke oder tippe, um eine Welle über die Cluster zu senden. Auf Touchscreens seitwärts ziehen."
       }
     },
     "heroBackend": "Java Spring Boot",
     "sectionNavigation": "Auf dieser Seite",
-    "illustrationNote": "Illustration dokumentierter Funktionen mit fiktiven Daten. Unternehmensoberflächen und -daten werden nicht gezeigt."
+    "illustrationNote": "Illustration dokumentierter Funktionen mit fiktiven Daten. Unternehmensoberflächen und -daten werden nicht gezeigt.",
+    "introHighlight": "über 10 Jahren",
+    "illustrationLabel": "Illustrative Oberfläche · fiktive Daten",
+    "viewIllustration": "Illustration vergrößern",
+    "copyEmail": "E-Mail kopieren",
+    "emailCopied": "E-Mail kopiert",
+    "copyEmailFailed": "Kopieren nicht möglich. Bitte die E-Mail-Adresse oben markieren und kopieren.",
+    "workPortalTitle": "Projekte",
+    "workPortalIntro": "Marktplatzprozesse, automatisierte Auftragsabwicklung und angewandte KI. Die Systeme hinter meiner Erfahrung.",
+    "earlierExperience": "Zuvor: Junior und Mid-Level Software Developer, 2011–2015. Interne Tools, Aufträge, Bestände und Berichte.",
+    "workGroups": [
+      "IMS-Plattform & Module",
+      "Eigenständige Produkte"
+    ],
+    "workGroupIntros": [
+      "Eine Betriebsplattform mit eigenen Fallstudien zu Auftragsabwicklung und Wissenszugriff.",
+      "Spezialisierte Tools für Werbeentscheidungen und Marktplatzinhalte."
+    ],
+    "closeIllustration": "Illustration schließen"
   },
   "uk": {
-    "nav": ["Проєкти", "Досвід", "Про мене", "Експерименти", "Контакти"],
+    "nav": [
+      "Проєкти",
+      "Досвід",
+      "Про мене",
+      "Експерименти",
+      "Контакти"
+    ],
     "skip": "Перейти до вмісту",
     "menu": "Меню",
     "close": "Закрити меню",
@@ -891,15 +1125,15 @@
     "footer": "Java backend та AI-автоматизація",
     "heroTitle": "Java Backend Developer",
     "role": "Java Backend Developer",
-    "intro": "Понад 10 років створюю програмне забезпечення для бізнесу: бекенди на Java і Spring Boot, внутрішні вебзастосунки та AI-автоматизацію робочих процесів.",
+    "intro": "Понад 10 років створюю програмне забезпечення для бізнесу: Java і Spring Boot, внутрішні вебзастосунки та AI-автоматизацію.",
     "location": "Берлін, Німеччина",
     "permit": "Дозвіл на роботу в Німеччині",
     "selected": "Вибрані проєкти",
     "contact": "Зв’язатися",
-    "workTitle": "Вибрані проєкти",
-    "workIntro": "Бекенд-системи, внутрішні вебзастосунки й AI-інструменти для e-commerce команд. Від обробки замовлень до аналітики товарів і доступу до знань компанії.",
+    "workTitle": "Проєкти",
+    "workIntro": "Бекенд-системи, автоматизація та прикладний AI для e-commerce команд.",
     "featured": "Вибрані проєкти",
-    "allWork": "Усі проєкти",
+    "allWork": "Переглянути проекти",
     "readCase": "Переглянути кейс",
     "roleLabel": "Мій внесок",
     "more": "Інші роботи",
@@ -912,7 +1146,10 @@
     "experienceIntro": "Від e-commerce-систем до незалежної backend-розробки та AI-автоматизації.",
     "education": "Освіта",
     "university": "Харківський національний університет радіоелектроніки",
-    "degrees": ["Магістр інженерії програмного забезпечення", "Бакалавр комп’ютерних наук"],
+    "degrees": [
+      "Магістр інженерії програмного забезпечення",
+      "Бакалавр комп’ютерних наук"
+    ],
     "contactTitle": "Зв’язатися",
     "contactIntro": "Щодо вакансій Java backend, full-stack та AI-автоматизації напишіть мені на email або LinkedIn.",
     "email": "Написати листа",
@@ -937,20 +1174,42 @@
     "backWork": "Усі проєкти",
     "nextProject": "Наступний проєкт",
     "caseSummaryTitle": "Проєкт коротко",
-    "caseSummaryLabels": ["Задача", "Мій внесок", "Результат"],
-    "caseLabels": ["Реалізація", "Основні рішення", "Що змінилося"],
+    "caseSummaryLabels": [
+      "Задача",
+      "Мій внесок",
+      "Результат"
+    ],
+    "caseLabels": [
+      "Реалізація",
+      "Основні рішення",
+      "Що змінилося"
+    ],
     "capabilityItems": [
       {
         "title": "Мови програмування",
-        "items": ["Java", "Python", "TypeScript", "JavaScript"]
+        "items": [
+          "Java",
+          "Python",
+          "TypeScript",
+          "JavaScript"
+        ]
       },
       {
         "title": "Бекенд",
-        "items": ["Spring Boot", "Hibernate / JPA", "REST APIs", "RabbitMQ"]
+        "items": [
+          "Spring Boot",
+          "Hibernate / JPA",
+          "REST APIs",
+          "RabbitMQ"
+        ]
       },
       {
         "title": "Вебінтерфейси",
-        "items": ["React", "Angular", "Vaadin"]
+        "items": [
+          "React",
+          "Angular",
+          "Vaadin"
+        ]
       },
       {
         "title": "Дані й аналітика",
@@ -964,7 +1223,13 @@
       },
       {
         "title": "AI-інтеграція",
-        "items": ["RAG", "Векторні бази даних", "MCP", "AI-агенти", "Skills"]
+        "items": [
+          "RAG",
+          "Векторні бази даних",
+          "MCP",
+          "AI-агенти",
+          "Skills"
+        ]
       },
       {
         "title": "Розгортання й інфраструктура",
@@ -1001,7 +1266,11 @@
           "Спрощую наявні процеси й усуваю повторні ручні кроки перед автоматизацією."
         ],
         "id": "freelance",
-        "bulletHighlights": ["Веду проєкти", "AI-агентів і Skills", "усуваю повторні ручні кроки"]
+        "bulletHighlights": [
+          "Веду проєкти",
+          "AI-агентів і Skills",
+          "усуваю повторні ручні кроки"
+        ]
       },
       {
         "id": "senior",
@@ -1034,7 +1303,10 @@
           "Розробляв бекенд-модулі для обробки замовлень, управління запасами та звітності.",
           "Автоматизував обмін даними й обробку документів постачальників."
         ],
-        "bulletHighlights": ["бекенд-модулі", "Автоматизував обмін даними"]
+        "bulletHighlights": [
+          "бекенд-модулі",
+          "Автоматизував обмін даними"
+        ]
       },
       {
         "id": "junior",
@@ -1047,23 +1319,26 @@
           "Створював внутрішні інструменти для управління запасами й обробки даних постачальників.",
           "Спрощував обробку замовлень, зменшував кількість помилок і ручної роботи та прискорював створення товарного контенту."
         ],
-        "bulletHighlights": ["внутрішні інструменти", "зменшував кількість помилок і ручної роботи"]
+        "bulletHighlights": [
+          "внутрішні інструменти",
+          "зменшував кількість помилок і ручної роботи"
+        ]
       }
     ],
     "additional": [
       [
         "Портал внутрішніх сервісів",
-        "Створив дашборд працівників із правами доступу й налаштуваннями внутрішніх сервісів: створення контенту, аналізу відгуків і реклами, перегляду платежів та інших інструментів поза основною операційною платформою.",
+        "Доступ працівників до внутрішніх сервісів, прав і налаштувань в одному дашборді.",
         "Внутрішні вебзастосунки · Права доступу · Налаштування сервісів"
       ],
       [
         "Аналітика товарів і планування закупівель",
-        "Створив звіт по кожному товару: продажі, запас у днях, плани закупівель, прибуток за маркетплейсами й у середньому, сезонність і дані конкурентів із маркетплейсів та Helium10. Працівники отримали спільну основу для оцінки товарів і планування закупівель.",
+        "Звіт поєднує продажі, запаси, прибутковість і дані конкурентів для планування закупівель.",
         "Інтеграція даних · Бізнес-звітність · Helium10"
       ],
       [
         "Аналіз відгуків покупців",
-        "Збирав відгуки покупців і застосовував AI для їх аналізу та підтримки бізнес-рішень. Дані відгуків були доступні через внутрішні сервіси поряд з іншою інформацією про товари й операційну роботу.",
+        "AI-аналіз відгуків покупців поруч із товарними й операційними даними.",
         "Збір даних · AI-аналіз · Внутрішні інструменти"
       ],
       [
@@ -1073,8 +1348,8 @@
       ],
       [
         "Автоматизація браузера",
-        "Звіти, оновлення товарів та інформації про відправлення за обмежених можливостей API.",
-        "Java, Selenium / Selenide"
+        "Вебскрапінг, звіти, оновлення товарів та інформації про відправлення за обмежених можливостей API.",
+        "Java, Selenium / Selenide, Web scraping"
       ]
     ],
     "projects": [
@@ -1088,7 +1363,13 @@
           "Я створив більшість бекенду й інтеграцій, зокрема звітність та автоматизацію обробки замовлень.",
           "Команда могла керувати замовленнями й запасами, контролювати автоматичну обробку та відкривати асистента знань із IMS."
         ],
-        "stack": ["Java", "Spring Boot", "PostgreSQL", "React", "RabbitMQ"],
+        "stack": [
+          "Java",
+          "Spring Boot",
+          "PostgreSQL",
+          "React",
+          "RabbitMQ"
+        ],
         "sections": [
           "Я реалізував API для замовлень, складських відправлень, відгуків і вхідних поставок. Інтеграції охоплювали Amazon, Walmart, eBay, Sears, BestBuy, склади компанії та fulfillment-сервіси.",
           "Замовлення з понад десяти маркетплейсів приводилися до спільного формату. Дашборди й аналітика товарів використовували спільні записи запасів, відправлень, поставок і звітів.",
@@ -1103,7 +1384,10 @@
         ],
         "featured": true,
         "imageAlt": "Ілюстративний дашборд IMS із ORD-1044, East і DG-07, узгодженим контекстом та видимими переходами до Order Automation і Knowledge Assistant.",
-        "relatedSlugs": ["order-processing", "company-knowledge-assistant"],
+        "relatedSlugs": [
+          "order-processing",
+          "company-knowledge-assistant"
+        ],
         "homeSummary": "Єдиний простір для замовлень, запасів і операцій маркетплейсів."
       },
       {
@@ -1116,7 +1400,13 @@
           "Я створив більшість бекенду й автоматичний процес у складі IMS: від отримання замовлення до друку етикеток і рахунків.",
           "Працівники могли налаштовувати типову обробку та перевіряти винятки без ручного повторення всього процесу."
         ],
-        "stack": ["Java", "Spring Boot", "PostgreSQL", "Vaadin", "RabbitMQ"],
+        "stack": [
+          "Java",
+          "Spring Boot",
+          "PostgreSQL",
+          "Vaadin",
+          "RabbitMQ"
+        ],
         "sections": [
           "Я розробив процес від отримання замовлення до друку етикетки й рахунку, включно з вагою, розмірами та митними даними.",
           "Налаштовувані правила враховували небезпечні товари, перевізників і конфлікти. Процес охоплював пакувальні інструкції, міжнародні відправлення, PDF-формати й типи принтерів.",
@@ -1131,7 +1421,10 @@
         ],
         "featured": true,
         "imageAlt": "Ілюстративний модуль обробки в тій самій оболонці IMS: ORD-1044 зупинено правилом DG-07, показано налаштування, кроки перевірки та перехід до асистента з контекстом замовлення.",
-        "relatedSlugs": ["inventory-management", "company-knowledge-assistant"],
+        "relatedSlugs": [
+          "inventory-management",
+          "company-knowledge-assistant"
+        ],
         "homeSummary": "Автоматична обробка замовлень із правилами доставки й перевіркою винятків."
       },
       {
@@ -1144,7 +1437,12 @@
           "Створив чат-помічника з векторною базою знань та доступом до файлів і БД через RAG, MCP і Skills.",
           "Працівники могли в одному місці запитувати про замовлення, товари, дефекти від постачальників, сезонність продажів і рекламу."
         ],
-        "stack": ["RAG", "Векторні бази даних", "MCP", "AI Skills"],
+        "stack": [
+          "RAG",
+          "Векторні бази даних",
+          "MCP",
+          "AI Skills"
+        ],
         "sections": [
           "Я підключив до чату працівників в IMS записи про замовлення, товари, дефекти постачальників, сезонність продажів і рекламу.",
           "Векторний пошук надавав контекст зі знань; MCP і Skills для конкретних задач відкривали доступ до файлів, структурованих даних і бізнес-процесів.",
@@ -1159,7 +1457,10 @@
         ],
         "featured": true,
         "imageAlt": "Ілюстративний асистент у тій самій оболонці IMS, відкритий з Order Automation із контекстом ORD-1044 і DG-07, джерелами та поверненням до тієї самої перевірки.",
-        "relatedSlugs": ["inventory-management", "order-processing"],
+        "relatedSlugs": [
+          "inventory-management",
+          "order-processing"
+        ],
         "homeSummary": "Відповіді з даних компанії, файлів і баз даних."
       },
       {
@@ -1172,7 +1473,12 @@
           "Реалізував більшість застосунку та процес підготовки й перевірки AI-пропозицій.",
           "Користувачі могли схвалити, змінити або відхилити пропозицію перед застосуванням."
         ],
-        "stack": ["Java", "Spring Boot", "PostgreSQL", "Vaadin"],
+        "stack": [
+          "Java",
+          "Spring Boot",
+          "PostgreSQL",
+          "Vaadin"
+        ],
         "sections": [
           "Я інтегрував Amazon Ads API, Helium10 і вебдослідження AI-агента в процес перевірки пропозицій.",
           "Пропозиції охоплювали ключові й мінус-слова, ставки та кампанії для товарів без реклами. Кожну пропозицію можна було змінити або відхилити.",
@@ -1200,7 +1506,12 @@
           "Я створив окремий сервіс для AI-контенту за правилами маркетплейсів, редагування, експорту та спільного каталогу товарів.",
           "Працівники могли створювати контент і переглядати товари та статистику всіх маркетплейсів в одному сервісі."
         ],
-        "stack": ["Java", "Spring Boot", "React", "AI"],
+        "stack": [
+          "Java",
+          "Spring Boot",
+          "React",
+          "AI"
+        ],
         "sections": [
           "Я створив окремий сервіс для AI-контенту з урахуванням вимог Amazon, Walmart, BestBuy, Sears та eBay, з редагуванням і експортом.",
           "Спільний каталог поєднав перегляд товарів із п’яти маркетплейсів. Статистика товарів була поруч з інструментами контенту.",
@@ -1219,11 +1530,15 @@
         "homeSummary": "Товарний контент і спільний каталог для п’яти маркетплейсів."
       }
     ],
-    "heroFocus": "AI-автоматизація та RAG",
+    "heroFocus": "Spring Boot · AI-автоматизація та RAG",
     "cv": "Завантажити CV",
     "cvNote": "PDF · англійською",
     "languages": "Мови",
-    "languageItems": ["Англійська C1", "Німецька B1", "Українська рідна"],
+    "languageItems": [
+      "Англійська C1",
+      "Німецька B1",
+      "Українська рідна"
+    ],
     "workflowTitle": "Як працює процес",
     "workflowNote": "Спрощена схема процесу. Дані компанії та внутрішні екрани не публікуються.",
     "stackLabel": "Технології",
@@ -1236,7 +1551,10 @@
       "speed": "Швидкість руху",
       "intensity": "Інтенсивність",
       "palette": "Кольорова палітра",
-      "palettes": ["Космос / мідь", "Смарагд / троянда"],
+      "palettes": [
+        "Космос / мідь",
+        "Смарагд / троянда"
+      ],
       "reset": "Скинути сцену",
       "help": "Рухайте вказівник або проведіть пальцем по сцені. З клавіатури: перейдіть до сцени та використовуйте стрілки.",
       "paused": "На паузі — налаштування залишаються доступними.",
@@ -1250,7 +1568,7 @@
       "pausedLabel": "На паузі"
     },
     "cinematicLab": {
-      "title": "Світи, створені математикою.",
+      "title": "Експерименти",
       "intro": "Досліджуйте чотири інтерактивні браузерні експерименти та MonkShift — нативний macOS-застосунок для зосередженої роботи.",
       "eyebrow": "Інтерактивні дослідження / Частинки та мережі",
       "classic": "Ще більше відкриттів",
@@ -1259,7 +1577,11 @@
       "immersive": "Кінорежим",
       "exit": "Вийти з кінорежиму",
       "quality": "Якість рендерингу",
-      "qualityOptions": ["Автоматично", "Продуктивність", "Висока деталізація"],
+      "qualityOptions": [
+        "Автоматично",
+        "Продуктивність",
+        "Висока деталізація"
+      ],
       "qualityHelp": "Автоматичний режим знижує роздільність, якщо рендеринг сповільнюється. Висока деталізація потребує більше ресурсів GPU.",
       "camera": "Оберіть ракурс",
       "palette": "Змінити кольори",
@@ -1278,7 +1600,11 @@
       "eyebrow": "Зображення в русі / Three.js",
       "intro": "Зображення з тисяч крихітних частинок. Проведіть по ньому, залиште слід і спостерігайте, як воно відновлює свою форму.",
       "choose": "Оберіть зображення",
-      "images": ["Лисиця", "Сова", "Медуза"],
+      "images": [
+        "Лисиця",
+        "Сова",
+        "Медуза"
+      ],
       "help": "Рухайте курсором або проведіть пальцем по зображенню. Коли полотно у фокусі, можна користуватися клавішами зі стрілками. Нижче можна обрати інше зображення.",
       "loading": "Готуємо частинки…",
       "fallback": "Інтерактивний режим недоступний. Ви можете переглядати три зображення.",
@@ -1290,32 +1616,52 @@
       "still": "НЕРУХОМЕ ПОЛЕ",
       "pulse": "Надіслати імпульс",
       "density": "Щільність",
-      "densities": ["Легко", "Щільно", "Занурення"],
+      "densities": [
+        "Легко",
+        "Щільно",
+        "Занурення"
+      ],
       "strength": "Реакція на мишку",
       "loading": "З’єднуємо поле…",
       "fallback": "Інтерактивне поле недоступне. Залишається зображення мережі.",
       "keyboard": "У фокусі поля: стрілки переміщують взаємодію, Enter надсилає імпульс, пробіл ставить на паузу.",
       "neural": {
         "slug": "neural-field",
-        "title": "Думка набуває форми",
+        "title": "Поле частинок",
         "eyebrow": "01 / Нейронне поле · tsParticles",
         "intro": "Сотні точок, безліч можливих зв’язків. Абстрактне нейронне поле, яке збирається навколо вашої уваги.",
         "caption": "УВАГА → ЗВ’ЯЗОК",
-        "help": "Рухайте мишкою, щоб притягувати мережу до себе. Натисніть або торкніться, щоб надіслати хвилю крізь зв’язки. На сенсорному екрані проводьте пальцем убік.",
-        "note": "Художній експеримент про увагу та нейронні зв’язки. Кожна точка — частина живої, мінливої мережі. Це візуальна метафора, а не модель мозку."
+        "help": "Рухайте мишкою, щоб притягувати мережу до себе. Натисніть або торкніться, щоб надіслати хвилю крізь зв’язки. На сенсорному екрані проводьте пальцем убік."
       },
       "services": {
         "slug": "service-constellation",
-        "title": "Незалежні. Пов’язані.",
+        "title": "Кластери частинок",
         "eyebrow": "02 / Сузір’я сервісів · tsParticles",
         "intro": "Окремі кластери, спільний ритм. Потоки точок сплітають абстрактну мережу незалежних сервісів.",
         "caption": "ЛОКАЛЬНИЙ РУХ → СПІЛЬНА СИСТЕМА",
-        "help": "Рухайте мишкою, щоб утворити вихор і простір усередині мережі. Натисніть або торкніться, щоб надіслати хвилю між кластерами. На сенсорному екрані проводьте пальцем убік.",
-        "note": "Візуальна метафора мікросервісів: незалежні кластери, з’єднані рухомими потоками. Рух створюється алгоритмом і не відображає реальний трафік чи вимірювання системи."
+        "help": "Рухайте мишкою, щоб утворити вихор і простір усередині мережі. Натисніть або торкніться, щоб надіслати хвилю між кластерами. На сенсорному екрані проводьте пальцем убік."
       }
     },
     "heroBackend": "Java Spring Boot",
     "sectionNavigation": "На цій сторінці",
-    "illustrationNote": "Ілюстрація описаних функцій із вигаданими даними. Внутрішні екрани й дані компанії не показані."
+    "illustrationNote": "Ілюстрація описаних функцій із вигаданими даними. Внутрішні екрани й дані компанії не показані.",
+    "introHighlight": "Понад 10 років",
+    "illustrationLabel": "Ілюстративний інтерфейс · вигадані дані",
+    "viewIllustration": "Збільшити ілюстрацію",
+    "copyEmail": "Копіювати email",
+    "emailCopied": "Email скопійовано",
+    "copyEmailFailed": "Не вдалося скопіювати. Виділіть і скопіюйте адресу вище.",
+    "workPortalTitle": "Проекти",
+    "workPortalIntro": "Операції маркетплейсів, автоматизація замовлень і прикладний AI. Системи, що стоять за моїм досвідом.",
+    "earlierExperience": "Раніше: Junior та Mid-Level Software Developer, 2011–2015. Внутрішні інструменти, замовлення, запаси та звітність.",
+    "workGroups": [
+      "Платформа IMS та модулі",
+      "Окремі продукти"
+    ],
+    "workGroupIntros": [
+      "Спільна операційна платформа з окремими кейсами автоматизації замовлень і доступу до знань.",
+      "Спеціалізовані інструменти для рекламних рішень і контенту маркетплейсів."
+    ],
+    "closeIllustration": "Закрити ілюстрацію"
   }
 }

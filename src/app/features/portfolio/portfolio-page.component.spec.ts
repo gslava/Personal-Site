@@ -39,6 +39,12 @@ describe('PortfolioPageComponent', () => {
       expect(
         fixture.nativeElement.querySelector('.case-artwork figcaption')?.textContent,
       ).toContain('fictional data');
+      const decisions = fixture.nativeElement.querySelector('.case-body') as HTMLElement;
+      expect(
+        decisions.compareDocumentPosition(image) & Node.DOCUMENT_POSITION_FOLLOWING,
+      ).toBeTruthy();
+      expect(fixture.nativeElement.querySelector('.case-artwork .preview-link')).not.toBeNull();
+      expect(fixture.nativeElement.querySelector('.case-artwork a')).toBeNull();
       expect(image.getAttribute('src')).toBe(`images/projects/${current}.webp`);
       expect(image.getAttribute('srcset')).toContain(`${current}-768.webp 768w`);
       expect(image.getAttribute('alt')?.length).toBeGreaterThan(20);
@@ -83,22 +89,27 @@ describe('Employer-focused portfolio', () => {
     expect(root.querySelector('h1')?.textContent).toBe('Java Backend Developer');
     expect(
       [...root.querySelectorAll('.hero__focus span')].map((line) => line.textContent?.trim()),
-    ).toEqual(['AI automation & RAG', 'Java Spring Boot']);
-    expect(root.querySelectorAll('.project-row')).toHaveLength(3);
-    expect(root.querySelector('a[href="/work/company-knowledge-assistant"]')).not.toBeNull();
-    expect(root.querySelector('a[href="/work/amazon-ads"]')).toBeNull();
-    expect(root.querySelectorAll('.job-summary')).toHaveLength(4);
-    expect(root.querySelectorAll('.project-role')).toHaveLength(3);
-    expect(root.querySelector('.project-row__detail > p')?.textContent).toBe(
-      'One workspace for marketplace orders, inventory and operations.',
-    );
+    ).toEqual(['Spring Boot · AI automation & RAG']);
+    expect(root.querySelectorAll('.project-row')).toHaveLength(0);
+    expect(root.querySelectorAll('.job-summary')).toHaveLength(2);
+    expect(root.querySelector('.earlier-experience')?.textContent).toContain('2011–2015');
+    const experience = root.querySelector('#work-experience')!;
+    const portal = root.querySelector('.work-portal')!;
+    expect(
+      experience.compareDocumentPosition(portal) & Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+    expect(
+      portal.compareDocumentPosition(root.querySelector('#contact')!) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+    expect(portal.querySelector('a')?.getAttribute('href')).toBe('/work');
     expect(root.querySelector('.cv-action .button--secondary')).not.toBeNull();
     expect(root.querySelector('.timeline ul')).toBeNull();
     expect(root.querySelector('img')).toBeNull();
     const cv = root.querySelector<HTMLAnchorElement>('a[download]');
     expect(cv?.getAttribute('href')).toBe('cv/viacheslav-guzhov-cv.pdf');
     expect(cv?.getAttribute('download')).toBe('Viacheslav Guzhov - CV.pdf');
-    expect(root.querySelector('a[href="/#projects"]')).not.toBeNull();
+    expect(root.querySelector('.hero a[href="/work"]')).not.toBeNull();
   });
 
   it('combines full experience, illustrated avatar, AI skills, education and languages on About', async () => {
@@ -116,6 +127,7 @@ describe('Employer-focused portfolio', () => {
       expect(root.querySelector('#' + id)).not.toBeNull();
     }
     expect(root.querySelector('#about-me .button--secondary')).not.toBeNull();
+    expect(root.querySelector('.core-stack')).toBeNull();
     expect(
       [...root.querySelectorAll('.timeline h3')].map((item) => item.textContent?.trim()),
     ).toEqual([
@@ -131,7 +143,7 @@ describe('Employer-focused portfolio', () => {
     ).toEqual(['Feb 2024 - present', '2016 - 2023', '2013 - 2015', '2011 - 2012']);
     expect(root.querySelectorAll('.experience-projects a')).toHaveLength(1);
     expect(root.querySelector('.experience-projects a')?.getAttribute('href')).toBe('/work');
-    expect(root.querySelector('.experience-projects a')?.textContent).toContain('All projects');
+    expect(root.querySelector('.experience-projects a')?.textContent).toContain('View projects');
     expect(root.querySelector('.related-work')).toBeNull();
     expect(root.querySelector('.ai-practice')).toBeNull();
     expect(root.textContent).not.toContain('AI connected to company knowledge and tools');
@@ -184,6 +196,18 @@ describe('Employer-focused portfolio', () => {
       expect(root.querySelector('a[href="/experiments/' + slug + '"]')).toBeNull();
     }
     expect(root.querySelectorAll('.cinematic-card')).toHaveLength(5);
+    expect(root.querySelector('h1')?.textContent).toBe('Experiments');
+    expect(root.querySelector('.cinematic-card__top')).toBeNull();
+    expect(root.querySelectorAll('.cinematic-card__intro')).toHaveLength(1);
+    expect(
+      root.querySelector('.cinematic-card--project .cinematic-card__intro')?.textContent,
+    ).toContain('native macOS');
+    expect(root.querySelector('a[href="/experiments/neural-field"] h2')?.textContent).toBe(
+      'Particle Field',
+    );
+    expect(root.querySelector('a[href="/experiments/service-constellation"] h2')?.textContent).toBe(
+      'Particle Clusters',
+    );
     for (const slug of ['neural-field', 'service-constellation']) {
       expect(root.querySelector('a[href="/experiments/' + slug + '"]')).not.toBeNull();
     }
@@ -201,5 +225,20 @@ describe('Employer-focused portfolio', () => {
       'Product Content Creation',
     );
     expect(root.querySelectorAll('.project-role')).toHaveLength(5);
+    expect(root.querySelectorAll('.work-group')).toHaveLength(2);
+    expect(root.querySelectorAll('.work-group')[0].querySelectorAll('.project-row')).toHaveLength(
+      3,
+    );
+    expect(root.querySelectorAll('.work-group')[1].querySelectorAll('.project-row')).toHaveLength(
+      2,
+    );
+    expect(root.querySelector('h1')?.textContent).toBe('Projects');
+  });
+  it('places LinkedIn with email ahead of supporting contact channels', async () => {
+    const root = await render('contact');
+    const primary = root.querySelector('.contact-email')!;
+    expect(primary.querySelector('a[href^="mailto:"]')).not.toBeNull();
+    expect(primary.querySelector('a[href*="linkedin.com"]')).not.toBeNull();
+    expect(root.querySelector('.contact-groups a[href*="linkedin.com"]')).toBeNull();
   });
 });

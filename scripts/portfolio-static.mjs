@@ -35,6 +35,7 @@ export function pageInfo(locale, path) {
     network?.title ||
     (path === 'experiments/interactive-particles' ? t.imageParticles.title : '') ||
     project?.title ||
+    (path === 'work' ? t.workTitle : '') ||
     (path === 'experiments/particles' ? t.particleTitle : index >= 0 ? t.nav[index] : t.role);
   const descriptions = {
     work: t.workIntro,
@@ -73,21 +74,20 @@ export function fallbackHtml(locale, path, base) {
     '</a> ' +
     esc(t.cvNote);
   const project = t.projects.find((p) => 'work/' + p.slug === path);
-  const projectList = () =>
-    t.projects
-      .filter((p) => path === 'work' || p.featured)
+  const projectList = (projects) =>
+    projects
       .map((p) =>
         section(
           p.title,
-          paragraph(path === 'work' ? p.summary : p.homeSummary) +
+          paragraph(p.homeSummary) +
             paragraph(t.roleLabel + ': ' + p.contribution) +
-            paragraph(p.stack.join(' / ')) +
+            paragraph(p.stack.slice(0, 3).join(' / ')) +
             link(base + 'work/' + p.slug + '/', t.readCase),
         ),
       )
       .join('');
   const jobs = (detailed) =>
-    t.jobs
+    (detailed ? t.jobs : t.jobs.slice(0, 2))
       .map((j) =>
         section(
           j.title,
@@ -121,20 +121,50 @@ export function fallbackHtml(locale, path, base) {
     body =
       '<p>' +
       esc(t.heroFocus) +
-      '<br>' +
-      esc(t.heroBackend) +
       '</p>' +
-      paragraph(t.intro) +
+      '<p>' +
+      esc(t.intro.split(t.introHighlight)[0]) +
+      '<strong>' +
+      esc(t.introHighlight) +
+      '</strong>' +
+      esc(t.intro.split(t.introHighlight)[1]) +
+      '</p>' +
       paragraph(t.location + ' / ' + t.permit) +
       paragraph(t.languageItems.slice(0, 2).join(' / ')) +
       cv +
-      section(t.featured, projectList()) +
-      section(t.experienceTitle, jobs(false)) +
-      link(base + 'about/', t.aboutLink);
+      link(base + 'work/', t.workTitle) +
+      section(
+        t.experienceTitle,
+        jobs(false) +
+          paragraph(t.earlierExperience) +
+          link(base + 'about/#work-experience', t.aboutLink),
+      ) +
+      section(t.workPortalTitle, paragraph(t.workPortalIntro) + link(base + 'work/', t.allWork));
   else if (path === 'work')
     body =
       paragraph(t.workIntro) +
-      projectList() +
+      section(
+        t.workGroups[0],
+        paragraph(t.workGroupIntros[0]) +
+          projectList(
+            t.projects.filter(
+              (p) =>
+                p.slug === 'inventory-management' ||
+                p.relatedSlugs.includes('inventory-management'),
+            ),
+          ),
+      ) +
+      section(
+        t.workGroups[1],
+        paragraph(t.workGroupIntros[1]) +
+          projectList(
+            t.projects.filter(
+              (p) =>
+                p.slug !== 'inventory-management' &&
+                !p.relatedSlugs.includes('inventory-management'),
+            ),
+          ),
+      ) +
       section(
         t.more,
         t.additional.map((p) => section(p[0], paragraph(p[1]) + paragraph(p[2]))).join(''),
@@ -161,11 +191,16 @@ export function fallbackHtml(locale, path, base) {
           .map((item, i) => section(t.caseSummaryLabels[i], paragraph(item)))
           .join(''),
       ) +
-      '<figure><img class="static-experiment-preview" src="' +
+      project.sections.map((s, i) => section(t.caseLabels[i], paragraph(s))).join('') +
+      '<figure><p>' +
+      esc(t.illustrationLabel) +
+      '</p><img class="static-experiment-preview" src="' +
       esc(base + 'images/projects/' + project.slug + '.webp') +
       '" alt="' +
       esc(project.imageAlt) +
-      '" width="1536" height="1024"><figcaption>' +
+      '" width="1536" height="1024">' +
+      link(base + 'images/projects/' + project.slug + '.webp', t.viewIllustration) +
+      '<figcaption>' +
       esc(t.illustrationNote) +
       '</figcaption></figure>' +
       section(
@@ -174,8 +209,7 @@ export function fallbackHtml(locale, path, base) {
           project.workflow.map((step) => '<li>' + esc(step) + '</li>').join('') +
           '</ol>' +
           paragraph(t.workflowNote),
-      ) +
-      project.sections.map((s, i) => section(t.caseLabels[i], paragraph(s))).join('');
+      );
   else if (path === 'about')
     body =
       paragraph(t.about) +
@@ -210,23 +244,14 @@ export function fallbackHtml(locale, path, base) {
       section(t.languages, list(t.languageItems), 'languages');
   else if (path === 'experiments')
     body =
-      paragraph(t.experimentIntro) +
-      section(
-        t.particleTitle,
-        paragraph(t.particleIntro) + link(base + 'experiments/particles/', t.openExperiment),
-      ) +
+      section(t.particleTitle, link(base + 'experiments/particles/', t.openExperiment)) +
       section(
         t.imageParticles.title,
-        paragraph(t.imageParticles.intro) +
-          link(base + 'experiments/interactive-particles/', t.openExperiment),
+        link(base + 'experiments/interactive-particles/', t.openExperiment),
       ) +
       [t.networkFields.neural, t.networkFields.services]
         .map((scene) =>
-          section(
-            scene.title,
-            paragraph(scene.intro) +
-              link(base + 'experiments/' + scene.slug + '/', t.openExperiment),
-          ),
+          section(scene.title, link(base + 'experiments/' + scene.slug + '/', t.openExperiment)),
         )
         .join('') +
       section(
@@ -242,7 +267,6 @@ export function fallbackHtml(locale, path, base) {
       esc(network.title) +
       '" width="1158" height="709">' +
       paragraph(network.help) +
-      paragraph(network.note) +
       paragraph(t.staticHelp) +
       link(base + 'experiments/', t.backExperiments);
   else if (path === 'experiments/interactive-particles')
@@ -276,14 +300,8 @@ export function fallbackHtml(locale, path, base) {
     body =
       paragraph(t.contactIntro) +
       link('mailto:guzhov.viacheslav@gmail.com', t.email) +
-      section(
-        t.elsewhere,
-        link('https://www.linkedin.com/in/viacheslav-guzhov/', 'LinkedIn') +
-          ' / ' +
-          link('https://github.com/GSlava', 'GitHub') +
-          ' / ' +
-          cv,
-      ) +
+      link('https://www.linkedin.com/in/viacheslav-guzhov/', 'LinkedIn') +
+      section(t.elsewhere, link('https://github.com/GSlava', 'GitHub') + ' / ' + cv) +
       section(
         t.messengers,
         link('https://t.me/g_slava', 'Telegram') +

@@ -85,9 +85,7 @@ describe('NetworkFieldPageComponent', () => {
     await ready(fixture);
     expect(fixture.nativeElement.querySelector('select').value).toBe('1');
     expect(mocks.create.mock.calls[0][1]).toBe('services');
-    expect(fixture.nativeElement.querySelector('h1').textContent).toContain(
-      'Independent. Connected.',
-    );
+    expect(fixture.nativeElement.querySelector('h1').textContent).toContain('Particle Clusters');
     const pause = fixture.nativeElement.querySelector('button') as HTMLButtonElement;
     pause.click();
     fixture.detectChanges();

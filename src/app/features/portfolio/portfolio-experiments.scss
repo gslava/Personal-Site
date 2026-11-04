@@ -17,7 +17,7 @@
   background: #03060b;
   text-decoration: none;
 }
-.cinematic-card:not(.cinematic-card--network) {
+.cinematic-card--project {
   grid-column: 1 / -1;
 }
 .cinematic-card--network {
@@ -58,7 +58,6 @@
   transform: scale(1.035);
 }
 .cinematic-card--hero {
-  grid-column: 1 / -1;
   min-height: 550px;
 }
 .cinematic-card--hero > img {
@@ -74,26 +73,6 @@
 }
 .cinematic-card--hero .cinematic-card__body {
   max-width: 530px;
-}
-.cinematic-card__top {
-  position: absolute;
-  top: 1.5rem;
-  left: 1.5rem;
-  right: 1.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.65rem;
-  letter-spacing: 0.05em;
-}
-.cinematic-card__top > span:first-child {
-  padding: 0.4rem 0.6rem;
-  background: #04060b8a;
-  border: 1px solid #ffffff24;
-  border-radius: 4px;
-}
-.cinematic-card__top > span:last-child {
-  font-size: 1.3rem;
 }
 .cinematic-card__body {
   padding: 2rem;

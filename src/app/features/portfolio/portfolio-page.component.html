@@ -7,14 +7,17 @@
           <h1 id="hero-title"><app-heading-text [text]="t.heroTitle" /></h1>
           <p class="hero__focus">
             <span>{{ t.heroFocus }}</span>
-            <span>{{ t.heroBackend }}</span>
           </p>
         </div>
         <div class="hero__intro">
-          <p class="lead">{{ t.intro }}</p>
+          <p class="lead">
+            @let introParts = t.intro.split(t.introHighlight);
+            {{ introParts[0] }}<strong>{{ t.introHighlight }}</strong
+            >{{ introParts[1] }}
+          </p>
           <div class="actions">
-            <a class="button button--primary" routerLink="/" fragment="projects"
-              >{{ t.selected }} <span aria-hidden="true">↓</span></a
+            <a class="button button--primary" routerLink="/work"
+              >{{ t.workTitle }} <span aria-hidden="true">→</span></a
             >
             <div class="cv-action">
               <a
@@ -76,7 +79,16 @@
             }
           </div>
         </section>
+        <div class="case-body">
+          @for (section of p.sections; track $index; let i = $index) {
+            <section [class.case-body__result]="i === 2">
+              <h2 appEntrance>{{ t.caseLabels[i] }}</h2>
+              <p>{{ section }}</p>
+            </section>
+          }
+        </div>
         <figure class="case-artwork">
+          <p class="illustration-label">{{ t.illustrationLabel }}</p>
           <app-project-artwork [slug]="p.slug" [imageAlt]="p.imageAlt" />
           <figcaption>{{ t.illustrationNote }}</figcaption>
         </figure>
@@ -89,14 +101,6 @@
           </ol>
           <p class="meta">{{ t.workflowNote }}</p>
         </section>
-        <div class="case-body">
-          @for (section of p.sections; track $index; let i = $index) {
-            <section>
-              <h2 appEntrance>{{ t.caseLabels[i] }}</h2>
-              <p>{{ section }}</p>
-            </section>
-          }
-        </div>
         @if (nextProject(); as next) {
           <a class="next-project" [routerLink]="'/work/' + next.slug"
             ><span
@@ -121,14 +125,17 @@
             >{{ t.cv }} <span aria-hidden="true">↓</span></a
           ><span class="cv-note">{{ t.cvNote }}</span>
         </div>
-        <img
-          class="portrait"
-          src="images/viacheslav-avatar.png"
-          width="1254"
-          height="1254"
-          [alt]="t.portraitAlt"
-          fetchpriority="high"
-        />
+        <div class="about-identity">
+          <img
+            class="portrait"
+            src="images/viacheslav-avatar.png"
+            width="1254"
+            height="1254"
+            [alt]="t.portraitAlt"
+            fetchpriority="high"
+          />
+          <p class="about-identity__name">Viacheslav Guzhov</p>
+        </div>
       </section>
       <nav class="about-sections" [attr.aria-label]="t.sectionNavigation">
         <a routerLink="/about" fragment="work-experience">{{ t.experienceTitle }}</a>
@@ -143,16 +150,20 @@
         <p class="lead">{{ t.contactIntro }}</p>
       </header>
       <section class="contact-layout">
-        <a class="email-card" href="mailto:guzhov.viacheslav@gmail.com"
-          ><span>{{ t.email }}</span
-          ><strong>guzhov.viacheslav<wbr />@gmail.com</strong><span aria-hidden="true">↗</span></a
-        >
+        <div class="contact-email">
+          <a class="email-card" href="mailto:guzhov.viacheslav@gmail.com"
+            ><span>{{ t.email }}</span
+            ><strong>guzhov.viacheslav<wbr />@gmail.com</strong><span aria-hidden="true">↗</span></a
+          >
+          <app-copy-email />
+          <a class="contact-linkedin" href="https://www.linkedin.com/in/viacheslav-guzhov/">
+            LinkedIn <span aria-hidden="true">↗</span>
+          </a>
+        </div>
         <div class="contact-groups">
           <section class="contact-group">
             <h2 appEntrance>{{ t.elsewhere }}</h2>
-            <a class="contact-row" href="https://www.linkedin.com/in/viacheslav-guzhov/"
-              >LinkedIn <span aria-hidden="true">↗</span></a
-            ><a class="contact-row" href="https://github.com/GSlava"
+            <a class="contact-row" href="https://github.com/GSlava"
               >GitHub <span aria-hidden="true">↗</span></a
             ><a
               class="contact-row"
@@ -179,9 +190,7 @@
     }
     @case ('experiments') {
       <header class="page-heading">
-        <p class="meta">{{ t.cinematicLab.eyebrow }}</p>
         <h1><app-heading-text [text]="t.cinematicLab.title" /></h1>
-        <p class="lead">{{ t.experimentIntro }}</p>
       </header>
       <div class="cinematic-grid">
         <a class="cinematic-card cinematic-card--hero" routerLink="/experiments/particles">
@@ -192,14 +201,9 @@
             height="750"
             loading="eager"
           />
-          <div class="cinematic-card__top">
-            <span>01 / {{ t.cinematicLab.live }}</span
-            ><span aria-hidden="true">↗</span>
-          </div>
           <div class="cinematic-card__body">
             <p class="meta">Three.js / WebGL</p>
             <h2>{{ t.particleTitle }}</h2>
-            <p class="cinematic-card__intro">{{ t.particleIntro }}</p>
             <span class="cinematic-card__enter"
               >{{ t.openExperiment }} <span aria-hidden="true">↗</span></span
             >
@@ -213,24 +217,15 @@
             height="750"
             loading="lazy"
           />
-          <div class="cinematic-card__top">
-            <span>02 / {{ t.cinematicLab.live }}</span
-            ><span aria-hidden="true">↗</span>
-          </div>
           <div class="cinematic-card__body">
             <p class="meta">{{ t.imageParticles.eyebrow }}</p>
             <h2>{{ t.imageParticles.title }}</h2>
-            <p class="cinematic-card__intro">{{ t.imageParticles.intro }}</p>
             <span class="cinematic-card__enter"
               >{{ t.openExperiment }} <span aria-hidden="true">↗</span></span
             >
           </div>
         </a>
-        @for (
-          scene of [t.networkFields.neural, t.networkFields.services];
-          track scene.slug;
-          let i = $index
-        ) {
+        @for (scene of [t.networkFields.neural, t.networkFields.services]; track scene.slug) {
           <a
             class="cinematic-card cinematic-card--network"
             [routerLink]="'/experiments/' + scene.slug"
@@ -242,14 +237,9 @@
               height="750"
               loading="lazy"
             />
-            <div class="cinematic-card__top">
-              <span>0{{ i + 3 }} / {{ t.cinematicLab.live }}</span
-              ><span aria-hidden="true">↗</span>
-            </div>
             <div class="cinematic-card__body">
               <p class="meta">tsParticles / Canvas</p>
               <h2>{{ scene.title }}</h2>
-              <p class="cinematic-card__intro">{{ scene.intro }}</p>
               <span class="cinematic-card__enter"
                 >{{ t.openExperiment }} <span aria-hidden="true">↗</span></span
               >
@@ -257,9 +247,6 @@
           </a>
         }
         <a class="cinematic-card cinematic-card--project" [href]="t.monkShift.url">
-          <div class="cinematic-card__top">
-            <span>05 / macOS</span><span aria-hidden="true">↗</span>
-          </div>
           <div class="cinematic-card__body">
             <p class="meta">SwiftUI / AppKit</p>
             <h2>{{ t.monkShift.title }}</h2>
@@ -282,70 +269,56 @@
       </header>
     }
   }
-  @if (page() === 'home' || page() === 'work') {
-    <section
-      id="projects"
-      class="projects-section"
-      [class.section]="page() === 'home'"
-      [attr.aria-label]="t.featured"
-    >
-      @if (page() === 'home') {
-        <div class="section-heading">
-          <h2 appEntrance>{{ t.featured }}</h2>
-          <a class="text-link" routerLink="/work"
-            >{{ t.allWork }} <span aria-hidden="true">→</span></a
-          >
-        </div>
-      }
-      <div class="project-list">
-        @for (p of visibleProjects(); track p.slug) {
-          <article class="project-row">
-            <div class="project-row__title">
-              <p class="meta">{{ p.category }}</p>
-              @if (page() === 'work') {
-                <h2>
-                  <a [routerLink]="'/work/' + p.slug">{{ p.title }}</a>
-                </h2>
-              } @else {
-                <h3>
-                  <a [routerLink]="'/work/' + p.slug">{{ p.title }}</a>
-                </h3>
-              }
-            </div>
-            <div class="project-row__detail">
-              <p>{{ page() === 'home' ? p.homeSummary : p.summary }}</p>
-              <p class="project-role">
-                <strong>{{ t.roleLabel }}</strong> {{ p.contribution }}
-              </p>
-              <div class="project-row__footer">
+  @if (page() === 'work') {
+    @for (group of workGroups; track $index; let groupIndex = $index) {
+      <section class="work-group" [attr.aria-labelledby]="'work-group-' + groupIndex">
+        <header class="work-group__heading">
+          <h2 [id]="'work-group-' + groupIndex">{{ t.workGroups[groupIndex] }}</h2>
+          <p>{{ t.workGroupIntros[groupIndex] }}</p>
+        </header>
+        <div class="project-list">
+          @for (p of group; track p.slug) {
+            <article
+              class="project-row"
+              [class.project-row--featured]="p.slug === 'inventory-management'"
+            >
+              <app-project-motif [variant]="p.slug" />
+              <div class="project-row__content">
+                <h3>{{ p.title }}</h3>
+                <p class="project-row__summary">{{ p.homeSummary }}</p>
+                <p class="project-role">
+                  <strong>{{ t.roleLabel }}</strong> {{ p.contribution }}
+                </p>
                 <ul class="project-stack" [attr.aria-label]="t.stackLabel">
-                  @for (technology of p.stack; track technology) {
+                  @for (technology of p.stack.slice(0, 3); track technology) {
                     <li>{{ technology }}</li>
                   }
                 </ul>
-                <a class="button button--case" [routerLink]="'/work/' + p.slug"
-                  >{{ t.readCase }} <span aria-hidden="true">→</span></a
+                <a
+                  class="button button--case"
+                  [routerLink]="'/work/' + p.slug"
+                  [attr.aria-label]="t.readCase + ': ' + p.title"
                 >
+                  {{ t.readCase }} <span aria-hidden="true">→</span>
+                </a>
               </div>
-            </div>
-          </article>
-        }
-      </div>
-    </section>
-    @if (page() === 'work') {
-      <section class="section">
-        <h2 appEntrance>{{ t.more }}</h2>
-        <div class="more-projects">
-          @for (p of t.additional; track p[0]) {
-            <article>
-              <h3>{{ p[0] }}</h3>
-              <p>{{ p[1] }}</p>
-              <p class="stack-line">{{ p[2] }}</p>
             </article>
           }
         </div>
       </section>
     }
+    <section class="section">
+      <h2 appEntrance>{{ t.more }}</h2>
+      <div class="more-projects">
+        @for (p of t.additional; track p[0]) {
+          <article>
+            <h3>{{ p[0] }}</h3>
+            <p>{{ p[1] }}</p>
+            <p class="stack-line">{{ p[2] }}</p>
+          </article>
+        }
+      </div>
+    </section>
   }
   @if (page() === 'home' || page() === 'about') {
     <section id="work-experience" class="section">
@@ -358,8 +331,8 @@
         }
       </div>
       <div class="timeline" [class.timeline--compact]="page() === 'home'">
-        @for (job of t.jobs; track job.id) {
-          <article>
+        @for (job of visibleJobs(); track job.id) {
+          <article [class.timeline__earlier]="job.id === 'mid' || job.id === 'junior'">
             <div class="timeline__date">
               <span>{{ job.date }}</span
               ><span>{{ job.place }}</span>
@@ -384,6 +357,9 @@
           </article>
         }
       </div>
+      @if (page() === 'home') {
+        <p class="earlier-experience">{{ t.earlierExperience }}</p>
+      }
       @if (page() === 'about') {
         <div class="experience-projects">
           <a class="button button--case" routerLink="/work">
@@ -391,6 +367,18 @@
           </a>
         </div>
       }
+    </section>
+  }
+  @if (page() === 'home') {
+    <section class="section work-portal" aria-labelledby="work-portal-title">
+      <a routerLink="/work" class="work-portal__link">
+        <div class="work-portal__copy">
+          <h2 id="work-portal-title">{{ t.workPortalTitle }}</h2>
+          <p>{{ t.workPortalIntro }}</p>
+          <span class="work-portal__action">{{ t.allWork }} <span aria-hidden="true">→</span></span>
+        </div>
+        <app-project-motif variant="work-overview" />
+      </a>
     </section>
   }
   @if (page() === 'about') {
@@ -402,7 +390,9 @@
             <h3>{{ group.title }}</h3>
             <ul class="technology-list">
               @for (technology of group.items; track technology) {
-                <li>{{ technology }}</li>
+                <li>
+                  {{ technology }}
+                </li>
               }
             </ul>
           </article>
@@ -440,6 +430,7 @@
         <a class="email-link" href="mailto:guzhov.viacheslav@gmail.com"
           >guzhov.viacheslav<wbr />@gmail.com</a
         >
+        <app-copy-email />
       </div>
       <div class="actions">
         <a class="button button--primary" href="mailto:guzhov.viacheslav@gmail.com"

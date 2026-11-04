@@ -1,0 +1,156 @@
+:host {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+}
+.motif {
+  height: 100%;
+  min-height: 190px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  color: var(--accent);
+  background: radial-gradient(ellipse at 50% 55%, #e4a0710b, transparent 70%);
+}
+.motif__composition {
+  flex-shrink: 0;
+  width: 240px;
+  height: 180px;
+  position: relative;
+}
+.motif__part {
+  position: absolute;
+  border: 1px solid #e4a07170;
+  background: #1e2021;
+}
+// One source expressed as several finished pieces of content.
+.motif--product-content-creation {
+  .motif__composition {
+    width: 230px;
+    height: 180px;
+  }
+  .motif__part {
+    width: 108px;
+    height: 135px;
+    border-radius: 6px;
+    left: calc(12px + var(--i) * 48px);
+    top: calc(8px + var(--i) * 16px);
+    transform: rotate(calc(-12deg + var(--i) * 10deg));
+    box-shadow: -10px 10px 22px #11131590;
+  }
+  .motif__part::before {
+    content: '';
+    position: absolute;
+    inset: 14px 14px 65px;
+    background: #e4a07120;
+    border-radius: 2px;
+  }
+  .motif__part::after {
+    content: '';
+    position: absolute;
+    inset: 83px 14px 16px;
+    background: repeating-linear-gradient(#9da4a780 0 1px, transparent 1px 10px);
+  }
+  .motif__part:nth-child(3)::before {
+    background: var(--accent);
+  }
+  .motif__part:nth-child(n + 4) {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .motif__composition {
+    transition: translate 300ms ease;
+  }
+  :host-context(.project-row:hover) .motif__composition,
+  :host-context(.project-row:focus-within) .motif__composition,
+  :host-context(.work-portal__link:hover) .motif__composition {
+    translate: 0 -5px;
+  }
+}
+
+@media (max-width: 600px) {
+  :host-context(.work-portal) .motif {
+    min-height: 150px;
+  }
+  :host-context(.work-portal) .motif__composition {
+    scale: 0.55;
+  }
+}
+
+@media (max-width: 767px) {
+  :host-context(.project-row) .motif {
+    min-height: 140px;
+  }
+  :host-context(.project-row) .motif__composition {
+    scale: 0.7;
+  }
+}
+
+// Conceptual diagrams share a common stroke and material treatment.
+.motif__composition:has(svg) {
+  width: 360px;
+  height: 220px;
+}
+svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.wire {
+  fill: none;
+  stroke: #b6a292;
+  stroke-width: 1.3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.wire--soft {
+  stroke: #74797b;
+}
+.wire--accent {
+  stroke: var(--accent);
+}
+.wire--dashed {
+  stroke-dasharray: 4 5;
+}
+.tile {
+  fill: #1b1e20;
+  stroke: #7c7168;
+  stroke-width: 1.2;
+  stroke-linejoin: round;
+}
+.tile--raised {
+  fill: #242322;
+  stroke: #bd9679;
+}
+.tile--tint {
+  fill: #342a23;
+  stroke: var(--accent);
+}
+.solid,
+.pin {
+  fill: var(--accent);
+  stroke: none;
+}
+.motif--work-overview .motif__composition {
+  width: 430px;
+  height: 263px;
+}
+@media (max-width: 600px) {
+  :host-context(.work-portal) .motif--work-overview .motif__composition {
+    scale: 0.55;
+  }
+}
+
+.system-boundary {
+  fill: #15181a;
+  stroke: #51585b;
+  stroke-width: 1;
+}
+.motif--inventory-management .motif__composition {
+  width: 380px;
+  height: 232px;
+}

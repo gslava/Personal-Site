@@ -3,6 +3,8 @@ import {
   ChangeDetectionStrategy,
   Component,
   DestroyRef,
+  ElementRef,
+  ViewChild,
   Input,
   OnChanges,
   OnInit,
@@ -11,6 +13,7 @@ import {
   inject,
   signal,
 } from '@angular/core';
+import { PortfolioContentService } from '../../core/content/portfolio-content';
 
 @Component({
   selector: 'app-project-artwork',
@@ -21,6 +24,15 @@ import {
 export class ProjectArtworkComponent implements OnInit, OnChanges {
   @Input({ required: true }) slug = '';
   @Input({ required: true }) imageAlt = '';
+
+  @ViewChild('preview') private preview?: ElementRef<HTMLDialogElement>;
+  protected readonly t = inject(PortfolioContentService).text;
+  private previousOverflow: string | undefined;
+  private opener: HTMLElement | undefined;
+
+  constructor() {
+    this.destroy.onDestroy(() => this.closePreview());
+  }
 
   protected readonly revealed = signal(false);
   private readonly document = inject(DOCUMENT);
@@ -45,10 +57,38 @@ export class ProjectArtworkComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['slug']) {
+      this.closePreview();
       this.clearTimer();
       this.revealed.set(false);
       this.imageLoaded = false;
     }
+  }
+
+  protected openPreview(): void {
+    const dialog = this.preview?.nativeElement;
+    if (!dialog || dialog.open) return;
+    this.opener = this.document.activeElement as HTMLElement;
+    this.previousOverflow = this.document.documentElement.style.overflow;
+    this.document.documentElement.style.overflow = 'hidden';
+    dialog.showModal();
+  }
+
+  protected onPreviewClick(event: MouseEvent): void {
+    if (event.target === event.currentTarget) this.closePreview();
+  }
+
+  protected closePreview(): void {
+    const dialog = this.preview?.nativeElement;
+    if (dialog?.open) dialog.close();
+    this.releasePreview();
+  }
+
+  protected releasePreview(): void {
+    if (this.previousOverflow === undefined) return;
+    this.document.documentElement.style.overflow = this.previousOverflow;
+    this.previousOverflow = undefined;
+    if (this.opener?.isConnected) this.opener.focus({ preventScroll: true });
+    this.opener = undefined;
   }
 
   protected onImageLoad(): void {

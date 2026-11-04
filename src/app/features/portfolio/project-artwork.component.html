@@ -1,4 +1,11 @@
-<div class="case-interface" [class.case-interface--revealed]="revealed()">
+<button
+  type="button"
+  class="case-interface"
+  [class.case-interface--revealed]="revealed()"
+  [attr.aria-label]="t.viewIllustration"
+  aria-haspopup="dialog"
+  (click)="openPreview()"
+>
   <span class="case-interface__surface">
     <img
       class="case-interface__monochrome"
@@ -44,4 +51,30 @@
       decoding="async"
     />
   </span>
-</div>
+</button>
+<button type="button" class="preview-link" aria-haspopup="dialog" (click)="openPreview()">
+  {{ t.viewIllustration }} <span aria-hidden="true">↗</span>
+</button>
+<!-- Native dialog backdrop has equivalent Escape/close-button actions; the dialog itself is not a tab stop. -->
+<!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
+<dialog
+  #preview
+  class="artwork-preview"
+  [attr.aria-label]="imageAlt"
+  (cancel)="closePreview(); $event.preventDefault()"
+  (close)="releasePreview()"
+  (click)="onPreviewClick($event)"
+>
+  <button
+    type="button"
+    class="artwork-preview__close"
+    [attr.aria-label]="t.closeIllustration"
+    (click)="closePreview()"
+    (keydown.tab)="$event.preventDefault()"
+    (keydown.shift.tab)="$event.preventDefault()"
+    autofocus
+  >
+    <span aria-hidden="true">×</span>
+  </button>
+  <img [src]="'images/projects/' + slug + '.webp'" [alt]="imageAlt" width="1536" height="1024" />
+</dialog>

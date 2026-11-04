@@ -46,7 +46,7 @@ for (const [locale, text] of Object.entries(data)) {
     assert.equal(scene.slug, data.en.networkFields[key].slug);
     assert(experimentIndex.includes(experimentBase + 'experiments/' + scene.slug + '/'));
     const networkFallback = fallbackHtml(locale, 'experiments/' + scene.slug, experimentBase);
-    assert(networkFallback.includes(scene.note.replaceAll('&', '&amp;')));
+    assert(networkFallback.includes(scene.intro.replaceAll('&', '&amp;')));
     assert(networkFallback.includes(experimentBase + 'images/experiments/' + scene.slug + '.webp'));
     assert(
       existsSync(new URL('../public/images/experiments/' + scene.slug + '.webp', import.meta.url)),
@@ -145,10 +145,9 @@ for (const [locale, text] of Object.entries(data)) {
   for (const p of text.projects) {
     assert.equal(typeof p.featured, 'boolean');
     assert(workFallback.includes('work/' + p.slug + '/'), locale + ': Work case missing');
-    assert.equal(
-      homeFallback.includes('work/' + p.slug + '/'),
-      p.featured,
-      locale + ': featured case parity',
+    assert(
+      !homeFallback.includes('work/' + p.slug),
+      locale + ': Home links to collection, not individual cases',
     );
   }
   for (const p of text.additional) {
@@ -180,7 +179,8 @@ for (const [locale, text] of Object.entries(data)) {
   }
   for (const job of text.jobs) {
     const escape = (value) => value.replaceAll('&', '&amp;');
-    assert(homeFallback.includes(escape(job.title)) && homeFallback.includes(job.date));
+    if (['freelance', 'senior'].includes(job.id))
+      assert(homeFallback.includes(escape(job.title)) && homeFallback.includes(job.date));
     assert(profileFallback.includes(escape(job.title)) && profileFallback.includes(job.date));
     assert.equal(job.bulletHighlights.length, job.bullets.length);
     job.bullets.forEach((bullet, i) => {
@@ -190,16 +190,38 @@ for (const [locale, text] of Object.entries(data)) {
     });
   }
   assert(caseFallback.indexOf(text.caseSummaryTitle) < caseFallback.indexOf('<img'));
-  for (const p of text.projects.filter((p) => p.featured)) {
-    assert(homeFallback.includes(p.contribution.replaceAll('&', '&amp;')));
-  }
+  assert(homeFallback.includes(text.earlierExperience));
+  assert(!homeFallback.includes('work/inventory-management/'));
+  assert(
+    homeFallback.indexOf('<h2>' + text.experienceTitle) <
+      homeFallback.indexOf('<h2>' + text.workPortalTitle),
+  );
+  assert(homeFallback.includes('work/"'));
+  const localizedWorkFallback = fallbackHtml(locale, 'work', prefix);
+  for (const project of text.projects)
+    assert(localizedWorkFallback.includes(prefix + 'work/' + project.slug + '/'));
+  for (const title of text.workGroups)
+    assert(workFallback.includes(title.replaceAll('&', '&amp;')));
+
   assert(profileFallback.includes('Python'));
   assert(profileFallback.includes('TypeScript'));
   assert(profileFallback.includes('JavaScript'));
-  assert(homeFallback.includes('Java Spring Boot'));
+  assert(homeFallback.includes('Spring Boot'));
+  assert.equal(text.intro.split(text.introHighlight).length, 2);
+  assert(homeFallback.includes('<strong>' + text.introHighlight + '</strong>'));
+  for (const key of [
+    'copyEmail',
+    'emailCopied',
+    'copyEmailFailed',
+    'illustrationLabel',
+    'viewIllustration',
+  ])
+    assert(text[key].length > 5);
+  assert(caseFallback.indexOf(text.caseLabels[1]) < caseFallback.indexOf('<figure>'));
+  assert(caseFallback.includes(text.illustrationLabel));
   assert.equal(fallbackHtml(locale, 'experience', prefix), profileFallback);
   assert(!homeFallback.includes(text.jobs[0].bullets[0]), locale + ': Home must stay concise');
 }
 console.log(
-  'Portfolio content verified: EN/DE/UK, five cases, five additional works, three featured cases, IMS connections, workflows and CV.',
+  'Portfolio content verified: EN/DE/UK, five cases, five additional works, compact Home, grouped Work, IMS connections, workflows and CV.',
 );

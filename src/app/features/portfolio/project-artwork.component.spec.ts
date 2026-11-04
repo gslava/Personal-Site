@@ -10,6 +10,7 @@ describe('ProjectArtworkComponent', () => {
 
   beforeEach(async () => {
     vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
+    document.documentElement.lang = 'en';
     touch = true;
     originalMatchMedia = window.matchMedia;
     removeListener = vi.fn();
@@ -69,7 +70,9 @@ describe('ProjectArtworkComponent', () => {
     vi.advanceTimersByTime(2000);
     fixture.detectChanges();
     expect(revealed()).toBe(false);
-    expect(root.querySelectorAll('img[alt="Inventory workspace illustration"]')).toHaveLength(1);
+    expect(
+      root.querySelectorAll('.case-interface img[alt="Inventory workspace illustration"]'),
+    ).toHaveLength(1);
     expect(root.querySelector('.case-interface__color')?.getAttribute('aria-hidden')).toBe('true');
     expect(root.querySelector('a')).toBeNull();
     expect(root.querySelector('[href], [target], [tabindex]')).toBeNull();
@@ -104,5 +107,69 @@ describe('ProjectArtworkComponent', () => {
     fixture.destroy();
     expect(vi.getTimerCount()).toBe(0);
     expect(removeListener).toHaveBeenCalledWith('change', change);
+  });
+  // jsdom has no native modal layer; keyboard trapping is verified in a browser.
+  function preview() {
+    const result = render();
+    const dialog = result.root.querySelector('dialog')!;
+    dialog.showModal = () => {
+      dialog.open = true;
+    };
+    dialog.close = () => {
+      dialog.open = false;
+      dialog.dispatchEvent(new Event('close'));
+    };
+    const trigger = result.root.querySelector<HTMLButtonElement>('.case-interface')!;
+    const close = result.root.querySelector<HTMLButtonElement>('.artwork-preview__close')!;
+    return { ...result, dialog, trigger, close };
+  }
+
+  it('opens inline without navigation and restores scroll styles and focus on close', () => {
+    const { dialog, trigger, close } = preview();
+    document.documentElement.style.overflow = 'auto';
+    trigger.focus();
+    trigger.click();
+    expect(dialog.open).toBe(true);
+    expect(document.documentElement.style.overflow).toBe('hidden');
+    expect(dialog.querySelector('img')?.getAttribute('src')).toBe(
+      'images/projects/inventory-management.webp',
+    );
+    close.click();
+    expect(dialog.open).toBe(false);
+    expect(document.documentElement.style.overflow).toBe('auto');
+    expect(document.activeElement).toBe(trigger);
+    document.documentElement.style.overflow = '';
+  });
+
+  it('opens from the enlarge action and closes on Escape cancellation', () => {
+    const { root, dialog } = preview();
+    root.querySelector<HTMLButtonElement>('.preview-link')!.click();
+    expect(dialog.open).toBe(true);
+    const cancel = new Event('cancel', { cancelable: true });
+    dialog.dispatchEvent(cancel);
+    expect(cancel.defaultPrevented).toBe(true);
+    expect(dialog.open).toBe(false);
+    expect(document.documentElement.style.overflow).toBe('');
+  });
+
+  it('releases the page when the case changes or the component is destroyed', () => {
+    const { fixture, dialog, trigger } = preview();
+    trigger.click();
+    fixture.componentRef.setInput('slug', 'amazon-ads');
+    fixture.detectChanges();
+    expect(dialog.open).toBe(false);
+    expect(document.documentElement.style.overflow).toBe('');
+    trigger.click();
+    fixture.destroy();
+    expect(document.documentElement.style.overflow).toBe('');
+  });
+  it('closes on the surrounding area while clicks on the image keep the preview open', () => {
+    const { dialog, trigger } = preview();
+    trigger.click();
+    dialog.querySelector('img')!.click();
+    expect(dialog.open).toBe(true);
+    dialog.click();
+    expect(dialog.open).toBe(false);
+    expect(document.documentElement.style.overflow).toBe('');
   });
 });

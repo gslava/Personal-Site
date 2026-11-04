@@ -1,0 +1,116 @@
+// These refinements follow the existing palette, typography and corner-radius scale.
+.page--home .timeline {
+  max-width: 960px;
+}
+.earlier-experience {
+  color: var(--muted);
+  max-width: 76ch;
+  font-size: 0.9rem;
+  margin: 1.5rem 0 0;
+}
+.work-portal__link {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  align-items: center;
+  border-block: 1px solid var(--line);
+  text-decoration: none;
+  color: var(--text);
+  overflow: hidden;
+  min-height: 260px;
+}
+.work-portal__copy {
+  padding-block: 2rem;
+}
+.work-portal h2 {
+  font-size: clamp(2rem, 3.8vw, 3.1rem);
+  margin: 0;
+}
+.work-portal p {
+  max-width: 48ch;
+  margin: 1rem 0 1.5rem;
+}
+.work-portal__action {
+  color: var(--accent);
+  display: inline-flex;
+  gap: 2rem;
+  align-items: center;
+  min-height: 44px;
+}
+.work-portal__action > span {
+  font-size: 1.8rem;
+}
+.work-portal app-project-motif {
+  height: 270px;
+}
+.work-portal__link:hover .work-portal__action {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+.about-identity__name {
+  display: none;
+}
+.contact-linkedin {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  min-height: 64px;
+  border-block: 1px solid var(--line);
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+.contact-linkedin:hover {
+  color: var(--text);
+}
+// Override legacy compact-card padding now that each card includes a graphic panel.
+.project-row {
+  padding: 0;
+}
+@media (max-width: 600px) {
+  .about-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .about-identity {
+    order: -1;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .about-identity .portrait {
+    width: 80px;
+  }
+  .about-identity__name {
+    display: block;
+    font-size: 1.2rem;
+    color: var(--text);
+  }
+  .about-layout > div {
+    min-width: 0;
+  }
+  .work-portal__link {
+    grid-template-columns: 1fr;
+    position: relative;
+  }
+  .work-portal__copy {
+    padding-block: 1.75rem;
+    padding-right: 0;
+  }
+  .work-portal app-project-motif {
+    display: block;
+    height: 150px;
+    order: -1;
+  }
+  .work-portal__action {
+    justify-content: space-between;
+    width: 100%;
+  }
+  .work-portal h2 {
+    font-size: 2rem;
+  }
+  .page--home .timeline article {
+    padding-bottom: 1.5rem;
+  }
+}

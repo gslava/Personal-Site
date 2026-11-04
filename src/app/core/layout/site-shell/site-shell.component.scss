@@ -186,13 +186,16 @@
     min-width: 44px;
   }
   .menu-button {
-    display: grid;
-    place-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.65rem;
     background: transparent;
     color: var(--text);
     border: 1px solid var(--line);
     border-radius: 6px;
-    width: 44px;
+    min-width: 44px;
+    padding-inline: 0.7rem;
     height: 44px;
   }
   .hamburger,
@@ -264,5 +267,14 @@
   .menu-button .hamburger::after {
     // Explicitly cancel transitions already running when the preference changes.
     transition: none;
+  }
+}
+
+.menu-button__label {
+  font-size: 0.8rem;
+}
+@media (max-width: 359px) {
+  .menu-button__label {
+    display: none;
   }
 }

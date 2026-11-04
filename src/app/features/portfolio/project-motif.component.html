@@ -1,0 +1,219 @@
+<div [class]="'motif motif--' + variant()">
+  <div class="motif__composition">
+    @switch (variant()) {
+      @case ('work-overview') {
+        <svg viewBox="0 0 360 220" focusable="false">
+          <g class="wire wire--accent"><path d="M94 110H112M248 110H266" /></g>
+          <g class="tile">
+            <rect x="16" y="56" width="78" height="108" rx="8" />
+            <rect x="266" y="56" width="78" height="108" rx="8" />
+          </g>
+          <rect class="tile tile--raised" x="112" y="28" width="136" height="164" rx="10" />
+          <path class="wire wire--accent" d="M129 45H231" />
+          <g class="wire wire--soft"><path d="M129 61H184M129 70H163M32 73H65M282 73H315" /></g>
+          <g class="wire"><path d="M140 100H180V146H220M140 146H180V100H220M180 100V89" /></g>
+          <g class="tile">
+            <rect x="128" y="89" width="24" height="22" rx="4" />
+            <rect x="208" y="89" width="24" height="22" rx="4" />
+            <rect x="128" y="135" width="24" height="22" rx="4" />
+            <rect x="208" y="135" width="24" height="22" rx="4" />
+          </g>
+          <rect class="solid" x="168" y="111" width="24" height="24" rx="5" />
+          <g class="wire wire--soft"><path d="M129 175H171M185 175H231" /></g>
+          <g class="wire"><path d="M39 95V125H70V145M39 110H70" /></g>
+          <g class="tile">
+            <rect x="31" y="88" width="16" height="16" rx="3" />
+            <rect x="62" y="137" width="16" height="16" rx="3" />
+          </g>
+          <path class="solid" d="M70 101L79 110L70 119L61 110Z" />
+          <path class="tile tile--tint" d="M282 88H329V118H310L300 128V118H282Z" />
+          <g class="wire wire--accent"><path d="M291 98H320M291 106H312" /></g>
+          <g class="wire wire--soft"><path d="M283 145H328" /></g>
+          <g class="pin">
+            <circle cx="292" cy="145" r="2" />
+            <circle cx="305" cy="145" r="2" />
+            <circle cx="318" cy="145" r="2" />
+          </g>
+        </svg>
+      }
+      @case ('inventory-management') {
+        <svg viewBox="0 0 360 220" focusable="false">
+          <rect class="system-boundary" x="12" y="12" width="336" height="196" rx="14" />
+          <g class="wire wire--soft">
+            <path d="M96 54H120V166H96M96 110H148M120 110H148" />
+            <path d="M264 54H240V166H264M212 110H264" />
+            <path d="M180 62V90M180 130V158" />
+          </g>
+          <g class="wire wire--accent"><path d="M120 110H148M212 110H240M180 62V90" /></g>
+          <g class="tile">
+            <rect x="32" y="36" width="64" height="36" rx="6" />
+            <rect x="32" y="92" width="64" height="36" rx="6" />
+            <rect x="32" y="148" width="64" height="36" rx="6" />
+            <rect x="264" y="36" width="64" height="36" rx="6" />
+            <rect x="264" y="92" width="64" height="36" rx="6" />
+            <rect x="264" y="148" width="64" height="36" rx="6" />
+            <rect x="148" y="26" width="64" height="36" rx="6" />
+            <rect x="148" y="158" width="64" height="36" rx="6" />
+          </g>
+          <g class="wire wire--soft">
+            <path d="M45 48H57V60H45ZM66 48H82M66 55H77" />
+            <path d="M45 103H82M45 111H73M45 119H78" />
+            <path d="M278 47H287V61H278ZM298 47H314V61H298Z" />
+            <path d="M278 103H284M291 103H314M278 113H284M291 113H306" />
+            <path d="M277 161H315M277 169H306M277 177H311" />
+            <path d="M161 38H173V50H161ZM182 38H198M182 46H192M162 170H198M162 178H189" />
+          </g>
+          <g class="wire wire--accent">
+            <circle cx="51" cy="166" r="5" />
+            <circle cx="77" cy="166" r="5" />
+            <path d="M56 166H72" />
+          </g>
+          <rect class="tile tile--tint" x="148" y="90" width="64" height="40" rx="8" />
+          <rect class="solid" x="173" y="103" width="14" height="14" rx="3" />
+          <g class="pin">
+            <circle cx="120" cy="110" r="2.5" />
+            <circle cx="240" cy="110" r="2.5" />
+          </g>
+        </svg>
+      }
+      @case ('company-knowledge-assistant') {
+        <svg viewBox="0 0 360 220" focusable="false">
+          <g class="wire wire--soft">
+            <path d="M48 108H74V68H104M70 178H104V105M293 54H320V153H290" />
+          </g>
+          <g class="tile">
+            <rect x="23" y="89" width="40" height="48" rx="4" />
+            <rect x="48" y="158" width="40" height="42" rx="4" />
+          </g>
+          <g class="wire wire--soft">
+            <path d="M33 101H52M33 109H52M33 117H45M58 170H78M58 178H72" />
+          </g>
+          <path
+            class="tile tile--raised"
+            d="M104 28H284Q296 28 296 40V101Q296 113 284 113H149L120 134V113H104Q92 113 92 101V40Q92 28 104 28Z"
+          />
+          <g class="wire"><path d="M116 53H245M116 65H269M116 77H231" /></g>
+          <path
+            class="tile tile--tint"
+            d="M165 138H282Q294 138 294 150V178Q294 190 282 190H265V205L245 190H165Q153 190 153 178V150Q153 138 165 138Z"
+          />
+          <g class="pin">
+            <circle cx="180" cy="164" r="4" />
+            <circle cx="199" cy="164" r="4" />
+            <circle cx="218" cy="164" r="4" />
+          </g>
+          <path class="solid" d="M286 16L291 30L305 35L291 40L286 54L281 40L267 35L281 30Z" />
+          <g class="wire wire--accent"><path d="M125 142V166H143" /></g>
+        </svg>
+      }
+      @case ('order-processing') {
+        <svg viewBox="0 0 360 220" focusable="false">
+          <defs>
+            <marker
+              id="orders-arrow"
+              viewBox="0 0 8 8"
+              refX="7"
+              refY="4"
+              markerWidth="5"
+              markerHeight="5"
+              orient="auto"
+            >
+              <path class="solid" d="M0 0L8 4L0 8Z" />
+            </marker>
+          </defs>
+          <g class="wire wire--arrows" marker-end="url(#orders-arrow)">
+            <path d="M48 44H70V100H88" />
+            <path d="M48 108H88" />
+            <path d="M48 174H70V116H88" />
+            <path d="M124 108H144" />
+            <path d="M188 108H210V47H232" />
+            <path d="M188 108H210V171H232" />
+            <path d="M270 47H291V100H310" />
+            <path d="M270 171H291V116H310" />
+          </g>
+          <path
+            class="wire wire--soft wire--dashed"
+            d="M252 151V125H166V139M166 139V187H105V130"
+            marker-end="url(#orders-arrow)"
+          />
+          <g class="tile">
+            <rect x="16" y="28" width="32" height="32" rx="5" />
+            <rect x="16" y="92" width="32" height="32" rx="5" />
+            <rect x="16" y="158" width="32" height="32" rx="5" />
+            <rect x="88" y="86" width="36" height="44" rx="5" />
+            <rect x="232" y="27" width="38" height="40" rx="5" />
+            <rect x="232" y="151" width="38" height="40" rx="5" />
+            <rect x="310" y="87" width="34" height="42" rx="5" />
+          </g>
+          <path class="solid" d="M166 86L188 108L166 130L144 108Z" />
+          <g class="wire wire--soft">
+            <path
+              d="M97 98H115M97 108H115M97 118H109M241 39H260M241 49H255M319 99H335M319 109H330"
+            />
+          </g>
+          <circle class="tile tile--tint" cx="251" cy="171" r="9" />
+          <g class="pin">
+            <circle cx="70" cy="108" r="3" />
+            <circle cx="291" cy="108" r="3" />
+          </g>
+        </svg>
+      }
+      @case ('amazon-ads') {
+        <svg viewBox="0 0 360 220" focusable="false">
+          <defs>
+            <marker
+              id="ads-arrow"
+              viewBox="0 0 8 8"
+              refX="7"
+              refY="4"
+              markerWidth="5"
+              markerHeight="5"
+              orient="auto"
+            >
+              <path class="solid" d="M0 0L8 4L0 8Z" />
+            </marker>
+          </defs>
+          <g class="wire" marker-end="url(#ads-arrow)">
+            <path d="M55 55H81V103H108" />
+            <path d="M55 153H81V117H108" />
+            <path d="M158 110H190" />
+            <path d="M230 110H254V48H282" />
+            <path d="M230 110H282" />
+            <path d="M230 110H254V172H282" />
+          </g>
+          <path
+            class="wire wire--soft wire--dashed"
+            d="M314 192V210H133V140"
+            marker-end="url(#ads-arrow)"
+          />
+          <g class="tile">
+            <rect x="17" y="33" width="38" height="44" rx="5" />
+            <rect x="17" y="131" width="38" height="44" rx="5" />
+            <rect x="282" y="28" width="56" height="40" rx="5" />
+            <rect x="282" y="90" width="56" height="40" rx="5" />
+            <rect x="282" y="152" width="56" height="40" rx="5" />
+          </g>
+          <path class="tile tile--raised" d="M133 79L158 94V126L133 141L108 126V94Z" />
+          <path class="solid" d="M210 90L230 110L210 130L190 110Z" />
+          <g class="wire wire--accent">
+            <path
+              d="M122 104L133 97L144 104V117L133 124L122 117ZM29 65V46M38 65V53M45 65V42M27 143H46M27 151H42M27 159H46"
+            />
+          </g>
+          <g class="wire wire--soft">
+            <path d="M294 40H325M294 50H315M294 102H325M294 112H315M294 164H325M294 174H315" />
+          </g>
+          <g class="pin">
+            <circle cx="81" cy="110" r="3" />
+            <circle cx="254" cy="110" r="3" />
+          </g>
+        </svg>
+      }
+      @default {
+        @for (part of parts; track part) {
+          <span class="motif__part" [style.--i]="part"></span>
+        }
+      }
+    }
+  </div>
+</div>
