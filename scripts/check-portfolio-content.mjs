@@ -110,10 +110,15 @@ for (const [locale, text] of Object.entries(data)) {
     assert(!('metric' in p) && !('metricLabel' in p), p.slug + ': old metric claim');
     assert(p.stack.length >= 3 && p.stack.length <= 5);
     assert(p.workflow.length >= 3 && p.workflow.length <= 4);
+    assert(p.workflowTitle.trim().length > 5, p.slug + ': missing workflow heading');
     assert(p.workflow.every((step) => step.trim().length > 5));
     assert(p.contribution.length > 20);
     assert(p.homeSummary.length > 15 && p.homeSummary.length < p.summary.length);
     const rendered = fallbackHtml(locale, 'work/' + p.slug, '/');
+    assert(
+      rendered.includes('<h2>' + p.workflowTitle + '</h2>'),
+      p.slug + ': static workflow heading',
+    );
     assert(rendered.includes('<figcaption>' + text.illustrationNote + '</figcaption>'));
     assert(p.imageAlt.trim().length > 20, p.slug + ': missing interface description');
     assert.equal(new Set(p.relatedSlugs).size, p.relatedSlugs.length);

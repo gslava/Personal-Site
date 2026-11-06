@@ -60,17 +60,6 @@
     display: none;
   }
 }
-@media (prefers-reduced-motion: no-preference) {
-  .motif__composition {
-    transition: translate 300ms ease;
-  }
-  :host-context(.project-row:hover) .motif__composition,
-  :host-context(.project-row:focus-within) .motif__composition,
-  :host-context(.work-portal__link:hover) .motif__composition {
-    translate: 0 -5px;
-  }
-}
-
 @media (max-width: 600px) {
   :host-context(.work-portal) .motif {
     min-height: 150px;
@@ -153,4 +142,52 @@ svg {
 .motif--inventory-management .motif__composition {
   width: 380px;
   height: 232px;
+}
+
+.motif__particles,
+.motif__flow-guides {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.motif__flow-guides {
+  visibility: hidden;
+}
+.motif__particles {
+  opacity: 0;
+}
+:host([data-particles-active]) {
+  .motif__particles {
+    opacity: 1;
+  }
+  .motif__constellation {
+    visibility: hidden;
+  }
+}
+.constellation-links {
+  stroke: var(--accent);
+  stroke-width: 0.65;
+  opacity: 0.22;
+}
+.constellation-star {
+  fill: var(--accent);
+  opacity: 0.8;
+}
+.constellation-orbits {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 0.8;
+  opacity: 0.45;
+}
+@media (prefers-reduced-motion: reduce), (hover: none), (pointer: coarse) {
+  :host([data-particles-active]) {
+    .motif__particles {
+      display: none;
+    }
+    .motif__constellation {
+      visibility: visible;
+    }
+  }
 }

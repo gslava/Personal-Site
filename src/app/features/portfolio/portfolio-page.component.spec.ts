@@ -214,7 +214,7 @@ describe('Employer-focused portfolio', () => {
     expect(root.querySelector('canvas')).toBeNull();
   });
 
-  it('shows five cases on Work and promotes Product Content Creation from additional work', async () => {
+  it('shows five cases on Work and keeps marketplace content in the main collection', async () => {
     const root = await render('work');
     expect(root.querySelectorAll('.project-row')).toHaveLength(5);
     expect(root.querySelector('a[href="/work/amazon-ads"]')).not.toBeNull();
@@ -222,7 +222,7 @@ describe('Employer-focused portfolio', () => {
     expect(root.querySelector('a[href="/work/product-content-creation"]')).not.toBeNull();
     expect(root.querySelectorAll('.more-projects article')).toHaveLength(5);
     expect(root.querySelector('.more-projects')?.textContent).not.toContain(
-      'Product Content Creation',
+      'Marketplace Content Creation',
     );
     expect(root.querySelectorAll('.project-role')).toHaveLength(5);
     expect(root.querySelectorAll('.work-group')).toHaveLength(2);

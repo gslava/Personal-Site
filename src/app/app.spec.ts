@@ -53,7 +53,7 @@ describe('App', () => {
     expect(fixture.nativeElement.querySelector('h1')?.textContent).toBe(
       'Company Knowledge Assistant',
     );
-    expect(fixture.nativeElement.querySelector('.case-summary')?.textContent).toContain('MCP');
+    expect(fixture.nativeElement.querySelector('.case-body')?.textContent).toContain('MCP');
     expect(fixture.nativeElement.querySelector('.next-project')?.getAttribute('href')).toBe(
       '/work/amazon-ads',
     );

@@ -10,7 +10,7 @@ describe('HomePageComponent', () => {
       providers: [provideRouter([])],
     }).compileComponents();
   });
-  it('introduces the engineer, links to Work and keeps the particle canvas off Home', () => {
+  it('introduces the engineer and confines decorative particles to the Work link', () => {
     const fixture = TestBed.createComponent(HomePageComponent);
     fixture.detectChanges();
     const element = fixture.nativeElement as HTMLElement;
@@ -20,7 +20,10 @@ describe('HomePageComponent', () => {
     expect(element.querySelector('.metrics')).toBeNull();
     expect(element.querySelectorAll('.project-row')).toHaveLength(0);
     expect(element.querySelector('.work-portal a[href="/work"]')).toBeTruthy();
-    expect(element.querySelector('canvas')).toBeNull();
+    expect(element.querySelector('.hero canvas')).toBeNull();
+    expect(element.querySelector('app-particle-sphere')).toBeNull();
+    expect(element.querySelectorAll('canvas')).toHaveLength(1);
+    expect(element.querySelector('.work-portal app-project-motif canvas')).not.toBeNull();
     expect(element.textContent).not.toMatch(/captcha/i);
   });
 });

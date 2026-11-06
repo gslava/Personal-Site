@@ -204,7 +204,7 @@ export function fallbackHtml(locale, path, base) {
       esc(t.illustrationNote) +
       '</figcaption></figure>' +
       section(
-        t.workflowTitle,
+        project.workflowTitle,
         '<ol>' +
           project.workflow.map((step) => '<li>' + esc(step) + '</li>').join('') +
           '</ol>' +

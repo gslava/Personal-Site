@@ -70,8 +70,8 @@
       "Result"
     ],
     "caseLabels": [
-      "Implementation",
-      "Key decisions",
+      "Problem",
+      "Solution",
       "What changed"
     ],
     "capabilityItems": [
@@ -218,28 +218,28 @@
     "additional": [
       [
         "Internal Services Portal",
-        "Employee access to internal services, with permissions and settings in one dashboard.",
-        "Internal web applications · Access control · Service settings"
+        "Shows employees the internal services available to them and their settings in one dashboard.",
+        "Internal web applications · Service access · Settings"
       ],
       [
-        "Product Analytics & Planning",
-        "Product reporting combines sales, stock, profitability and competitor data to support purchase planning.",
+        "Product Analytics & Purchase Planning",
+        "Combines sales, stock, profitability and competitor data in a report for purchase planning.",
         "Data integration · Business reporting · Helium10"
       ],
       [
-        "Customer Review Analysis",
-        "AI analysis of customer reviews, available alongside product and operational data.",
-        "Data collection · AI analysis · Internal tools"
+        "Customer Review Analysis & Follow-up",
+        "Collects reviews for removal requests, summarizes issues and routes them to the responsible department. Suggests solutions based on how issues were resolved before.",
+        "Review collection · AI analysis · Issue handling"
       ],
       [
         "Customer Support Bot",
-        "Policy-based responses with escalation to a specialist for exceptions.",
-        "Java, Spring Boot, PostgreSQL"
+        "Answers questions using company policies and routes exceptions to a specialist.",
+        "Java · Spring Boot · PostgreSQL"
       ],
       [
         "Browser Automation",
-        "Web scraping, reports, product updates and shipment information where API coverage was limited.",
-        "Java, Selenium / Selenide, Web scraping"
+        "Web scraping and browser workflow automation: retrieving reports and updating product and shipment data where API coverage is limited.",
+        "Java · Selenium / Selenide · Web scraping"
       ]
     ],
     "projects": [
@@ -247,11 +247,11 @@
         "slug": "inventory-management",
         "title": "Inventory Management System",
         "category": "Marketplace operations",
-        "summary": "A shared operations platform for marketplace orders, inventory, automated fulfillment and company knowledge.",
+        "summary": "An operations platform for an e-commerce team, bringing orders from more than ten marketplaces, warehouse stock and daily workflows into one system.",
         "snapshot": [
-          "Marketplace orders, warehouse data and operational tools needed a shared workspace.",
-          "I built most of the backend and integrations, including reporting and order automation.",
-          "The team could manage orders and inventory, monitor automated fulfillment and open the knowledge assistant from IMS."
+          "Bring marketplace, warehouse and fulfillment data together.",
+          "Built most of the backend: integrations, order processing and reporting.",
+          "The team manages orders and stock using shared operational records."
         ],
         "stack": [
           "Java",
@@ -261,34 +261,35 @@
           "RabbitMQ"
         ],
         "sections": [
-          "I implemented APIs for orders, warehouse shipments, reviews and incoming deliveries. Connections covered Amazon, Walmart, eBay, Sears, BestBuy, company warehouses and fulfillment services.",
-          "Orders from more than ten marketplaces were normalized into one format. Dashboards and product analytics used shared records for inventory, shipments, deliveries and reports.",
-          "Order automation and the knowledge assistant were accessible from the same workspace, so staff could monitor processing and consult company information without switching systems."
+          "Orders arrived from different marketplaces, while stock, shipment and delivery records lived in separate systems. Daily operations needed a consistent data format and a shared view across these sources.",
+          "I integrated marketplaces, company warehouses and fulfillment services, normalizing orders from more than ten sources. I implemented APIs for orders, shipments, incoming deliveries and reviews. The same records support dashboards, reporting and product analytics. Order automation and the knowledge assistant are available as connected IMS tools.",
+          "Staff gained a shared view of orders, stock and incoming deliveries. Reporting and analytics use the same operational records as daily work. Monitoring fulfillment and accessing company knowledge require fewer switches between separate tools."
         ],
-        "contribution": "Most backend services, marketplace integrations and reporting tools.",
+        "contribution": "Most of the backend: marketplace integrations, order processing and reporting.",
         "workflow": [
-          "Marketplace & warehouse data",
-          "Unified operational records",
-          "Automated fulfillment & review",
-          "Reporting & company knowledge"
+          "Marketplace and warehouse data",
+          "Normalize into a shared format",
+          "Process orders and inventory",
+          "Reporting and analytics"
         ],
         "featured": true,
-        "imageAlt": "Illustrative IMS dashboard showing ORD-1044, East and DG-07, with consistent order context and visible links to Order Automation and Knowledge Assistant.",
+        "imageAlt": "Illustrative IMS dashboard showing orders, warehouse data and links to order automation and the knowledge assistant.",
         "relatedSlugs": [
           "order-processing",
           "company-knowledge-assistant"
         ],
-        "homeSummary": "One workspace for marketplace orders, inventory and operations."
+        "homeSummary": "Orders and inventory from multiple sources in one system.",
+        "workflowTitle": "How data flows through IMS"
       },
       {
         "slug": "order-processing",
         "title": "Automated Order Processing",
         "category": "IMS · Workflow automation",
-        "summary": "The IMS fulfillment module automatically prepares orders, applies rules, selects carriers and prints documents, with exceptions routed for human review.",
+        "summary": "An IMS module that prepares orders for dispatch automatically, from shipping-rule checks to document printing, with exceptions routed to staff.",
         "snapshot": [
-          "Routine fulfillment needed to run automatically while making shipping restrictions and conflicting rules visible.",
-          "I built most of the backend and the automated workflow inside IMS, from order receipt through label and invoice printing.",
-          "Staff could configure routine processing and review exceptions without manually repeating the fulfillment sequence."
+          "Automate repetitive fulfillment steps while respecting shipping restrictions.",
+          "Built most of the backend: processing rules, shipping selection and document printing.",
+          "Routine orders run automatically; exceptions are routed for review."
         ],
         "stack": [
           "Java",
@@ -298,34 +299,35 @@
           "RabbitMQ"
         ],
         "sections": [
-          "I built the workflow from order receipt through shipping-label and invoice printing, including weight, dimensions and customs data.",
-          "Configurable rules covered dangerous goods, carriers and conflicts. Packing instructions, international shipments, PDF formats and printer types were handled within the workflow.",
-          "Staff reviewed exceptions through processing records. Recovery and duplicate protection allowed retries without repeating completed work or shipping-label purchases."
+          "Each order required data preparation, carrier selection and document printing. Automation had to account for dangerous goods, customs requirements and conflicting rules. After a failure, processing needed to resume without repeating completed actions.",
+          "I built the workflow from order receipt to shipping-label and invoice printing. Configurable rules determine shipping using weight, dimensions, restrictions and packing instructions. I implemented exception records, recovery and duplicate protection, with support for different PDF formats and printers.",
+          "Staff configure rules and handle exceptions instead of manually repeating the full sequence for every order. Processing can resume after a failure without repeating completed steps or buying the same shipping label again."
         ],
-        "contribution": "Most backend services, shipping selection, document generation and printing automation.",
+        "contribution": "Most of the backend: shipping rules, recovery after failures and printing automation.",
         "workflow": [
-          "Receive & prepare orders",
-          "Check restrictions & apply rules",
-          "Select carrier & create documents",
-          "Print or route for human review"
+          "Receive and prepare order data",
+          "Check restrictions and rules",
+          "Select shipping and create documents",
+          "Print or route for review"
         ],
         "featured": true,
-        "imageAlt": "Illustrative Order Processing in the same IMS shell, with ORD-1044 paused by DG-07, processing settings, review steps and a contextual link to Knowledge Assistant.",
+        "imageAlt": "Illustrative IMS order-processing screen showing a dangerous-goods restriction, rule settings and review steps.",
         "relatedSlugs": [
           "inventory-management",
           "company-knowledge-assistant"
         ],
-        "homeSummary": "Automated fulfillment with shipping rules and exception review."
+        "homeSummary": "Automated fulfillment, exception review and recovery after failures.",
+        "workflowTitle": "How an order is processed"
       },
       {
         "slug": "company-knowledge-assistant",
         "title": "Company Knowledge Assistant",
         "category": "IMS · Applied AI",
-        "summary": "An employee assistant accessed from IMS, connecting company knowledge, files and databases through RAG, MCP and task-specific Skills.",
+        "summary": "A chat assistant that helps employees find information about orders, products and company operations in internal records and documents.",
         "snapshot": [
-          "Employees needed answers from digitized company information spread across business records, files and databases.",
-          "I built a chat assistant combining a vector knowledge base with file and database access, using RAG, MCP and Skills.",
-          "Employees could ask about customer orders, product details, supplier defects, sales seasonality and advertising in one place."
+          "Make knowledge spread across files and databases accessible to employees.",
+          "Built the IMS chat and connected company sources and tools for working with them.",
+          "Employees can ask work-related questions in one chat within their existing workspace."
         ],
         "stack": [
           "RAG",
@@ -334,34 +336,34 @@
           "AI Skills"
         ],
         "sections": [
-          "I connected business records covering orders, products, supplier defects, sales seasonality and advertising to the employee chat in IMS.",
-          "Vector retrieval supplied knowledge context; MCP and task-specific Skills provided access to files, structured data and business workflows.",
-          "Employees could ask business questions from their operational workspace instead of first finding the relevant tool, file or report."
+          "Answering a work-related question could require information from several sources. Employees first had to locate the right file, report or system record, then bring together the relevant order, product or supplier data.",
+          "I connected the chat to a vector knowledge base: RAG retrieves context for answers, MCP connects files and structured data, and task-specific Skills support business tasks. Connected sources cover orders, products, supplier defects, sales seasonality and advertising.",
+          "Employees access company information by asking questions in the chat available from IMS. Finding the relevant data requires fewer switches between files, reports and separate tools."
         ],
-        "contribution": "Company knowledge integration, RAG, file and database access, MCP and task-specific Skills.",
+        "contribution": "Chat assistant, company source integrations, RAG, MCP and task-specific Skills.",
         "workflow": [
           "Employee question",
-          "Retrieve company context",
-          "Access files & business data",
-          "Answer in chat"
+          "Retrieve knowledge and access business data",
+          "Answer in IMS chat"
         ],
         "featured": true,
-        "imageAlt": "Illustrative Knowledge Assistant in the same IMS shell, opened from Order Automation with ORD-1044 and DG-07 context, cited sources and a return to the same review task.",
+        "imageAlt": "Illustrative IMS assistant chat showing an order question, an answer with sources and a return to the order review.",
         "relatedSlugs": [
           "inventory-management",
           "order-processing"
         ],
-        "homeSummary": "Company answers from business records, files and databases."
+        "homeSummary": "Company knowledge and business data through questions in chat.",
+        "workflowTitle": "From question to answer"
       },
       {
         "slug": "amazon-ads",
         "title": "Amazon Ads Optimization",
-        "category": "AI-assisted decisions",
-        "summary": "AI-assisted campaign suggestions, reviewed by a person before changes are applied.",
+        "category": "Advertising automation",
+        "summary": "A service for advertising teams that automates Amazon Ads analysis and prepares campaign changes while keeping users in control of what is applied.",
         "snapshot": [
-          "Campaigns, keywords and bids needed to be assessed together.",
-          "I built most of the application and its AI-assisted suggestion workflow.",
-          "Users could approve, adjust or reject suggestions before applying them."
+          "Automate advertising data collection, analysis and change preparation.",
+          "Built most of the application: integrations and the AI suggestion review workflow.",
+          "Most manual work was automated. The advertising budget and ACoS decreased."
         ],
         "stack": [
           "Java",
@@ -370,31 +372,32 @@
           "Vaadin"
         ],
         "sections": [
-          "I integrated the Amazon Ads API, Helium10 and web research by an AI agent into the suggestion review workflow.",
-          "Suggestions covered keywords, negative keywords, bids and campaigns for products without advertising. Each suggestion could be edited or rejected.",
-          "Campaign data and proposed changes were reviewed together. Human approval remained the gate before changes were applied."
+          "Campaign management required combining advertising metrics with product research, assessing keywords and bids, and preparing changes. These repetitive tasks needed automation while preserving user control over proposed updates.",
+          "I integrated the Amazon Ads API, Helium10 and web research by an AI agent. I implemented suggestions for keywords, negative keywords, bids and campaigns for products without advertising. Users review campaign data alongside each suggestion, can edit or reject it, and must approve changes before they are applied.",
+          "The service automated most manual data collection, analysis and preparation of advertising changes. The advertising budget decreased, and lower ACoS meant advertising costs accounted for a smaller share of ad-attributed sales. Users focused on reviewing and approving suggestions."
         ],
-        "contribution": "Most of the application, advertising data integrations and AI review workflow.",
+        "contribution": "Most of the application: advertising integrations, AI suggestions and approval workflow.",
         "workflow": [
-          "Collect campaign data",
-          "Generate suggestions",
-          "Review & adjust",
+          "Collect data and research",
+          "Prepare AI suggestions",
+          "Review, edit and approve",
           "Apply approved changes"
         ],
         "featured": false,
-        "imageAlt": "Illustrative Amazon Ads console connecting campaign, ad group, keyword, metrics and an automation rule to a pending bid change and approval.",
+        "imageAlt": "Illustrative Amazon Ads console showing campaign and keyword data alongside a proposed bid change and its approval action.",
         "relatedSlugs": [],
-        "homeSummary": "AI-assisted advertising with human approval."
+        "homeSummary": "Automated advertising analysis with approval before changes.",
+        "workflowTitle": "From advertising data to changes"
       },
       {
         "slug": "product-content-creation",
-        "title": "Product Content Creation",
+        "title": "Marketplace Content Creation",
         "category": "AI · Marketplace content",
-        "summary": "A standalone service for AI-assisted product content on Amazon, Walmart, BestBuy, Sears and eBay, with a unified catalog and product statistics.",
+        "summary": "A service for staff preparing product content for five marketplaces, with AI generation, editing and export alongside a shared catalog and product statistics.",
         "snapshot": [
-          "Product content and product visibility had to be managed across five marketplaces with different requirements.",
-          "I built a dedicated service for marketplace-specific AI content, editing, export and a shared product catalog.",
-          "Staff could create product content and inspect products and statistics across marketplaces in one service."
+          "Organize content preparation around the requirements of five marketplaces.",
+          "Built a dedicated service for content generation, editing, export and a shared catalog.",
+          "Staff prepare and review content alongside product data and performance indicators."
         ],
         "stack": [
           "Java",
@@ -403,21 +406,22 @@
           "AI"
         ],
         "sections": [
-          "I built a separate service with marketplace-specific AI content, editing and export for Amazon, Walmart, BestBuy, Sears and eBay.",
-          "A shared catalog connected product visibility across all five marketplaces. Product statistics sat alongside the content tools.",
-          "Staff could inspect cross-marketplace products and their indicators while preparing content in the same service."
+          "Amazon, Walmart, BestBuy, Sears and eBay have different requirements for product content. Staff also need product data and indicators from multiple platforms while preparing it. These tasks needed a shared workflow.",
+          "I built a standalone service that uses product data and the selected marketplace’s requirements to generate AI-assisted content. Staff can edit and export the result. A unified catalog brings together products from five platforms, with statistics available alongside the content tools.",
+          "Staff prepare content for different marketplaces through one workflow, from product data to an edited result and export. The catalog and product indicators are available in the same service, so checking a product does not require leaving the content tool."
         ],
-        "contribution": "Backend services, AI content workflows and marketplace-specific catalog tools.",
+        "contribution": "Backend, AI content generation and a product catalog spanning five marketplaces.",
         "workflow": [
-          "Product facts & marketplace",
-          "Generate AI content",
-          "Edit & export",
-          "Unified catalog & statistics"
+          "Product data from the shared catalog",
+          "Select marketplace and generate content",
+          "Review and edit",
+          "Export finished content"
         ],
         "featured": false,
-        "imageAlt": "Illustrative standalone content catalog with a selected product, five marketplace content states, its AI draft, review controls and statistics for the displayed products.",
+        "imageAlt": "Illustrative content service showing a shared catalog, a selected product, an AI draft, content states on five marketplaces and product statistics.",
         "relatedSlugs": [],
-        "homeSummary": "Product content and a shared catalog across five marketplaces."
+        "homeSummary": "Product content and a shared catalog for five marketplaces.",
+        "workflowTitle": "How product content is prepared"
       }
     ],
     "heroFocus": "Spring Boot · AI automation & RAG",
@@ -429,9 +433,8 @@
       "German B1",
       "Ukrainian native"
     ],
-    "workflowTitle": "How it works",
     "workflowNote": "Simplified workflow. Company data and internal screens are not shown.",
-    "stackLabel": "Stack",
+    "stackLabel": "Technologies and approaches",
     "notFoundTitle": "Page not found",
     "notFoundIntro": "This page may have moved. You can find my work and experience from the homepage.",
     "visualLab": {
@@ -550,7 +553,7 @@
     ],
     "workGroupIntros": [
       "One operations platform, with focused case studies of its fulfillment and knowledge tools.",
-      "Dedicated tools for advertising decisions and marketplace content."
+      "Dedicated services for advertising automation and product content preparation."
     ],
     "closeIllustration": "Close illustration"
   },
@@ -625,8 +628,8 @@
       "Ergebnis"
     ],
     "caseLabels": [
-      "Umsetzung",
-      "Wichtige Entscheidungen",
+      "Problem",
+      "Lösung",
       "Ergebnis im Arbeitsalltag"
     ],
     "capabilityItems": [
@@ -773,28 +776,28 @@
     "additional": [
       [
         "Portal für interne Dienste",
-        "Zugang zu internen Services mit Berechtigungen und Einstellungen in einem Mitarbeiter-Dashboard.",
-        "Interne Webanwendungen · Zugriffssteuerung · Diensteinstellungen"
+        "Zeigt Mitarbeitenden die für sie zugänglichen internen Dienste und deren Einstellungen in einem Dashboard.",
+        "Interne Webanwendungen · Dienstzugang · Einstellungen"
       ],
       [
-        "Produktanalyse & Einkaufsplanung",
-        "Produktberichte verbinden Absatz, Bestände, Rentabilität und Wettbewerbsdaten für die Einkaufsplanung.",
+        "Produktanalyse und Einkaufsplanung",
+        "Verbindet Absatz, Bestände, Rentabilität und Wettbewerbsdaten in einem Bericht für die Einkaufsplanung.",
         "Datenintegration · Geschäftsberichte · Helium10"
       ],
       [
-        "Analyse von Kundenbewertungen",
-        "KI-Analyse von Kundenbewertungen neben Produkt- und Betriebsdaten.",
-        "Datenerfassung · KI-Analyse · Interne Werkzeuge"
+        "Analyse und Bearbeitung von Kundenbewertungen",
+        "Sammelt Bewertungen für Löschungsanträge, fasst Probleme zusammen und leitet sie an die zuständige Abteilung weiter. Schlägt Maßnahmen auf Grundlage früherer Problemlösungen vor.",
+        "Bewertungserfassung · KI-Analyse · Problembearbeitung"
       ],
       [
         "Kundensupport-Bot",
-        "Richtlinienbasierte Antworten mit Weiterleitung von Ausnahmen an Fachkräfte.",
-        "Java, Spring Boot, PostgreSQL"
+        "Beantwortet Fragen anhand der Unternehmensrichtlinien und leitet Ausnahmen an Fachkräfte weiter.",
+        "Java · Spring Boot · PostgreSQL"
       ],
       [
         "Browser-Automatisierung",
-        "Web Scraping, Berichte, Produktdaten und Versandinformationen bei begrenzter API-Abdeckung.",
-        "Java, Selenium / Selenide, Web scraping"
+        "Web Scraping und automatisierte Browserabläufe: Berichte abrufen sowie Produkt- und Versanddaten bei begrenzter API-Abdeckung aktualisieren.",
+        "Java · Selenium / Selenide · Web scraping"
       ]
     ],
     "projects": [
@@ -802,11 +805,11 @@
         "slug": "inventory-management",
         "title": "Inventory Management System",
         "category": "Marktplatzprozesse",
-        "summary": "Eine gemeinsame Betriebsplattform für Marktplatzaufträge, Bestände, automatisierte Abwicklung und Unternehmenswissen.",
+        "summary": "Eine Plattform für den E-Commerce-Alltag: Bestellungen aus mehr als zehn Marktplätzen, Lagerbestände und operative Abläufe in einem System.",
         "snapshot": [
-          "Marktplatzaufträge, Lagerdaten und operative Werkzeuge brauchten einen gemeinsamen Arbeitsbereich.",
-          "Ich entwickelte den Großteil des Backends und der Integrationen, einschließlich Berichten und Auftragsautomatisierung.",
-          "Das Team konnte Aufträge und Bestände verwalten, die automatische Abwicklung überwachen und den Wissensassistenten aus IMS öffnen."
+          "Daten aus Marktplätzen, Lagern und Fulfillment-Diensten zusammenführen.",
+          "Den Großteil des Backends entwickelt: Integrationen, Auftragsverarbeitung und Berichte.",
+          "Das Team verwaltet Bestellungen und Bestände auf einer gemeinsamen Datengrundlage."
         ],
         "stack": [
           "Java",
@@ -816,34 +819,35 @@
           "RabbitMQ"
         ],
         "sections": [
-          "Ich implementierte APIs für Bestellungen, Lagerlieferungen, Bewertungen und Wareneingänge. Angebunden waren Amazon, Walmart, eBay, Sears, BestBuy, eigene Lager und Fulfillment-Dienste.",
-          "Aufträge aus mehr als zehn Marktplätzen wurden in ein gemeinsames Format überführt. Dashboards und Produktanalysen nutzten dieselben Datensätze für Bestände, Sendungen und Berichte.",
-          "Auftragsautomatisierung und Wissensassistent waren im selben Arbeitsbereich zugänglich. Mitarbeitende konnten Abläufe überwachen und Unternehmensinformationen abrufen, ohne das System zu wechseln."
+          "Bestellungen kamen aus verschiedenen Marktplätzen; Bestands-, Versand- und Lieferdaten lagen in getrennten Systemen. Für den Arbeitsalltag waren ein einheitliches Datenformat und eine gemeinsame Übersicht über diese Quellen erforderlich.",
+          "Ich integrierte Marktplätze, Unternehmenslager und Fulfillment-Dienste und vereinheitlichte Bestellungen aus mehr als zehn Quellen. Dazu entwickelte ich APIs für Bestellungen, Sendungen, Wareneingänge und Bewertungen. Dieselben Daten stehen für Dashboards, Berichte und Produktanalysen bereit. Auftragsautomatisierung und Wissensassistent sind als verbundene IMS-Werkzeuge zugänglich.",
+          "Mitarbeitende erhielten eine gemeinsame Übersicht über Bestellungen, Bestände und Wareneingänge. Berichte und Analysen verwenden dieselben operativen Daten wie die tägliche Arbeit. Zur Überwachung der Auftragsabwicklung und zum Abruf von Unternehmenswissen sind weniger Wechsel zwischen einzelnen Werkzeugen nötig."
         ],
-        "contribution": "Großteil der Backend-Dienste, Marktplatzintegrationen und Berichtswerkzeuge.",
+        "contribution": "Großteil des Backends: Marktplatzintegrationen, Auftragsverarbeitung und Berichte.",
         "workflow": [
           "Marktplatz- und Lagerdaten",
-          "Einheitliche operative Datensätze",
-          "Automatische Abwicklung & Prüfung",
-          "Berichte & Unternehmenswissen"
+          "In einheitliches Format überführen",
+          "Bestellungen und Bestände verarbeiten",
+          "Berichte und Analysen"
         ],
         "featured": true,
-        "imageAlt": "Illustrative IMS-Übersicht mit ORD-1044, East und DG-07, passenden Kontextdaten und sichtbaren Links zu Order Automation und Knowledge Assistant.",
+        "imageAlt": "Illustratives IMS-Dashboard mit Bestellungen, Lagerdaten und Zugängen zur Auftragsautomatisierung und zum Wissensassistenten.",
         "relatedSlugs": [
           "order-processing",
           "company-knowledge-assistant"
         ],
-        "homeSummary": "Ein Arbeitsbereich für Marktplatzaufträge, Bestände und Abläufe."
+        "homeSummary": "Bestellungen und Bestände aus mehreren Quellen in einem System.",
+        "workflowTitle": "Der Datenfluss in IMS"
       },
       {
         "slug": "order-processing",
         "title": "Automatisierte Auftragsabwicklung",
         "category": "IMS · Prozessautomatisierung",
-        "summary": "Das IMS-Abwicklungsmodul bereitet Aufträge automatisch vor, wendet Regeln an, wählt Versanddienstleister und druckt Dokumente. Ausnahmen werden zur menschlichen Prüfung weitergeleitet.",
+        "summary": "Ein IMS-Modul, das Bestellungen automatisch für den Versand vorbereitet: von der Prüfung der Versandregeln bis zum Dokumentendruck, mit Weiterleitung von Ausnahmen an Mitarbeitende.",
         "snapshot": [
-          "Routineaufträge sollten automatisch verarbeitet werden, während Versandbeschränkungen und Regelkonflikte sichtbar bleiben.",
-          "Ich entwickelte den Großteil des Backends und den automatischen Ablauf in IMS, vom Auftragseingang bis zum Etiketten- und Rechnungsdruck.",
-          "Mitarbeitende konnten Routineabläufe konfigurieren und Ausnahmen prüfen, ohne die gesamte Abwicklung manuell zu wiederholen."
+          "Wiederkehrende Abwicklungsschritte unter Beachtung der Versandbeschränkungen automatisieren.",
+          "Den Großteil des Backends entwickelt: Verarbeitungsregeln, Versandauswahl und Dokumentendruck.",
+          "Reguläre Bestellungen laufen automatisch durch; Ausnahmen werden zur Prüfung weitergeleitet."
         ],
         "stack": [
           "Java",
@@ -853,34 +857,35 @@
           "RabbitMQ"
         ],
         "sections": [
-          "Ich entwickelte den Ablauf vom Auftragseingang bis zum Druck von Versandetiketten und Rechnungen, einschließlich Gewicht, Abmessungen und Zolldaten.",
-          "Konfigurierbare Regeln berücksichtigten Gefahrgut, Versanddienste und Konflikte. Verpackungshinweise, internationale Sendungen, PDF-Formate und Druckertypen gehörten zum Ablauf.",
-          "Mitarbeitende prüften Ausnahmen anhand der Verarbeitungsprotokolle. Wiederherstellung und Duplikatschutz ermöglichten Wiederholungen ohne erneute Ausführung abgeschlossener Schritte oder Etikettenkäufe."
+          "Jede Bestellung erforderte Datenvorbereitung, die Auswahl eines Versanddienstleisters und Dokumentendruck. Die Automatisierung musste Gefahrgut, Zollvorgaben und Regelkonflikte berücksichtigen. Nach einem Fehler sollte der Prozess fortgesetzt werden, ohne abgeschlossene Aktionen zu wiederholen.",
+          "Ich entwickelte den Ablauf vom Auftragseingang bis zum Druck von Versandetiketten und Rechnungen. Konfigurierbare Regeln bestimmen den Versand anhand von Gewicht, Maßen, Beschränkungen und Verpackungsvorgaben. Ich implementierte Ausnahmeprotokolle, Wiederaufnahme nach Fehlern und Schutz vor doppelter Ausführung sowie die Unterstützung verschiedener PDF-Formate und Drucker.",
+          "Mitarbeitende konfigurieren Regeln und bearbeiten Ausnahmen, statt die gesamte Abfolge für jede Bestellung manuell auszuführen. Nach einem Fehler lässt sich die Verarbeitung fortsetzen, ohne abgeschlossene Schritte zu wiederholen oder dasselbe Versandetikett erneut zu kaufen."
         ],
-        "contribution": "Großteil der Backend-Dienste, Versandauswahl sowie Automatisierung von Dokumentenerstellung und Druck.",
+        "contribution": "Großteil des Backends: Versandregeln, Wiederaufnahme nach Fehlern und Druckautomatisierung.",
         "workflow": [
-          "Aufträge empfangen & vorbereiten",
-          "Beschränkungen & Regeln prüfen",
-          "Versand wählen & Dokumente erstellen",
+          "Bestelldaten empfangen und vorbereiten",
+          "Beschränkungen und Regeln prüfen",
+          "Versand wählen und Dokumente erstellen",
           "Drucken oder zur Prüfung weiterleiten"
         ],
         "featured": true,
-        "imageAlt": "Illustratives Auftragsmodul in derselben IMS-Oberfläche mit durch DG-07 angehaltenem Auftrag ORD-1044, Einstellungen, Prüfschritten und kontextbezogenem Link zum Wissensassistenten.",
+        "imageAlt": "Illustrative IMS-Auftragsansicht mit einer Gefahrgutbeschränkung, Regeleinstellungen und Prüfschritten.",
         "relatedSlugs": [
           "inventory-management",
           "company-knowledge-assistant"
         ],
-        "homeSummary": "Automatisierter Versand mit Regeln und Prüfung von Ausnahmen."
+        "homeSummary": "Automatische Abwicklung, Ausnahmeprüfung und Wiederaufnahme nach Fehlern.",
+        "workflowTitle": "So wird eine Bestellung verarbeitet"
       },
       {
         "slug": "company-knowledge-assistant",
         "title": "KI-Assistent für Unternehmenswissen",
         "category": "IMS · Angewandte KI",
-        "summary": "Ein aus IMS erreichbarer Mitarbeiterassistent, der Unternehmenswissen, Dateien und Datenbanken über RAG, MCP und aufgabenspezifische Skills verbindet.",
+        "summary": "Ein Chat-Assistent, mit dem Mitarbeitende Informationen zu Bestellungen, Produkten und Unternehmensabläufen in internen Daten und Dokumenten finden.",
         "snapshot": [
-          "Mitarbeiter benötigten Antworten aus digitalisierten Unternehmensinformationen, verteilt über Geschäftsdatensätze, Dateien und Datenbanken.",
-          "Ich entwickelte einen Chat-Assistenten mit Vektor-Wissensbasis sowie Datei- und Datenbankzugriff über RAG, MCP und Skills.",
-          "Mitarbeiter konnten an einer Stelle Fragen zu Kundenaufträgen, Produktdetails, Lieferantendefekten, Saisonalität und Werbung stellen."
+          "Wissen aus verteilten Dateien und Datenbanken für Mitarbeitende zugänglich machen.",
+          "Den IMS-Chat entwickelt und Unternehmensquellen sowie Werkzeuge für deren Nutzung angebunden.",
+          "Fragen zur Arbeit lassen sich in einem Chat im gewohnten Arbeitsbereich stellen."
         ],
         "stack": [
           "RAG",
@@ -889,34 +894,34 @@
           "AI Skills"
         ],
         "sections": [
-          "Ich verband Geschäftsdaten zu Aufträgen, Produkten, Lieferantenmängeln, saisonalen Verkäufen und Werbung mit dem Mitarbeiterchat in IMS.",
-          "Vektorsuche lieferte Wissenskontext; MCP und aufgabenspezifische Skills ermöglichten den Zugriff auf Dateien, strukturierte Daten und Geschäftsabläufe.",
-          "Mitarbeitende konnten direkt im operativen Arbeitsbereich Fragen stellen, statt zuerst das passende Werkzeug, die Datei oder den Bericht zu suchen."
+          "Die Antwort auf eine Arbeitsfrage konnte Informationen aus mehreren Quellen erfordern. Mitarbeitende mussten zunächst die passende Datei, den Bericht oder den Systemeintrag finden und anschließend Bestell-, Produkt- oder Lieferantendaten zusammenführen.",
+          "Ich verband den Chat mit einer Vektorwissensbasis: RAG liefert den Kontext für Antworten, MCP bindet Dateien und strukturierte Daten an, und spezialisierte Skills unterstützen Arbeitsaufgaben. Die Quellen umfassen Bestellungen, Produkte, Lieferantenmängel, saisonale Verkäufe und Werbung.",
+          "Mitarbeitende greifen über Fragen im IMS-Chat auf Unternehmensinformationen zu. Um die benötigten Daten zu finden, müssen sie seltener zwischen Dateien, Berichten und einzelnen Werkzeugen wechseln."
         ],
-        "contribution": "Integration von Unternehmenswissen, RAG, Datei- und Datenbankzugriff, MCP und aufgabenspezifische Skills.",
+        "contribution": "Chat-Assistent, Anbindung von Unternehmensquellen, RAG, MCP und spezialisierte Skills.",
         "workflow": [
-          "Frage eines Mitarbeiters",
-          "Unternehmenskontext abrufen",
-          "Dateien & Geschäftsdaten abfragen",
-          "Antwort im Chat"
+          "Frage eines Mitarbeitenden",
+          "Wissen abrufen und Geschäftsdaten abfragen",
+          "Antwort im IMS-Chat"
         ],
         "featured": true,
-        "imageAlt": "Illustrativer Wissensassistent in derselben IMS-Oberfläche, aus Order Automation mit ORD-1044 und DG-07 geöffnet, mit Quellen und Rückkehr zum gleichen Prüfvorgang.",
+        "imageAlt": "Illustrativer IMS-Assistent mit einer Frage zu einer Bestellung, einer Antwort mit Quellen und Rückkehr zur Auftragsprüfung.",
         "relatedSlugs": [
           "inventory-management",
           "order-processing"
         ],
-        "homeSummary": "Unternehmensantworten aus Geschäftsdaten, Dateien und Datenbanken."
+        "homeSummary": "Unternehmenswissen und Geschäftsdaten per Frage im Chat.",
+        "workflowTitle": "Von der Frage zur Antwort"
       },
       {
         "slug": "amazon-ads",
         "title": "Amazon-Ads-Optimierung",
-        "category": "KI-gestützte Entscheidungen",
-        "summary": "KI-gestützte Kampagnenvorschläge mit menschlicher Prüfung vor der Umsetzung.",
+        "category": "Werbeautomatisierung",
+        "summary": "Ein Dienst für Werbeteams, der Amazon-Ads-Analysen automatisiert und Kampagnenänderungen vorbereitet. Nutzer behalten die Kontrolle darüber, was angewendet wird.",
         "snapshot": [
-          "Kampagnen, Keywords und Gebote mussten gemeinsam bewertet werden.",
-          "Ich entwickelte den Großteil der Anwendung und des KI-gestützten Vorschlagsprozesses.",
-          "Anwender konnten Vorschläge vor der Umsetzung freigeben, ändern oder ablehnen."
+          "Werbedaten sammeln, analysieren und Änderungen automatisiert vorbereiten.",
+          "Den Großteil der Anwendung entwickelt: Integrationen und Prüfung von KI-Vorschlägen.",
+          "Die meiste manuelle Arbeit wurde automatisiert. Werbebudget und ACoS sanken."
         ],
         "stack": [
           "Java",
@@ -925,31 +930,32 @@
           "Vaadin"
         ],
         "sections": [
-          "Ich integrierte die Amazon Ads API, Helium10 und Webrecherchen eines KI-Agenten in den Prüfprozess für Vorschläge.",
-          "Vorschläge betrafen Keywords, negative Keywords, Gebote und Kampagnen für Produkte ohne Werbung. Jeder Vorschlag ließ sich bearbeiten oder ablehnen.",
-          "Kampagnendaten und vorgeschlagene Änderungen wurden gemeinsam geprüft. Vor der Anwendung blieb die menschliche Freigabe erforderlich."
+          "Die Kampagnenarbeit erforderte Werbekennzahlen zusammen mit Produktrecherchen, die Bewertung von Keywords und Geboten sowie die Vorbereitung von Änderungen. Diese wiederkehrenden Aufgaben sollten automatisiert werden, ohne die Kontrolle über vorgeschlagene Anpassungen abzugeben.",
+          "Ich integrierte die Amazon Ads API, Helium10 und Webrecherchen eines KI-Agenten. Ich implementierte Vorschläge für Keywords, negative Keywords, Gebote und Kampagnen für bislang nicht beworbene Produkte. Nutzer sehen Kampagnendaten neben dem Vorschlag, können ihn bearbeiten oder ablehnen und müssen Änderungen vor der Anwendung freigeben.",
+          "Der Dienst automatisierte den Großteil der manuellen Datensammlung, Analyse und Vorbereitung von Werbeänderungen. Das Werbebudget sank; durch den niedrigeren ACoS machten Werbekosten einen geringeren Anteil des durch Werbung erzielten Umsatzes aus. Nutzer konzentrierten sich auf die Prüfung und Freigabe der Vorschläge."
         ],
-        "contribution": "Großteil der Anwendung, Werbedatenintegrationen und KI-Prüfablauf.",
+        "contribution": "Großteil der Anwendung: Werbeintegrationen, KI-Vorschläge und Freigabeprozess.",
         "workflow": [
-          "Kampagnendaten sammeln",
-          "Vorschläge erzeugen",
-          "Prüfen & anpassen",
-          "Freigegebene Änderungen umsetzen"
+          "Daten sammeln und recherchieren",
+          "KI-Vorschläge vorbereiten",
+          "Prüfen, bearbeiten und freigeben",
+          "Freigegebene Änderungen anwenden"
         ],
         "featured": false,
-        "imageAlt": "Illustrative Amazon-Ads-Konsole, die Kampagne, Anzeigengruppe, Keyword, Kennzahlen und Automatisierungsregel mit einer vorgeschlagenen Gebotsänderung und Freigaben verbindet.",
+        "imageAlt": "Illustrative Amazon-Ads-Konsole mit Kampagnen- und Keyword-Daten neben einer vorgeschlagenen Gebotsänderung und deren Freigabe.",
         "relatedSlugs": [],
-        "homeSummary": "KI-gestützte Werbung mit menschlicher Freigabe."
+        "homeSummary": "Automatisierte Werbeanalyse mit Freigabe vor Änderungen.",
+        "workflowTitle": "Von Werbedaten zu Änderungen"
       },
       {
         "slug": "product-content-creation",
-        "title": "Product Content Creation",
+        "title": "Produktinhalte für Marktplätze",
         "category": "KI · Marktplatzinhalte",
-        "summary": "Ein eigenständiger Dienst für KI-gestützte Produktinhalte auf Amazon, Walmart, BestBuy, Sears und eBay, mit gemeinsamem Katalog und Produktstatistiken.",
+        "summary": "Ein Dienst für Mitarbeitende, die Produktinhalte für fünf Marktplätze erstellen: KI-Generierung, Bearbeitung und Export mit gemeinsamem Katalog und Produktstatistiken.",
         "snapshot": [
-          "Produktinhalte und Produktübersichten mussten über fünf Marktplätze mit unterschiedlichen Anforderungen hinweg verwaltet werden.",
-          "Ich entwickelte einen eigenen Dienst für marktplatzspezifische KI-Inhalte, Bearbeitung, Export und einen gemeinsamen Produktkatalog.",
-          "Mitarbeitende konnten Produktinhalte erstellen und Produkte sowie Statistiken aller Marktplätze in einem Dienst einsehen."
+          "Die Inhaltserstellung an den Anforderungen von fünf Marktplätzen ausrichten.",
+          "Einen eigenen Dienst für Inhaltserstellung, Bearbeitung, Export und Produktkatalog entwickelt.",
+          "Inhalte werden zusammen mit Produktdaten und Kennzahlen erstellt und geprüft."
         ],
         "stack": [
           "Java",
@@ -958,21 +964,22 @@
           "AI"
         ],
         "sections": [
-          "Ich entwickelte einen separaten Dienst für marktplatzspezifische KI-Inhalte, Bearbeitung und Export für Amazon, Walmart, BestBuy, Sears und eBay.",
-          "Ein gemeinsamer Katalog verband die Produktsicht über alle fünf Marktplätze. Produktstatistiken standen neben den Inhaltswerkzeugen bereit.",
-          "Mitarbeitende konnten marktplatzübergreifende Produkte und Kennzahlen prüfen, während sie Inhalte im selben Dienst vorbereiteten."
+          "Amazon, Walmart, BestBuy, Sears und eBay stellen unterschiedliche Anforderungen an Produktinhalte. Bei der Erstellung benötigen Mitarbeitende außerdem Produktdaten und Kennzahlen aus mehreren Plattformen. Diese Aufgaben brauchten einen gemeinsamen Arbeitsablauf.",
+          "Ich entwickelte einen eigenständigen Dienst, der Produktdaten und die Anforderungen des gewählten Marktplatzes zur KI-gestützten Inhaltserstellung nutzt. Das Ergebnis lässt sich bearbeiten und exportieren. Ein gemeinsamer Katalog bündelt Produkte aus fünf Plattformen; Statistiken stehen neben den Inhaltswerkzeugen zur Verfügung.",
+          "Mitarbeitende erstellen Inhalte für verschiedene Marktplätze in einem gemeinsamen Ablauf: von den Produktdaten über die Bearbeitung bis zum Export. Katalog und Kennzahlen sind im selben Dienst verfügbar, sodass Produktprüfungen ohne Wechsel aus dem Inhaltswerkzeug möglich sind."
         ],
-        "contribution": "Backend-Dienste, KI-Inhaltsprozesse und marktplatzspezifische Katalogwerkzeuge.",
+        "contribution": "Backend, KI-Inhaltserstellung und Produktkatalog für fünf Marktplätze.",
         "workflow": [
-          "Produktdaten & Marktplatz",
-          "KI-Inhalte generieren",
-          "Bearbeiten & exportieren",
-          "Gemeinsamer Katalog & Statistiken"
+          "Produktdaten aus dem gemeinsamen Katalog",
+          "Marktplatz wählen und Inhalte generieren",
+          "Prüfen und bearbeiten",
+          "Fertige Inhalte exportieren"
         ],
         "featured": false,
-        "imageAlt": "Illustrativer eigenständiger Inhaltsdienst mit ausgewähltem Produkt, Inhaltsstatus auf fünf Marktplätzen, passendem KI-Entwurf, Prüfung und Statistiken der angezeigten Produkte.",
+        "imageAlt": "Illustrativer Inhaltsdienst mit gemeinsamem Katalog, ausgewähltem Produkt, KI-Entwurf, Inhaltsstatus auf fünf Marktplätzen und Produktstatistiken.",
         "relatedSlugs": [],
-        "homeSummary": "Produktinhalte und ein gemeinsamer Katalog für fünf Marktplätze."
+        "homeSummary": "Produktinhalte und gemeinsamer Katalog für fünf Marktplätze.",
+        "workflowTitle": "So entstehen Produktinhalte"
       }
     ],
     "heroFocus": "Spring Boot · KI-Automatisierung & RAG",
@@ -984,9 +991,8 @@
       "Deutsch B1",
       "Ukrainisch Muttersprache"
     ],
-    "workflowTitle": "So funktioniert der Ablauf",
     "workflowNote": "Vereinfachter Ablauf. Unternehmensdaten und interne Oberflächen werden nicht gezeigt.",
-    "stackLabel": "Technologien",
+    "stackLabel": "Technologien und Ansätze",
     "notFoundTitle": "Seite nicht gefunden",
     "notFoundIntro": "Diese Seite wurde möglicherweise verschoben. Meine Projekte und Erfahrung finden Sie über die Startseite.",
     "visualLab": {
@@ -1105,7 +1111,7 @@
     ],
     "workGroupIntros": [
       "Eine Betriebsplattform mit eigenen Fallstudien zu Auftragsabwicklung und Wissenszugriff.",
-      "Spezialisierte Tools für Werbeentscheidungen und Marktplatzinhalte."
+      "Eigenständige Dienste für Werbeautomatisierung und die Erstellung von Produktinhalten."
     ],
     "closeIllustration": "Illustration schließen"
   },
@@ -1180,8 +1186,8 @@
       "Результат"
     ],
     "caseLabels": [
-      "Реалізація",
-      "Основні рішення",
+      "Проблема",
+      "Рішення",
       "Що змінилося"
     ],
     "capabilityItems": [
@@ -1328,28 +1334,28 @@
     "additional": [
       [
         "Портал внутрішніх сервісів",
-        "Доступ працівників до внутрішніх сервісів, прав і налаштувань в одному дашборді.",
-        "Внутрішні вебзастосунки · Права доступу · Налаштування сервісів"
+        "Показує працівнику доступні йому внутрішні сервіси та їхні налаштування в одному дашборді.",
+        "Внутрішні вебзастосунки · Доступ до сервісів · Налаштування"
       ],
       [
         "Аналітика товарів і планування закупівель",
-        "Звіт поєднує продажі, запаси, прибутковість і дані конкурентів для планування закупівель.",
+        "Поєднує продажі, запаси, прибутковість і дані конкурентів у звіті для планування закупівель.",
         "Інтеграція даних · Бізнес-звітність · Helium10"
       ],
       [
-        "Аналіз відгуків покупців",
-        "AI-аналіз відгуків покупців поруч із товарними й операційними даними.",
-        "Збір даних · AI-аналіз · Внутрішні інструменти"
+        "Аналіз та опрацювання відгуків",
+        "Збирає відгуки для оскарження й запиту на видалення, стисло описує проблеми та передає їх відповідальному відділу. Пропонує варіанти вирішення на основі попередніх рішень.",
+        "Збір відгуків · AI-аналіз · Опрацювання проблем"
       ],
       [
         "Бот підтримки клієнтів",
-        "Відповіді за політиками компанії та передача винятків фахівцю.",
-        "Java, Spring Boot, PostgreSQL"
+        "Відповідає на запитання за політиками компанії та передає винятки фахівцю.",
+        "Java · Spring Boot · PostgreSQL"
       ],
       [
         "Автоматизація браузера",
-        "Вебскрапінг, звіти, оновлення товарів та інформації про відправлення за обмежених можливостей API.",
-        "Java, Selenium / Selenide, Web scraping"
+        "Вебскрапінг і автоматизація вебінтерфейсів: отримання звітів, оновлення товарів та даних про відправлення за обмежених можливостей API.",
+        "Java · Selenium / Selenide · Web scraping"
       ]
     ],
     "projects": [
@@ -1357,11 +1363,11 @@
         "slug": "inventory-management",
         "title": "Inventory Management System",
         "category": "Операції маркетплейсів",
-        "summary": "Спільна операційна платформа для замовлень маркетплейсів, запасів, автоматичної обробки та знань компанії.",
+        "summary": "Платформа для команди e-commerce: замовлення з понад десяти маркетплейсів, складські запаси та щоденні операції в одній системі.",
         "snapshot": [
-          "Замовлення маркетплейсів, складські дані й операційні інструменти потребували спільного робочого простору.",
-          "Я створив більшість бекенду й інтеграцій, зокрема звітність та автоматизацію обробки замовлень.",
-          "Команда могла керувати замовленнями й запасами, контролювати автоматичну обробку та відкривати асистента знань із IMS."
+          "Об’єднати дані маркетплейсів, складів і сервісів виконання замовлень.",
+          "Розробив основну частину бекенду: інтеграції, обробку замовлень і звітність.",
+          "Команда керує замовленнями й запасами на основі спільних даних."
         ],
         "stack": [
           "Java",
@@ -1371,34 +1377,35 @@
           "RabbitMQ"
         ],
         "sections": [
-          "Я реалізував API для замовлень, складських відправлень, відгуків і вхідних поставок. Інтеграції охоплювали Amazon, Walmart, eBay, Sears, BestBuy, склади компанії та fulfillment-сервіси.",
-          "Замовлення з понад десяти маркетплейсів приводилися до спільного формату. Дашборди й аналітика товарів використовували спільні записи запасів, відправлень, поставок і звітів.",
-          "Автоматизація замовлень і помічник зі знань були доступні з одного робочого простору: працівники контролювали обробку та зверталися до інформації компанії без переходу між системами."
+          "Замовлення надходили з різних маркетплейсів, а дані про залишки, відправлення й поставки зберігалися в окремих системах. Для щоденної роботи їх потрібно було звести до єдиного формату й забезпечити спільний огляд операцій.",
+          "Інтегрував маркетплейси, склади компанії та сервіси виконання замовлень. Привів замовлення з понад десяти джерел до спільного формату; реалізував API для замовлень, відправлень, поставок і відгуків. Ці дані використовуються в дашбордах, звітності та аналітиці товарів. Автоматизація замовлень і AI-помічник доступні як пов’язані інструменти IMS.",
+          "Працівники отримали спільний огляд замовлень, запасів і поставок. Звітність та аналітика використовують ті самі операційні дані, що й щоденна робота команди. Для контролю обробки замовлень і звернення до знань компанії потрібно менше переходів між окремими інструментами."
         ],
-        "contribution": "Більшість backend-сервісів, інтеграцій із маркетплейсами та інструментів звітності.",
+        "contribution": "Основна частина бекенду: інтеграції маркетплейсів, обробка замовлень і звітність.",
         "workflow": [
           "Дані маркетплейсів і складів",
-          "Спільні операційні записи",
-          "Автоматична обробка й перевірка",
-          "Звітність і знання компанії"
+          "Приведення до спільного формату",
+          "Обробка замовлень і запасів",
+          "Звітність та аналітика"
         ],
         "featured": true,
-        "imageAlt": "Ілюстративний дашборд IMS із ORD-1044, East і DG-07, узгодженим контекстом та видимими переходами до Order Automation і Knowledge Assistant.",
+        "imageAlt": "Ілюстративний дашборд IMS: замовлення, складські дані та переходи до автоматизації обробки й AI-помічника.",
         "relatedSlugs": [
           "order-processing",
           "company-knowledge-assistant"
         ],
-        "homeSummary": "Єдиний простір для замовлень, запасів і операцій маркетплейсів."
+        "homeSummary": "Замовлення й запаси з різних джерел у спільній системі.",
+        "workflowTitle": "Шлях даних в IMS"
       },
       {
         "slug": "order-processing",
         "title": "Автоматизована обробка замовлень",
         "category": "IMS · Автоматизація процесів",
-        "summary": "Модуль IMS автоматично готує замовлення, застосовує правила, вибирає перевізників і друкує документи, передаючи винятки на перевірку людині.",
+        "summary": "Модуль IMS для автоматичної підготовки й відправлення замовлень: від перевірки правил доставки до друку документів, із передачею винятків працівнику.",
         "snapshot": [
-          "Типові замовлення мали оброблятися автоматично, а обмеження доставки й конфлікти правил — залишатися видимими.",
-          "Я створив більшість бекенду й автоматичний процес у складі IMS: від отримання замовлення до друку етикеток і рахунків.",
-          "Працівники могли налаштовувати типову обробку та перевіряти винятки без ручного повторення всього процесу."
+          "Автоматизувати повторювані операції з урахуванням обмежень доставки.",
+          "Розробив основну частину бекенду: правила обробки, вибір доставки й друк документів.",
+          "Типові замовлення проходять автоматично; винятки надходять на перевірку."
         ],
         "stack": [
           "Java",
@@ -1408,34 +1415,35 @@
           "RabbitMQ"
         ],
         "sections": [
-          "Я розробив процес від отримання замовлення до друку етикетки й рахунку, включно з вагою, розмірами та митними даними.",
-          "Налаштовувані правила враховували небезпечні товари, перевізників і конфлікти. Процес охоплював пакувальні інструкції, міжнародні відправлення, PDF-формати й типи принтерів.",
-          "Працівники перевіряли винятки за записами обробки. Відновлення та захист від дублювання дозволяли повторні спроби без повторення завершених дій або купівлі етикеток."
+          "Кожне замовлення вимагало підготовки даних, вибору перевізника та друку документів. Автоматизація мала враховувати небезпечні товари, митні вимоги й конфлікти правил. Після збою потрібно було продовжувати обробку без повторення вже виконаних дій.",
+          "Побудував процес від отримання замовлення до друку етикетки й рахунку. Налаштовувані правила визначають доставку з урахуванням ваги, розмірів, обмежень і пакувальних інструкцій. Реалізував облік винятків, відновлення після помилок і захист від дублювання дій, а також підтримку різних PDF-форматів і принтерів.",
+          "Працівники налаштовують правила й розбирають винятки замість ручного виконання всієї послідовності для кожного замовлення. Обробку після помилки можна відновити без повторення завершених кроків або повторної купівлі етикетки."
         ],
-        "contribution": "Більшість бекенд-сервісів, вибір доставки, генерація документів та автоматизація друку.",
+        "contribution": "Основна частина бекенду: правила доставки, відновлення після збоїв і автоматизація друку.",
         "workflow": [
-          "Отримати й підготувати замовлення",
-          "Перевірити обмеження й правила",
-          "Вибрати доставку й створити документи",
-          "Надрукувати або передати на перевірку"
+          "Отримання й підготовка даних",
+          "Перевірка обмежень і правил",
+          "Вибір доставки та створення документів",
+          "Друк або передача на перевірку"
         ],
         "featured": true,
-        "imageAlt": "Ілюстративний модуль обробки в тій самій оболонці IMS: ORD-1044 зупинено правилом DG-07, показано налаштування, кроки перевірки та перехід до асистента з контекстом замовлення.",
+        "imageAlt": "Ілюстративний екран обробки замовлення в IMS: обмеження для небезпечного товару, налаштування правил і кроки перевірки.",
         "relatedSlugs": [
           "inventory-management",
           "company-knowledge-assistant"
         ],
-        "homeSummary": "Автоматична обробка замовлень із правилами доставки й перевіркою винятків."
+        "homeSummary": "Автоматична обробка, перевірка винятків і відновлення після збоїв.",
+        "workflowTitle": "Як проходить замовлення"
       },
       {
         "slug": "company-knowledge-assistant",
         "title": "Корпоративний AI-помічник",
         "category": "IMS · Прикладний AI",
-        "summary": "Асистент працівників, доступний з IMS, який поєднує знання компанії, файли й бази даних через RAG, MCP та спеціалізовані Skills.",
+        "summary": "Чат-помічник для працівників, який знаходить інформацію про замовлення, товари та роботу компанії у внутрішніх даних і документах.",
         "snapshot": [
-          "Працівникам потрібні були відповіді з оцифрованої інформації компанії, розподіленої між бізнес-записами, файлами й базами даних.",
-          "Створив чат-помічника з векторною базою знань та доступом до файлів і БД через RAG, MCP і Skills.",
-          "Працівники могли в одному місці запитувати про замовлення, товари, дефекти від постачальників, сезонність продажів і рекламу."
+          "Дати працівникам доступ до знань, розподілених між файлами й базами даних.",
+          "Створив чат в IMS і підключив корпоративні джерела та інструменти роботи з ними.",
+          "Відповіді на робочі запитання доступні через один чат у звичному робочому просторі."
         ],
         "stack": [
           "RAG",
@@ -1444,34 +1452,34 @@
           "AI Skills"
         ],
         "sections": [
-          "Я підключив до чату працівників в IMS записи про замовлення, товари, дефекти постачальників, сезонність продажів і рекламу.",
-          "Векторний пошук надавав контекст зі знань; MCP і Skills для конкретних задач відкривали доступ до файлів, структурованих даних і бізнес-процесів.",
-          "Працівники ставили бізнес-запитання зі свого операційного простору замість попереднього пошуку потрібного інструмента, файлу чи звіту."
+          "Відповідь на робоче запитання могла потребувати інформації з кількох джерел. Працівник спочатку мав знайти потрібний файл, звіт або запис у системі, а потім зіставити дані про замовлення, товари чи постачальників.",
+          "Поєднав чат із векторною базою знань: RAG знаходить потрібний контекст для відповіді, MCP підключає файли та структуровані дані, а спеціалізовані Skills підтримують робочі задачі. Підключені джерела охоплюють замовлення, товари, дефекти від постачальників, сезонність продажів і рекламу.",
+          "Працівники звертаються до інформації компанії через запитання в чаті, доступному з IMS. Пошук потрібних даних вимагає менше переходів між файлами, звітами та окремими інструментами."
         ],
-        "contribution": "Інтеграція знань компанії, RAG, доступ до файлів і БД, MCP та Skills для конкретних задач.",
+        "contribution": "Чат-помічник, інтеграція корпоративних джерел, RAG, MCP і спеціалізовані Skills.",
         "workflow": [
           "Запитання працівника",
-          "Пошук контексту компанії",
-          "Доступ до файлів і бізнес-даних",
-          "Відповідь у чаті"
+          "Пошук знань і доступ до бізнес-даних",
+          "Відповідь у чаті IMS"
         ],
         "featured": true,
-        "imageAlt": "Ілюстративний асистент у тій самій оболонці IMS, відкритий з Order Automation із контекстом ORD-1044 і DG-07, джерелами та поверненням до тієї самої перевірки.",
+        "imageAlt": "Ілюстративний чат AI-помічника в IMS: запитання про замовлення, відповідь із джерелами та повернення до перевірки замовлення.",
         "relatedSlugs": [
           "inventory-management",
           "order-processing"
         ],
-        "homeSummary": "Відповіді з даних компанії, файлів і баз даних."
+        "homeSummary": "Корпоративні знання та бізнес-дані через запитання в чаті.",
+        "workflowTitle": "Від запитання до відповіді"
       },
       {
         "slug": "amazon-ads",
         "title": "Оптимізація Amazon Ads",
-        "category": "Рішення з підтримкою AI",
-        "summary": "AI-пропозиції для рекламних кампаній із перевіркою людиною перед застосуванням.",
+        "category": "Автоматизація реклами",
+        "summary": "Сервіс для команди реклами: автоматизує аналіз Amazon Ads і підготовку змін у кампаніях, залишаючи їх застосування під контролем користувача.",
         "snapshot": [
-          "Кампанії, ключові слова та ставки потрібно було аналізувати разом.",
-          "Реалізував більшість застосунку та процес підготовки й перевірки AI-пропозицій.",
-          "Користувачі могли схвалити, змінити або відхилити пропозицію перед застосуванням."
+          "Автоматизувати збирання рекламних даних, аналіз і підготовку змін.",
+          "Розробив основну частину застосунку: інтеграції та процес перевірки AI-пропозицій.",
+          "Більшість ручної роботи автоматизовано. Рекламний бюджет і ACoS знизилися."
         ],
         "stack": [
           "Java",
@@ -1480,31 +1488,32 @@
           "Vaadin"
         ],
         "sections": [
-          "Я інтегрував Amazon Ads API, Helium10 і вебдослідження AI-агента в процес перевірки пропозицій.",
-          "Пропозиції охоплювали ключові й мінус-слова, ставки та кампанії для товарів без реклами. Кожну пропозицію можна було змінити або відхилити.",
-          "Дані кампаній і запропоновані зміни переглядалися разом. Перед застосуванням залишалося обов’язковим підтвердження людиною."
+          "Для роботи з кампаніями потрібно було поєднувати рекламні показники з дослідженням товарів, аналізувати ключові слова й ставки та готувати зміни. Ці повторювані задачі потребували автоматизації зі збереженням контролю над застосуванням пропозицій.",
+          "Інтегрував Amazon Ads API, Helium10 і вебдослідження AI-агента. Реалізував підготовку пропозицій щодо ключових і мінус-слів, ставок та кампаній для товарів без реклами. Користувач бачить рекламні дані поруч із пропозицією, може змінити або відхилити її; застосування потребує підтвердження.",
+          "Сервіс автоматизував більшість ручної роботи зі збирання даних, аналізу та підготовки рекламних змін. Рекламний бюджет зменшився, ACoS знизився — витрати на рекламу становили меншу частку продажів, отриманих завдяки рекламі. Користувачі зосередилися на перевірці й погодженні пропозицій."
         ],
-        "contribution": "Більшість застосунку, інтеграції рекламних даних і процес перевірки AI-пропозицій.",
+        "contribution": "Основна частина застосунку: рекламні інтеграції, AI-пропозиції та їх погодження.",
         "workflow": [
-          "Зібрати рекламні дані",
-          "Сформувати пропозиції",
-          "Перевірити й уточнити",
-          "Застосувати схвалені зміни"
+          "Збирання даних і дослідження",
+          "Підготовка AI-пропозицій",
+          "Перевірка, редагування й погодження",
+          "Застосування схвалених змін"
         ],
         "featured": false,
-        "imageAlt": "Ілюстративна консоль Amazon Ads зі зв’язком між кампанією, групою, ключовим словом, метриками та правилом автоматизації, запропонованою зміною ставки й погодженням.",
+        "imageAlt": "Ілюстративна консоль Amazon Ads: дані кампанії та ключового слова поруч із запропонованою зміною ставки й дією погодження.",
         "relatedSlugs": [],
-        "homeSummary": "AI-пропозиції для реклами з підтвердженням людиною."
+        "homeSummary": "Автоматизація рекламного аналізу з погодженням змін.",
+        "workflowTitle": "Від рекламних даних до змін"
       },
       {
         "slug": "product-content-creation",
-        "title": "Product Content Creation",
+        "title": "Контент для маркетплейсів",
         "category": "AI · Контент маркетплейсів",
-        "summary": "Окремий сервіс AI-створення товарного контенту для Amazon, Walmart, BestBuy, Sears і eBay зі спільним каталогом та статистикою товарів.",
+        "summary": "Сервіс для працівників, які готують товарний контент для п’яти маркетплейсів: AI-генерація, редагування та експорт зі спільним каталогом і статистикою.",
         "snapshot": [
-          "Товарний контент і перегляд товарів потрібно було організувати для п’яти маркетплейсів із різними вимогами.",
-          "Я створив окремий сервіс для AI-контенту за правилами маркетплейсів, редагування, експорту та спільного каталогу товарів.",
-          "Працівники могли створювати контент і переглядати товари та статистику всіх маркетплейсів в одному сервісі."
+          "Організувати підготовку контенту з урахуванням вимог п’яти маркетплейсів.",
+          "Створив окремий сервіс: генерацію контенту, редагування, експорт і спільний каталог.",
+          "Контент готують і перевіряють разом із даними товару та його показниками."
         ],
         "stack": [
           "Java",
@@ -1513,21 +1522,22 @@
           "AI"
         ],
         "sections": [
-          "Я створив окремий сервіс для AI-контенту з урахуванням вимог Amazon, Walmart, BestBuy, Sears та eBay, з редагуванням і експортом.",
-          "Спільний каталог поєднав перегляд товарів із п’яти маркетплейсів. Статистика товарів була поруч з інструментами контенту.",
-          "Працівники могли перевіряти товари й показники на різних маркетплейсах під час підготовки контенту в одному сервісі."
+          "Amazon, Walmart, BestBuy, Sears та eBay мають різні вимоги до товарного контенту. Під час його підготовки працівникам також потрібні дані про товари та їхні показники на різних платформах. Ці задачі потребували спільного робочого процесу.",
+          "Розробив окремий сервіс, який використовує дані товару та вимоги вибраного маркетплейсу для AI-генерації контенту. Результат можна відредагувати й експортувати. Єдиний каталог об’єднує товари з п’яти платформ, а статистика доступна поруч з інструментами підготовки контенту.",
+          "Працівники готують контент для різних маркетплейсів у спільному процесі: від даних товару до відредагованого результату й експорту. Перегляд каталогу та показників доступний у тому самому сервісі, тож для перевірки товару не потрібно виходити з інструмента підготовки контенту."
         ],
-        "contribution": "Бекенд-сервіси, процеси AI-створення контенту та інструменти каталогу для маркетплейсів.",
+        "contribution": "Бекенд, AI-генерація контенту та каталог товарів із п’яти маркетплейсів.",
         "workflow": [
-          "Дані товару й маркетплейс",
-          "Згенерувати AI-контент",
-          "Відредагувати й експортувати",
-          "Спільний каталог і статистика"
+          "Дані товару зі спільного каталогу",
+          "Вибір маркетплейсу та AI-генерація",
+          "Перевірка й редагування",
+          "Експорт готового контенту"
         ],
         "featured": false,
-        "imageAlt": "Ілюстративний окремий каталог контенту: вибраний товар, стани контенту п’яти маркетплейсів, відповідна AI-чернетка, перевірка та статистика показаних товарів.",
+        "imageAlt": "Ілюстративний сервіс контенту: спільний каталог, вибраний товар, AI-чернетка, стани контенту на п’яти маркетплейсах і статистика.",
         "relatedSlugs": [],
-        "homeSummary": "Товарний контент і спільний каталог для п’яти маркетплейсів."
+        "homeSummary": "Товарний контент і каталог для п’яти маркетплейсів.",
+        "workflowTitle": "Як готується товарний контент"
       }
     ],
     "heroFocus": "Spring Boot · AI-автоматизація та RAG",
@@ -1539,9 +1549,8 @@
       "Німецька B1",
       "Українська рідна"
     ],
-    "workflowTitle": "Як працює процес",
     "workflowNote": "Спрощена схема процесу. Дані компанії та внутрішні екрани не публікуються.",
-    "stackLabel": "Технології",
+    "stackLabel": "Технології та підходи",
     "notFoundTitle": "Сторінку не знайдено",
     "notFoundIntro": "Можливо, ця сторінка змінила адресу. Проєкти й досвід доступні з головної.",
     "visualLab": {
@@ -1660,7 +1669,7 @@
     ],
     "workGroupIntros": [
       "Спільна операційна платформа з окремими кейсами автоматизації замовлень і доступу до знань.",
-      "Спеціалізовані інструменти для рекламних рішень і контенту маркетплейсів."
+      "Окремі сервіси для автоматизації реклами та підготовки товарного контенту."
     ],
     "closeIllustration": "Закрити ілюстрацію"
   }

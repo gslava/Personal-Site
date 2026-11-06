@@ -21,23 +21,11 @@
   color: var(--text);
   font-weight: 500;
 }
-.case-body {
-  margin-bottom: 2.5rem;
-}
-.case-body__result {
-  border-left: 3px solid var(--accent);
-  background: var(--surface);
-  padding: 1.25rem;
-  border-radius: 0 var(--radius) var(--radius) 0;
-}
-.case-body__result p {
-  color: var(--text);
-}
 .case-summary__grid h3 {
   color: var(--muted);
   font-weight: 500;
 }
-.case-summary__grid article:nth-child(n + 2) p {
+.case-summary__grid p {
   color: var(--text);
 }
 .case-summary__grid article:last-child {
@@ -123,9 +111,6 @@
   .about-layout .cv-note {
     margin-left: 0;
     display: block;
-  }
-  .case-body__result {
-    padding: 1rem;
   }
   .case-artwork {
     margin-block: 2rem;

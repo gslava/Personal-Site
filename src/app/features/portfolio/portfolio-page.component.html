@@ -82,7 +82,9 @@
         <div class="case-body">
           @for (section of p.sections; track $index; let i = $index) {
             <section [class.case-body__result]="i === 2">
-              <h2 appEntrance>{{ t.caseLabels[i] }}</h2>
+              <h2 appEntrance>
+                <span class="case-body__marker" aria-hidden="true"></span>{{ t.caseLabels[i] }}
+              </h2>
               <p>{{ section }}</p>
             </section>
           }
@@ -93,7 +95,7 @@
           <figcaption>{{ t.illustrationNote }}</figcaption>
         </figure>
         <section class="workflow" aria-labelledby="workflow-title">
-          <h2 appEntrance id="workflow-title">{{ t.workflowTitle }}</h2>
+          <h2 appEntrance id="workflow-title">{{ p.workflowTitle }}</h2>
           <ol>
             @for (step of p.workflow; track step) {
               <li>{{ step }}</li>
