@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { ProjectMotifComponent } from './project-motif.component';
+import { PortraitOrbitComponent } from './portrait-orbit.component';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { HeadingTextComponent } from '../../shared/components/heading-text/heading-text.component';
@@ -14,6 +15,7 @@ import { ProjectArtworkComponent } from './project-artwork.component';
   imports: [
     RouterLink,
     ProjectMotifComponent,
+    PortraitOrbitComponent,
     HeadingTextComponent,
     EntranceDirective,
     RuleRevealDirective,

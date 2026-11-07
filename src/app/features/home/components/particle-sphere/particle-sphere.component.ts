@@ -9,6 +9,7 @@ import {
   PLATFORM_ID,
   ViewChild,
   inject,
+  input,
   signal,
 } from '@angular/core';
 import {
@@ -16,7 +17,12 @@ import {
   HOME_SCENE_CAMERA_Z,
   HOME_SCENE_PARTICLE_RADIUS,
 } from '../../home-scene.constants';
-import { easeOutExpo, easeOutPower, projectPointerToPlane } from './particle-sphere.math';
+import {
+  easeOutExpo,
+  easeOutPower,
+  framePortraitCamera,
+  projectPointerToPlane,
+} from './particle-sphere.math';
 import { createParticlePoints } from './particle-sphere.points';
 import { createSimulation } from './particle-sphere.simulation';
 import {
@@ -33,6 +39,8 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ParticleSphereComponent implements AfterViewInit {
+  readonly compact = input(false);
+  readonly pointerTarget = input<HTMLElement>();
   @ViewChild('canvas', { static: true }) private readonly canvasRef!: ElementRef<HTMLCanvasElement>;
 
   protected readonly fallbackActive = signal(false);
@@ -46,6 +54,7 @@ export class ParticleSphereComponent implements AfterViewInit {
   private cleanupCallbacks: Array<() => void> = [];
   private destroyed = false;
   private isVisible = true;
+  private inViewport = true;
 
   constructor() {
     this.destroyRef.onDestroy(() => {
@@ -117,7 +126,9 @@ export class ParticleSphereComponent implements AfterViewInit {
     const screenMouse = new THREE.Vector2();
     const smoothedMouse = new THREE.Vector2(windowRef.innerWidth, 0);
     const previousMouse = smoothedMouse.clone();
-    const interactionTarget = this.document.body ?? canvas;
+    const interactionTarget = this.compact()
+      ? (this.document.body ?? canvas)
+      : (this.pointerTarget() ?? this.document.body ?? canvas);
     const mouseTween: VectorTween = {
       active: false,
       startMs: animationStart,
@@ -137,20 +148,37 @@ export class ParticleSphereComponent implements AfterViewInit {
 
     scene.add(particles.points);
 
+    let previousView = '';
+    const updatePortraitView = (): void => {
+      const anchor = this.compact() ? this.pointerTarget() : undefined;
+      if (!anchor) return;
+      const bounds = anchor.getBoundingClientRect();
+      const width = Math.max(1, canvas.clientWidth);
+      const height = Math.max(1, canvas.clientHeight);
+      const nextView = `${bounds.left},${bounds.top},${bounds.width},${bounds.height},${width},${height}`;
+      if (nextView === previousView) return;
+      previousView = nextView;
+      // Keep the original portrait-sized projection while rendering across the
+      // viewport, so a repelled particle can travel beyond the avatar's box.
+      framePortraitCamera(camera, bounds, { width, height });
+    };
+
     const updateViewport = (): void => {
       const rect = canvas.getBoundingClientRect();
       const width = Math.max(1, Math.round(rect.width));
       const height = Math.max(1, Math.round(rect.height));
-      const pixelRatio = Math.min(windowRef.devicePixelRatio || 1, 2);
+      const pixelRatio = this.compact()
+        ? Math.min(Math.max(windowRef.devicePixelRatio || 1, 2), 3)
+        : Math.min(windowRef.devicePixelRatio || 1, 2);
 
-      camera.aspect = width / height;
+      if (!this.compact() || !this.pointerTarget()) camera.aspect = width / height;
       camera.updateProjectionMatrix();
       renderer.setPixelRatio(pixelRatio);
       renderer.setSize(width, height, false);
 
       particles.material.uniforms['uColorResolution'].value.set(
-        fboSize * (windowRef.innerWidth / 1366),
-        fboSize * (windowRef.innerWidth / 1366),
+        this.compact() ? width : fboSize * (windowRef.innerWidth / 1366),
+        this.compact() ? height : fboSize * (windowRef.innerWidth / 1366),
       );
       particles.material.uniforms['uWindowResolution'].value.set(
         windowRef.innerWidth,
@@ -160,6 +188,7 @@ export class ParticleSphereComponent implements AfterViewInit {
         windowRef.innerWidth,
         windowRef.innerHeight,
       );
+      updatePortraitView();
     };
 
     const syncMouse = (nowMs: number): void => {
@@ -203,6 +232,7 @@ export class ParticleSphereComponent implements AfterViewInit {
     };
 
     const pause = (): void => {
+      if (this.compact()) renderer.clear();
       if (this.animationFrameId === null) {
         return;
       }
@@ -221,6 +251,7 @@ export class ParticleSphereComponent implements AfterViewInit {
       const centerDistance = screenMouse.length();
       const halfWindow = Math.max(1, windowRef.innerWidth / 2);
 
+      updatePortraitView();
       updateIntroState(elapsed);
       syncMouse(nowMs);
       gpuCompute.compute();
@@ -257,17 +288,19 @@ export class ParticleSphereComponent implements AfterViewInit {
       const nowMs = windowRef.performance.now();
       syncMouse(nowMs);
       const bounds = canvas.getBoundingClientRect();
+      updatePortraitView();
       projectedMouse.copy(
         projectPointerToPlane(THREE, camera, event.clientX, event.clientY, bounds),
       );
 
+      const interactionBounds = this.pointerTarget()?.getBoundingClientRect() ?? bounds;
       screenMouse.set(
-        Math.abs(event.clientX - bounds.left - bounds.width / 2),
-        Math.abs(event.clientY - bounds.top - bounds.height / 2),
+        Math.abs(event.clientX - interactionBounds.left - interactionBounds.width / 2),
+        Math.abs(event.clientY - interactionBounds.top - interactionBounds.height / 2),
       );
 
       if (!initMouseMove) {
-        smoothedMouse.set(projectedMouse.x, -projectedMouse.y);
+        smoothedMouse.set(projectedMouse.x, projectedMouse.y);
         simulation.acceleration.material.uniforms['mousePos'].value.copy(smoothedMouse);
         simulation.acceleration.material.uniforms['oldMousePos'].value.copy(smoothedMouse);
         initMouseMove = true;
@@ -275,7 +308,7 @@ export class ParticleSphereComponent implements AfterViewInit {
         mouseTween.active = true;
         mouseTween.startMs = nowMs;
         mouseTween.from.copy(smoothedMouse);
-        mouseTween.to.set(projectedMouse.x, -projectedMouse.y);
+        mouseTween.to.set(projectedMouse.x, projectedMouse.y);
       }
 
       const repulseRadiusTarget =
@@ -289,7 +322,7 @@ export class ParticleSphereComponent implements AfterViewInit {
     };
 
     const handleVisibility = (): void => {
-      this.isVisible = !this.document.hidden;
+      this.isVisible = this.inViewport && !this.document.hidden;
 
       if (this.isVisible) {
         resume();
@@ -303,7 +336,8 @@ export class ParticleSphereComponent implements AfterViewInit {
 
     const intersectionObserver = new IntersectionObserver(
       ([entry]) => {
-        this.isVisible = entry?.isIntersecting ?? true;
+        this.inViewport = entry?.isIntersecting ?? true;
+        this.isVisible = this.inViewport && !this.document.hidden;
 
         if (this.isVisible) {
           resume();
@@ -315,7 +349,7 @@ export class ParticleSphereComponent implements AfterViewInit {
     );
 
     updateViewport();
-    intersectionObserver.observe(canvas);
+    intersectionObserver.observe(this.pointerTarget() ?? canvas);
     interactionTarget.addEventListener('mousemove', handleMouseMove, { passive: true });
     this.document.addEventListener('visibilitychange', handleVisibility);
 
@@ -356,6 +390,8 @@ export class ParticleSphereComponent implements AfterViewInit {
 
   private resolveFboSize(): number {
     const width = this.document.defaultView?.innerWidth ?? 1440;
+
+    if (this.compact()) return width <= 600 ? 256 : 512;
 
     if (width > 1920) {
       return 1024;

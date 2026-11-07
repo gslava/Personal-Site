@@ -1,7 +1,7 @@
 <div class="particle-sphere">
   <canvas #canvas class="particle-sphere__canvas" aria-hidden="true"></canvas>
 
-  @if (fallbackActive()) {
+  @if (fallbackActive() && !compact()) {
     <div class="particle-sphere__fallback" aria-hidden="true"></div>
   }
 </div>
