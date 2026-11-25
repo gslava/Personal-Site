@@ -89,8 +89,8 @@ for (const [locale, text] of Object.entries(data)) {
   assert.equal(text.heroBackend, 'Java Spring Boot');
   assert(!text.projects.find((p) => p.slug === 'amazon-ads').stack.includes('RabbitMQ'));
   assert.equal(text.projects.filter((p) => p.featured).length, 3);
-  assert.equal(text.caseSummaryLabels.length, 3);
   assert.equal(text.caseLabels.length, 3);
+  assert.equal(new Set(text.caseLabels).size, 3);
   assert.equal(text.languageItems.length, 3);
   assert(!('aiTitle' in text) && !('aiDescription' in text) && !('relatedWork' in text));
   assert(text.jobs.slice(1).every((job) => job.company.endsWith(' / NDA)')));
@@ -101,11 +101,11 @@ for (const [locale, text] of Object.entries(data)) {
   for (const p of text.projects) {
     assert.deepEqual(Object.keys(p).sort(), Object.keys(data.en.projects[0]).sort());
     assert.equal(p.sections.length, text.caseLabels.length, p.slug + ': missing case section');
-    assert(p.sections.every((s) => s.trim().length > 30));
-    assert.equal(p.snapshot.length, 3, p.slug + ': incomplete case summary');
+    const sectionLengths = p.sections.map((s) => s.trim().length);
+    assert(sectionLengths.every((length) => length > 30));
     assert(
-      p.snapshot.every((s) => s.trim().length > 30),
-      p.slug + ': weak case summary',
+      Math.max(...sectionLengths) / Math.min(...sectionLengths) <= 1.6,
+      locale + '/' + p.slug + ': uneven case sections',
     );
     assert(!('metric' in p) && !('metricLabel' in p), p.slug + ': old metric claim');
     assert(p.stack.length >= 3 && p.stack.length <= 5);
@@ -114,10 +114,27 @@ for (const [locale, text] of Object.entries(data)) {
     assert(p.workflow.every((step) => step.trim().length > 5));
     assert(p.contribution.length > 20);
     assert(p.homeSummary.length > 15 && p.homeSummary.length < p.summary.length);
-    const rendered = fallbackHtml(locale, 'work/' + p.slug, '/');
+    const rendered = fallbackHtml(locale, 'work/' + p.slug, experimentBase);
+    const summary = rendered.match(/<section id="case-summary"><h2>(.*?)<\/h2>(.*?)<\/section>/s);
+    assert(summary, p.slug + ': missing static case summary');
+    assert.equal(summary[1], text.caseSummaryTitle);
+    assert.deepEqual(
+      Array.from(
+        summary[2].matchAll(/<article><h3>(.*?)<\/h3><p>.+?<\/p><\/article>/gs),
+        (card) => card[1],
+      ),
+      text.caseLabels,
+      p.slug + ': static case labels',
+    );
+    const figureIndex = rendered.indexOf('<figure>');
+    const workflowIndex = rendered.indexOf('<h2>' + p.workflowTitle + '</h2>');
     assert(
-      rendered.includes('<h2>' + p.workflowTitle + '</h2>'),
-      p.slug + ': static workflow heading',
+      figureIndex > summary.index && workflowIndex > figureIndex,
+      p.slug + ': static case order',
+    );
+    assert(
+      rendered.includes(experimentBase + 'images/projects/' + p.slug + '.webp'),
+      p.slug + ': missing static image',
     );
     assert(rendered.includes('<figcaption>' + text.illustrationNote + '</figcaption>'));
     assert(p.imageAlt.trim().length > 20, p.slug + ': missing interface description');
@@ -128,9 +145,7 @@ for (const [locale, text] of Object.entries(data)) {
         p.slug + ': invalid connection',
       );
       assert(
-        fallbackHtml(locale, 'work/' + p.slug, experimentBase).includes(
-          experimentBase + 'work/' + related + '/',
-        ),
+        rendered.includes(experimentBase + 'work/' + related + '/'),
         p.slug + ': missing static connection',
       );
     }
@@ -141,8 +156,6 @@ for (const [locale, text] of Object.entries(data)) {
         ),
       );
     }
-    const caseImage = fallbackHtml(locale, 'work/' + p.slug, experimentBase);
-    assert(caseImage.includes(experimentBase + 'images/projects/' + p.slug + '.webp'));
   }
   const homeFallback = fallbackHtml(locale, '', '/');
   const caseFallback = fallbackHtml(locale, 'work/order-processing', '/');
@@ -166,12 +179,21 @@ for (const [locale, text] of Object.entries(data)) {
   const knowledgeFallback = fallbackHtml(
     locale,
     'work/company-knowledge-assistant',
-    '/Personal-Site/',
+    experimentBase,
   );
   assert(knowledgeFallback.includes('MCP'));
   assert(!/~(?:70|80|95)%|5×/.test(homeFallback + caseFallback));
-  assert(caseFallback.includes(text.caseSummaryTitle));
-  assert(caseFallback.includes(text.projects[1].snapshot[1]));
+  for (const code of Object.keys(data)) {
+    const path =
+      '/Personal-Site/' + (code === 'en' ? '' : code + '/') + 'work/company-knowledge-assistant/';
+    const current = code === locale ? ' aria-current="true"' : '';
+    assert(
+      knowledgeFallback.includes(
+        `<a href="${path}" lang="${code}" hreflang="${code}"${current} data-locale-link data-locale-code="${code}">`,
+      ),
+      locale + ': missing static locale link to ' + code,
+    );
+  }
   assert(!/captcha|Lorem ipsum/i.test(JSON.stringify(text)));
   const prefix = '/Personal-Site/' + (locale === 'en' ? '' : locale + '/');
   const profileFallback = fallbackHtml(locale, 'about', prefix);

@@ -13,20 +13,19 @@ import {
 import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter } from 'rxjs';
-import { LocaleService } from '../../services/locale.service';
 import { PortfolioContentService } from '../../content/portfolio-content';
 import { PageMetadataService } from '../../services/page-metadata.service';
+import { LocaleSwitcherComponent } from '../locale-switcher/locale-switcher.component';
 
 @Component({
   selector: 'app-site-shell',
-  imports: [RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, LocaleSwitcherComponent],
   templateUrl: './site-shell.component.html',
   styleUrls: ['./site-shell.component.scss', './mobile-menu.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SiteShellComponent {
   @ViewChild('menuButton') private menuButton?: ElementRef<HTMLButtonElement>;
-  protected readonly localeService = inject(LocaleService);
   protected readonly t = inject(PortfolioContentService).text;
   protected readonly navigation = [
     { path: 'work', label: this.t.nav[0] },
@@ -40,6 +39,7 @@ export class SiteShellComponent {
   private readonly injector = inject(Injector);
   private readonly destroyRef = inject(DestroyRef);
   @ViewChild('mobileMenu') private mobileMenu?: ElementRef<HTMLDialogElement>;
+  @ViewChild('mobileLocaleSwitcher') private mobileLocaleSwitcher?: LocaleSwitcherComponent;
   private closeTimer?: ReturnType<typeof setTimeout>;
   private restoreScroll?: () => void;
   constructor() {
@@ -98,6 +98,7 @@ export class SiteShellComponent {
     const dialog = this.mobileMenu?.nativeElement;
     if (!dialog?.open) return;
     clearTimeout(this.closeTimer);
+    this.mobileLocaleSwitcher?.close();
     this.menuOpen.set(false);
     const finish = () => {
       dialog.close();
@@ -123,6 +124,7 @@ export class SiteShellComponent {
     // A queued close event may arrive after a rapid reopen.
     if (this.mobileMenu?.nativeElement.open) return;
     clearTimeout(this.closeTimer);
+    this.mobileLocaleSwitcher?.close();
     this.menuOpen.set(false);
     this.unlockScroll();
   }

@@ -7,6 +7,7 @@ import { CopyEmailComponent } from './copy-email.component';
 describe('CopyEmailComponent', () => {
   const descriptor = Object.getOwnPropertyDescriptor(navigator, 'clipboard');
   afterEach(() => {
+    vi.useRealTimers();
     if (descriptor) Object.defineProperty(navigator, 'clipboard', descriptor);
     else Reflect.deleteProperty(navigator, 'clipboard');
   });
@@ -33,18 +34,37 @@ describe('CopyEmailComponent', () => {
     );
     const fixture = await render({ writeText });
     const button = fixture.nativeElement.querySelector('button') as HTMLButtonElement;
+    expect(button.getAttribute('aria-label')).toBe(content.en.copyEmail);
+    expect(button.title).toBe(content.en.copyEmail);
+    expect(button.querySelector('svg[aria-hidden="true"]')).toBeTruthy();
+    expect(button.querySelectorAll('rect')).toHaveLength(2);
     button.click();
     fixture.detectChanges();
     expect(writeText).toHaveBeenCalledWith('guzhov.viacheslav@gmail.com');
-    expect(button.disabled).toBe(true);
+    expect(button.getAttribute('aria-disabled')).toBe('true');
     expect(fixture.nativeElement.querySelector('[role="status"]').textContent).toBe('');
     finish();
     await fixture.whenStable();
     fixture.detectChanges();
-    expect(button.disabled).toBe(false);
+    expect(button.hasAttribute('aria-disabled')).toBe(false);
+    expect(button.querySelector('svg path')).toBeTruthy();
     expect(fixture.nativeElement.querySelector('[role="status"]').textContent).toContain(
       'Email copied',
     );
+  });
+
+  it('restores the copy icon after showing the check mark for two seconds', async () => {
+    const fixture = await render({ writeText: () => Promise.resolve() });
+    vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
+    const button = fixture.nativeElement.querySelector('button') as HTMLButtonElement;
+    button.click();
+    await Promise.resolve();
+    fixture.detectChanges();
+    expect(button.querySelector('svg path')).toBeTruthy();
+
+    vi.advanceTimersByTime(2000);
+    fixture.detectChanges();
+    expect(button.querySelectorAll('rect')).toHaveLength(2);
   });
 
   for (const [name, clipboard] of [
@@ -59,7 +79,9 @@ describe('CopyEmailComponent', () => {
       expect(fixture.nativeElement.querySelector('[role="status"]').textContent).toContain(
         'Select and copy',
       );
-      expect(fixture.nativeElement.querySelector('button').disabled).toBe(false);
+      expect(fixture.nativeElement.querySelector('button').hasAttribute('aria-disabled')).toBe(
+        false,
+      );
     });
   }
 });

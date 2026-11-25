@@ -1,0 +1,40 @@
+<button
+  #trigger
+  type="button"
+  class="locale-trigger"
+  role="combobox"
+  aria-haspopup="listbox"
+  [attr.aria-label]="t.language + ' (' + activeLabel() + ')'"
+  [attr.aria-expanded]="open()"
+  [attr.aria-controls]="popupId()"
+  (click)="toggle()"
+>
+  {{ activeLabel() }}
+  <svg viewBox="0 0 16 16" aria-hidden="true">
+    <path d="m4 6 4 4 4-4" />
+  </svg>
+</button>
+<div
+  class="locale-options"
+  role="listbox"
+  [id]="popupId()"
+  [attr.aria-label]="t.language"
+  [hidden]="!open()"
+>
+  @for (locale of links(); track locale.code) {
+    <a
+      #option
+      role="option"
+      tabindex="-1"
+      [href]="locale.href"
+      [attr.lang]="locale.code"
+      [attr.hreflang]="locale.code"
+      [attr.aria-current]="locale.isActive ? 'true' : null"
+      [attr.aria-selected]="locale.isActive"
+      data-locale-link
+      [attr.data-locale-code]="locale.code"
+      (click)="close(true)"
+      >{{ locale.label }}</a
+    >
+  }
+</div>

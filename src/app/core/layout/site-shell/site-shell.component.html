@@ -20,21 +20,7 @@
         >CV <span aria-hidden="true">↓</span></a
       >
     </nav>
-    <nav class="locale-switcher" [attr.aria-label]="t.language">
-      @for (locale of localeService.localeLinks(); track locale.code) {
-        <a
-          class="locale-switcher__link"
-          [class.locale-switcher__link--active]="locale.isActive"
-          [href]="locale.href"
-          [attr.lang]="locale.code"
-          [attr.hreflang]="locale.code"
-          [attr.aria-current]="locale.isActive ? 'true' : null"
-          data-locale-link
-          [attr.data-locale-code]="locale.code"
-          >{{ locale.label }}</a
-        >
-      }
-    </nav>
+    <app-locale-switcher class="locale-switcher" popupId="header-locales" />
     <button
       #menuButton
       type="button"
@@ -108,20 +94,11 @@
         <span>{{ t.cv }}</span
         ><span aria-hidden="true">↓</span>
       </a>
-      <nav class="mobile-menu__locales" [attr.aria-label]="t.language">
-        @for (locale of localeService.localeLinks(); track locale.code) {
-          <a
-            [class.active]="locale.isActive"
-            [href]="locale.href"
-            [attr.lang]="locale.code"
-            [attr.hreflang]="locale.code"
-            [attr.aria-current]="locale.isActive ? 'true' : null"
-            data-locale-link
-            [attr.data-locale-code]="locale.code"
-            >{{ locale.label }}</a
-          >
-        }
-      </nav>
+      <app-locale-switcher
+        #mobileLocaleSwitcher
+        class="locale-switcher--inline"
+        popupId="mobile-locales"
+      />
     </div>
   </div>
 </dialog>

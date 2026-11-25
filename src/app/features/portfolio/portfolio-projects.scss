@@ -29,6 +29,24 @@
   background: var(--surface);
   overflow: hidden;
 }
+.project-row__visual {
+  display: contents;
+}
+.project-row__visual app-project-motif {
+  cursor: pointer;
+}
+.project-row__title {
+  color: inherit;
+  text-decoration: none;
+}
+.project-row__title:hover {
+  color: var(--accent);
+}
+.project-row__title:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
 .project-row app-project-motif {
   height: 225px;
   border-bottom: 1px solid var(--line);

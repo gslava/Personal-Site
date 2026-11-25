@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { ActivatedRoute, provideRouter } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import content from '../../core/content/portfolio-content.json';
 import { PortfolioPageComponent } from './portfolio-page.component';
 
 describe('PortfolioPageComponent', () => {
@@ -29,8 +30,18 @@ describe('PortfolioPageComponent', () => {
       expect(link.getAttribute('href')).toBe(`/work/${next}`);
       expect(link.textContent).toContain('Next project');
       const summary = fixture.nativeElement.querySelector('.case-summary') as HTMLElement;
-      expect(summary.querySelectorAll('article')).toHaveLength(3);
-      expect(summary.textContent).toContain('My contribution');
+      const project = content.en.projects.find((p) => p.slug === current)!;
+      expect(summary.querySelector('h2')?.textContent).toBe(content.en.caseSummaryTitle);
+      expect(
+        Array.from(summary.querySelectorAll('article h3'), (el) => el.textContent?.trim()),
+      ).toEqual(content.en.caseLabels);
+      expect(Array.from(summary.querySelectorAll('article p'), (el) => el.textContent)).toEqual(
+        project.sections,
+      );
+      expect(summary.querySelectorAll('.case-summary__marker')).toHaveLength(3);
+      expect(summary.querySelector('.case-summary__result p')?.textContent).toBe(
+        project.sections[2],
+      );
       expect(fixture.nativeElement.querySelector('.case-metric')).toBeNull();
       const image = fixture.nativeElement.querySelector('.case-interface img') as HTMLImageElement;
       expect(
@@ -39,10 +50,6 @@ describe('PortfolioPageComponent', () => {
       expect(
         fixture.nativeElement.querySelector('.case-artwork figcaption')?.textContent,
       ).toContain('fictional data');
-      const decisions = fixture.nativeElement.querySelector('.case-body') as HTMLElement;
-      expect(
-        decisions.compareDocumentPosition(image) & Node.DOCUMENT_POSITION_FOLLOWING,
-      ).toBeTruthy();
       expect(fixture.nativeElement.querySelector('.case-artwork .preview-link')).not.toBeNull();
       expect(fixture.nativeElement.querySelector('.case-artwork a')).toBeNull();
       expect(image.getAttribute('src')).toBe(`images/projects/${current}.webp`);
@@ -56,12 +63,15 @@ describe('PortfolioPageComponent', () => {
       } else {
         expect(connections).toBeNull();
       }
-      expect(fixture.nativeElement.querySelectorAll('.workflow li').length).toBeGreaterThanOrEqual(
-        3,
-      );
       const workflow = fixture.nativeElement.querySelector('.workflow') as HTMLElement;
+      const steps = Array.from(workflow.querySelectorAll('ol li'));
+      expect(steps.map((step) => step.textContent?.trim())).toEqual(project.workflow);
       expect(
-        summary.compareDocumentPosition(workflow) & Node.DOCUMENT_POSITION_FOLLOWING,
+        steps.every((step) => step.querySelector('.workflow__point[aria-hidden="true"]')),
+      ).toBe(true);
+      expect(workflow.querySelector('.meta')?.textContent).toBe(content.en.workflowNote);
+      expect(
+        image.compareDocumentPosition(workflow) & Node.DOCUMENT_POSITION_FOLLOWING,
       ).toBeTruthy();
     }
   });
@@ -110,6 +120,7 @@ describe('Employer-focused portfolio', () => {
     expect(cv?.getAttribute('href')).toBe('cv/viacheslav-guzhov-cv.pdf');
     expect(cv?.getAttribute('download')).toBe('Viacheslav Guzhov - CV.pdf');
     expect(root.querySelector('.hero a[href="/work"]')).not.toBeNull();
+    expect(root.querySelector('.contact-cta .email-link + app-copy-email button')).not.toBeNull();
   });
 
   it('combines full experience, illustrated avatar, AI skills, education and languages on About', async () => {
@@ -234,10 +245,17 @@ describe('Employer-focused portfolio', () => {
     );
     expect(root.querySelector('h1')?.textContent).toBe('Projects');
   });
-  it('places LinkedIn with email ahead of supporting contact channels', async () => {
+  it('places the address link and copy button inside the email card ahead of supporting channels', async () => {
     const root = await render('contact');
     const primary = root.querySelector('.contact-email')!;
-    expect(primary.querySelector('a[href^="mailto:"]')).not.toBeNull();
+    const card = primary.querySelector('div.email-card')!;
+    const address = card.querySelector('a[href="mailto:guzhov.viacheslav@gmail.com"]');
+    expect(card.firstElementChild?.textContent).toBe(content.en.email);
+    expect(address?.textContent).toContain('guzhov.viacheslav@gmail.com');
+    expect(address?.querySelector('[aria-hidden="true"]')?.textContent?.trim()).toBe('↗');
+    expect(address?.querySelector('wbr')).toBeTruthy();
+    expect(address?.nextSibling?.textContent).toBe('\u00a0');
+    expect(card.querySelector('a + app-copy-email > button')).not.toBeNull();
     expect(primary.querySelector('a[href*="linkedin.com"]')).not.toBeNull();
     expect(root.querySelector('.contact-groups a[href*="linkedin.com"]')).toBeNull();
   });

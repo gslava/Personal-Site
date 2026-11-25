@@ -70,25 +70,17 @@
         </header>
         <section appRuleReveal class="case-summary" aria-labelledby="case-summary-title">
           <h2 appEntrance id="case-summary-title">{{ t.caseSummaryTitle }}</h2>
-          <div class="case-summary__grid">
-            @for (item of p.snapshot; track $index; let i = $index) {
-              <article>
-                <h3>{{ t.caseSummaryLabels[i] }}</h3>
-                <p>{{ item }}</p>
+          <div class="case-summary__cards">
+            @for (section of p.sections; track $index; let i = $index) {
+              <article [class.case-summary__result]="i === 2">
+                <h3 appEntrance>
+                  <span class="case-summary__marker" aria-hidden="true"></span>{{ t.caseLabels[i] }}
+                </h3>
+                <p>{{ section }}</p>
               </article>
             }
           </div>
         </section>
-        <div class="case-body">
-          @for (section of p.sections; track $index; let i = $index) {
-            <section [class.case-body__result]="i === 2">
-              <h2 appEntrance>
-                <span class="case-body__marker" aria-hidden="true"></span>{{ t.caseLabels[i] }}
-              </h2>
-              <p>{{ section }}</p>
-            </section>
-          }
-        </div>
         <figure class="case-artwork">
           <p class="illustration-label">{{ t.illustrationLabel }}</p>
           <app-project-artwork [slug]="p.slug" [imageAlt]="p.imageAlt" />
@@ -96,9 +88,9 @@
         </figure>
         <section class="workflow" aria-labelledby="workflow-title">
           <h2 appEntrance id="workflow-title">{{ p.workflowTitle }}</h2>
-          <ol>
+          <ol role="list">
             @for (step of p.workflow; track step) {
-              <li>{{ step }}</li>
+              <li><span class="workflow__point" aria-hidden="true"></span>{{ step }}</li>
             }
           </ol>
           <p class="meta">{{ t.workflowNote }}</p>
@@ -146,11 +138,14 @@
       </header>
       <section class="contact-layout">
         <div class="contact-email">
-          <a class="email-card" href="mailto:guzhov.viacheslav@gmail.com"
-            ><span>{{ t.email }}</span
-            ><strong>guzhov.viacheslav<wbr />@gmail.com</strong><span aria-hidden="true">↗</span></a
-          >
-          <app-copy-email />
+          <div class="email-card">
+            <span>{{ t.email }}</span>
+            <div class="email-card__address">
+              <a class="email-link" href="mailto:guzhov.viacheslav@gmail.com"
+                >guzhov.viacheslav<wbr />@gmail.com&nbsp;<span aria-hidden="true">↗</span></a
+              >&nbsp;<app-copy-email class="email-card__copy" />
+            </div>
+          </div>
           <a class="contact-linkedin" href="https://www.linkedin.com/in/viacheslav-guzhov/">
             LinkedIn <span aria-hidden="true">↗</span>
           </a>
@@ -277,9 +272,17 @@
               class="project-row"
               [class.project-row--featured]="p.slug === 'inventory-management'"
             >
-              <app-project-motif [variant]="p.slug" />
+              <a
+                class="project-row__visual"
+                [routerLink]="'/work/' + p.slug"
+                tabindex="-1"
+                aria-hidden="true"
+                ><app-project-motif [variant]="p.slug"
+              /></a>
               <div class="project-row__content">
-                <h3>{{ p.title }}</h3>
+                <h3>
+                  <a class="project-row__title" [routerLink]="'/work/' + p.slug">{{ p.title }}</a>
+                </h3>
                 <p class="project-row__summary">{{ p.homeSummary }}</p>
                 <p class="project-role">
                   <strong>{{ t.roleLabel }}</strong> {{ p.contribution }}
@@ -422,10 +425,12 @@
     <section id="contact" class="contact-cta section">
       <div>
         <h2 appEntrance>{{ t.contactTitle }}</h2>
-        <a class="email-link" href="mailto:guzhov.viacheslav@gmail.com"
-          >guzhov.viacheslav<wbr />@gmail.com</a
-        >
-        <app-copy-email />
+        <div class="email-row">
+          <a class="email-link" href="mailto:guzhov.viacheslav@gmail.com"
+            >guzhov.viacheslav<wbr />@gmail.com</a
+          >
+          <app-copy-email />
+        </div>
       </div>
       <div class="actions">
         <a class="button button--primary" href="mailto:guzhov.viacheslav@gmail.com"

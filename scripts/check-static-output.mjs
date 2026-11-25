@@ -14,6 +14,13 @@ for (const locale of locales) {
     assert(html.includes('<base href="' + expectedBase + '"'), file + ': deployment base');
     assert.equal((html.match(/<h1[ >]/g) || []).length, 1, file + ': one static H1');
     assert(html.includes('mailto:guzhov.viacheslav@gmail.com'), file + ': usable contact fallback');
+    if (path === 'contact') {
+      assert.match(
+        html,
+        /<a href="mailto:guzhov\.viacheslav@gmail\.com">guzhov\.viacheslav<wbr>@gmail\.com <span aria-hidden="true">↗<\/span><\/a>/,
+        file + ': visible email address in the contact fallback',
+      );
+    }
     assert.equal((html.match(/property="og:title"/g) || []).length, 1, file + ': one OG title');
     assert.equal((html.match(/name="twitter:card"/g) || []).length, 1, file + ': one Twitter card');
     assert.equal((html.match(/rel="canonical"/g) || []).length, 1);

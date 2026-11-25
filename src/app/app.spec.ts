@@ -23,13 +23,13 @@ describe('App', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     const homeButton = compiled.querySelector('.site-header__home-button');
     const homeIcon = compiled.querySelector('.site-header__home-icon') as HTMLImageElement | null;
-    const localeLinks = Array.from(compiled.querySelectorAll('.locale-switcher__link')).map(
-      (link) => link.textContent?.trim(),
-    );
+    const localeLinks = Array.from(
+      compiled.querySelectorAll('.site-header a[data-locale-link]'),
+    ).map((link) => link.getAttribute('hreflang'));
 
     expect(homeButton).toBeTruthy();
     expect(homeIcon?.getAttribute('src')).toBe('images/fox-64.webp');
-    expect(localeLinks).toEqual(['EN', 'DE', 'UK']);
+    expect(localeLinks).toEqual(['en', 'de', 'uk']);
     const primaryLinks = Array.from(compiled.querySelectorAll('#primary-navigation a')).map((a) =>
       a.getAttribute('href'),
     );
@@ -53,7 +53,7 @@ describe('App', () => {
     expect(fixture.nativeElement.querySelector('h1')?.textContent).toBe(
       'Company Knowledge Assistant',
     );
-    expect(fixture.nativeElement.querySelector('.case-body')?.textContent).toContain('MCP');
+    expect(fixture.nativeElement.querySelector('.case-summary')?.textContent).toContain('MCP');
     expect(fixture.nativeElement.querySelector('.next-project')?.getAttribute('href')).toBe(
       '/work/amazon-ads',
     );

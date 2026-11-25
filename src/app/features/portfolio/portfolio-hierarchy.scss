@@ -21,16 +21,6 @@
   color: var(--text);
   font-weight: 500;
 }
-.case-summary__grid h3 {
-  color: var(--muted);
-  font-weight: 500;
-}
-.case-summary__grid p {
-  color: var(--text);
-}
-.case-summary__grid article:last-child {
-  border-color: var(--accent);
-}
 .case-artwork {
   max-width: 800px;
   margin: 2.5rem auto;

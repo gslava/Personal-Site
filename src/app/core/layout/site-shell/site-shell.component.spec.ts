@@ -126,8 +126,71 @@ describe('SiteShellComponent mobile menu', () => {
     expect(dialog.querySelector('a[download]')?.getAttribute('href')).toBe(
       'cv/viacheslav-guzhov-cv.pdf',
     );
-    expect(dialog.querySelectorAll('[data-locale-link]')).toHaveLength(3);
+    expect(dialog.querySelectorAll('#mobile-locales a[data-locale-link]')).toHaveLength(3);
     expect(root.querySelectorAll('#primary-navigation a')).toHaveLength(4);
     fixture.destroy();
+  });
+
+  it('opens the header locale list at the current link and supports keyboard and outside dismissal', async () => {
+    const { fixture, root } = await render();
+    const trigger = root.querySelector<HTMLButtonElement>(
+      'button[aria-controls="header-locales"]',
+    )!;
+    const popup = root.querySelector<HTMLElement>('#header-locales')!;
+    const links = Array.from(popup.querySelectorAll<HTMLAnchorElement>('a[data-locale-link]'));
+    const press = (key: string) =>
+      document.activeElement?.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true }));
+
+    expect(popup.hidden).toBe(true);
+    expect(links.map((link) => link.getAttribute('href'))).toEqual(['/', '/de/', '/uk/']);
+    expect(links[0].getAttribute('aria-current')).toBe('true');
+    trigger.focus();
+    press('ArrowDown');
+    await fixture.whenStable();
+    expect(trigger.getAttribute('aria-expanded')).toBe('true');
+    expect(popup.hidden).toBe(false);
+    expect(document.activeElement).toBe(links[0]);
+    press('ArrowUp');
+    expect(document.activeElement).toBe(links[2]);
+    press('ArrowDown');
+    expect(document.activeElement).toBe(links[0]);
+    press('End');
+    expect(document.activeElement).toBe(links[2]);
+    press('Home');
+    expect(document.activeElement).toBe(links[0]);
+    press('Escape');
+    await fixture.whenStable();
+    expect(document.activeElement).toBe(trigger);
+    expect(popup.hidden).toBe(true);
+
+    trigger.click();
+    await fixture.whenStable();
+    press('Tab');
+    await fixture.whenStable();
+    expect(popup.hidden).toBe(true);
+    trigger.click();
+    await fixture.whenStable();
+    root.querySelector<HTMLElement>('main')!.click();
+    await fixture.whenStable();
+    expect(popup.hidden).toBe(true);
+  });
+
+  it('resets the mobile locale list when the menu closes', async () => {
+    const { fixture, dialog, trigger, close } = await render();
+    vi.spyOn(window, 'matchMedia').mockReturnValue({ matches: true } as MediaQueryList);
+    trigger.click();
+    await fixture.whenStable();
+    const localeTrigger = dialog.querySelector<HTMLButtonElement>(
+      'button[aria-controls="mobile-locales"]',
+    )!;
+    localeTrigger.click();
+    await fixture.whenStable();
+    expect(localeTrigger.getAttribute('aria-expanded')).toBe('true');
+    close.click();
+    await fixture.whenStable();
+    expect(dialog.open).toBe(false);
+    trigger.click();
+    await fixture.whenStable();
+    expect(localeTrigger.getAttribute('aria-expanded')).toBe('false');
   });
 });

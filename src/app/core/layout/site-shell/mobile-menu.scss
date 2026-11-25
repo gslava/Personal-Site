@@ -129,36 +129,8 @@
 .mobile-menu__cv > span:last-child {
   color: var(--accent);
 }
-.mobile-menu__locales {
-  display: flex;
-  width: fit-content;
-  gap: 2px;
-  padding: 3px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--surface);
+.mobile-menu__bottom app-locale-switcher {
   margin-top: 1.75rem;
-}
-.mobile-menu__locales a {
-  display: grid;
-  place-items: center;
-  min-width: 44px;
-  min-height: 44px;
-  color: var(--muted);
-  text-decoration: none;
-  font-size: 0.875rem;
-}
-.mobile-menu__locales a {
-  border-radius: 4px;
-}
-.mobile-menu__locales .active {
-  background: var(--line);
-  color: var(--accent);
-  font-weight: 600;
-}
-.mobile-menu__locales a:not(.active):hover {
-  color: var(--text);
-  background: var(--line);
 }
 // Keep these declarations at the stylesheet root so Angular scopes their
 // keyframe names consistently in optimized builds.

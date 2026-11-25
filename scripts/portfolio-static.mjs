@@ -187,11 +187,14 @@ export function fallbackHtml(locale, path, base) {
         : '') +
       section(
         t.caseSummaryTitle,
-        project.snapshot
-          .map((item, i) => section(t.caseSummaryLabels[i], paragraph(item)))
+        project.sections
+          .map(
+            (item, i) =>
+              '<article><h3>' + esc(t.caseLabels[i]) + '</h3>' + paragraph(item) + '</article>',
+          )
           .join(''),
+        'case-summary',
       ) +
-      project.sections.map((s, i) => section(t.caseLabels[i], paragraph(s))).join('') +
       '<figure><p>' +
       esc(t.illustrationLabel) +
       '</p><img class="static-experiment-preview" src="' +
@@ -299,7 +302,10 @@ export function fallbackHtml(locale, path, base) {
   else if (path === 'contact')
     body =
       paragraph(t.contactIntro) +
-      link('mailto:guzhov.viacheslav@gmail.com', t.email) +
+      '<div>' +
+      paragraph(t.email) +
+      '<a href="mailto:guzhov.viacheslav@gmail.com">guzhov.viacheslav<wbr>@gmail.com ' +
+      '<span aria-hidden="true">↗</span></a></div>' +
       link('https://www.linkedin.com/in/viacheslav-guzhov/', 'LinkedIn') +
       section(t.elsewhere, link('https://github.com/GSlava', 'GitHub') + ' / ' + cv) +
       section(
@@ -323,11 +329,26 @@ export function fallbackHtml(locale, path, base) {
     link(base, t.home) +
     ' ' +
     [0, 2, 4].map((i) => link(base + routePaths[i] + '/', t.nav[i])).join(' ');
+  const localeSuffix = locale === 'en' ? '' : locale + '/';
+  const deploymentBase = base.endsWith('/' + localeSuffix)
+    ? base.slice(0, base.length - localeSuffix.length)
+    : base;
+  const localeLinks = Object.keys(data)
+    .map((code) => {
+      const href = deploymentBase + (code === 'en' ? '' : code + '/') + (path ? path + '/' : '');
+      const current = code === locale ? ' aria-current="true"' : '';
+      return `<a href="${esc(href)}" lang="${code}" hreflang="${code}"${current} data-locale-link data-locale-code="${code}">${code.toUpperCase()}</a>`;
+    })
+    .join(' ');
   return (
     '<div class="static-content container"><nav aria-label="' +
     esc(t.menu) +
     '">' +
     nav +
+    '</nav><nav aria-label="' +
+    esc(t.language) +
+    '">' +
+    localeLinks +
     '</nav><main id="static-main"><h1>' +
     esc(!path ? t.heroTitle : info.title) +
     '</h1>' +
